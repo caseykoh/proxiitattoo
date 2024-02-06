@@ -1,0 +1,78 @@
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  z-index: 100;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  height: 3.5rem;
+  margin: 1rem;
+}
+
+.nav-logo {
+  transition: color 0.4s;
+  font-size: 30px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.nav-toggle,
+.nav-close {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.5rem;
+}
+
+.nav-link:hover {
+  color: aqua;
+}
+.nav-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+}
+
+@media screen and (max-width: 1150px) {
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    background-color: hsla(0, 0%, 6%, 0.2);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    width: 80%;
+    height: 100%;
+    padding: 6rem 3rem 0;
+    transition: right 0.4s;
+  }
+  .show-menu {
+    right: 0;
+  }
+}
+
+@media screen and (min-width: 1150px) {
+  .nav {
+    height: 3.5rem;
+  }
+  .nav-toggle,
+  .nav-close {
+    display: none;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    column-gap: 2.5rem;
+  }
+}

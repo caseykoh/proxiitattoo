@@ -1,0 +1,48 @@
+.story-section {
+  width: 60%;
+  margin: 100px auto;
+}
+
+.story-section h3 {
+  font-size: 50px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  opacity: 50%;
+}
+
+.story-section p {
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.photobook-entry {
+  width: 100%;
+  margin: 40px auto;
+}
+
+.photobook-entry img {
+  display: block;
+  width: 60vw;
+  max-width: 800px;
+  margin: 30px auto;
+}
+
+.photobook-entry-description {
+  width: min(900px, 100% - 3rem);
+  margin-inline: auto;
+}
+
+.photobook-entry-description td {
+  padding: 1rem 8rem;
+}
+
+@media (max-width: 600px) {
+  .photobook-entry img {
+    width: 100%;
+  }
+
+  .photobook-entry-description td {
+    display: block;
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,27 @@
+.work-gallery {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+}
+
+.work-gallery-box {
+  flex: 1;
+  height: 400px;
+  background-color: rebeccapurple;
+}
+
+.work-gallery-box img {
+  max-height: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 600px) {
+  .work-gallery {
+    flex-direction: column;
+  }
+  .work-gallery-box {
+    flex: auto;
+  }
+}
