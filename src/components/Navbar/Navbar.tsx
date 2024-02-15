@@ -1,13 +1,12 @@
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import { IoClose, IoMenu } from "react-icons/io5";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
-    console.log(!showMenu);
     setShowMenu(!showMenu);
   };
 
@@ -21,7 +20,7 @@ const Navbar = () => {
     <header className="header">
       <nav className="nav container">
         <NavLink to="/" className="nav-logo">
-          Proxii
+          PROXII
         </NavLink>
         <div
           className={`nav-menu ${showMenu ? "show-menu" : ""}`}
@@ -30,7 +29,16 @@ const Navbar = () => {
           <ul className="nav-list">
             <li className="nav-item">
               <NavLink to="/" className="nav-link" onClick={closeMenuOnMobile}>
-                Home
+                h0m3
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/info"
+                className="nav-link"
+                onClick={closeMenuOnMobile}
+              >
+                1nf0
               </NavLink>
             </li>
             <li className="nav-item">
@@ -39,7 +47,7 @@ const Navbar = () => {
                 className="nav-link"
                 onClick={closeMenuOnMobile}
               >
-                Gallery
+                g4113rY
               </NavLink>
             </li>
             <li className="nav-item">
@@ -48,7 +56,7 @@ const Navbar = () => {
                 className="nav-link"
                 onClick={closeMenuOnMobile}
               >
-                Booking
+                bo0K1ng
               </NavLink>
             </li>
           </ul>

@@ -1,4 +1,5 @@
 import "./ArtBanner.css";
+import { IoChevronDown } from "react-icons/io5";
 
 function ArtBanner() {
   return (
@@ -60,21 +61,23 @@ function ArtBanner() {
           ></image>
         </svg>
       </div> */}
-      <main>
-        <div className="main-intro">
-          <h1>Proxii</h1>
-          <h2>world</h2>
+      <main className="art-banner-container">
+        <div className="main-title">
+          <h1 className="first-text">PROXII</h1>
+          <hr className="horizontal-line" />
+          <h1 className="second-text">WORLD</h1>
+          {/* <h2>world</h2> */}
         </div>
-        <div className="main-links">
-          <div className="book-tattoo-link">
-            <a href="#">Book tattoo</a>
-          </div>
-          <div className="view-gallery-link">
-            <a href="#">View gallery</a>
-          </div>
-        </div>
-        <div>
-          <a href="#work-section">See more</a>
+        <hr className="horizontal-line" />
+        <hr className="vertical-line" />
+        {/* <div className="main-links">
+          <div className="book-tattoo-link">{"BOOK > TATTOO"}</div>
+          <div className="view-gallery-link">{"VIEW > GALLERY"}</div>
+        </div> */}
+        <div id="scroll-down-link">
+          <a href="#work-section">
+            <IoChevronDown />
+          </a>
         </div>
       </main>
     </>

@@ -1,0 +1,63 @@
+.info-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 30px;
+  /* color: white; */
+  background-image: linear-gradient(to bottom right, #00000010, #0000005d);
+}
+
+.info-text {
+  font-size: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 32px;
+  opacity: 30%;
+  font-weight: 600;
+}
+
+.info-section {
+  margin-top: 200px;
+  padding: 10px;
+  width: 60vw;
+}
+
+.tattoo-faq {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+details {
+  padding-inline: 20px;
+  padding-block: 45px;
+  border-block: 1px solid #000;
+  overflow: hidden;
+}
+
+summary {
+  list-style-type: none; /* Firefox */
+  transition: all 0.3s;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+summary::-webkit-details-marker {
+  display: none; /* Chrome */
+}
+
+details p {
+  line-height: 26px;
+}
+
+details[open] {
+  min-height: 50px;
+}
+
+details[open] summary {
+  margin-bottom: 1em;
+}
+
+@media screen and (max-width: 600px) {
+  .info-section {
+    width: 100%;
+    margin-top: 100px;
+  }
+}
