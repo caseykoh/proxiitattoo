@@ -5,10 +5,12 @@ import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 import Info from "./pages/Info";
 import Booking from "./pages/Booking.tsx";
+import HelloWorld from "./HelloWorld.tsx";
 
 function App() {
   return (
     <>
+      {/* <HelloWorld /> */}
       <Home />
       {/* <Router>
         <Navbar />

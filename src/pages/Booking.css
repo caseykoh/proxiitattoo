@@ -1,3 +1,58 @@
+.form-section {
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.booking-form {
+  font-size: 18px;
+  width: 30%;
+  border-radius: 10px;
+  border: 1px black solid;
+  padding: 30px;
+  padding-block: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.form-control input[type="text"],
+textarea {
+  border-radius: 8px;
+  border: 1px rgba(0, 0, 0, 0.274) solid;
+  padding-block: 6px;
+  padding-inline: 10px;
+}
+
+.form-control input[type="text"]:focus {
+}
+
+.booking-form button {
+  cursor: pointer;
+}
+
+.text-error {
+  font-size: 20px;
+  color: red;
+}
+
+/* Chat style
+
 .booking-page {
   width: 100%;
   min-height: 100vh;
@@ -5,11 +60,10 @@
   background-color: black;
   color: white;
 }
-
 input {
-  /* background-color: blueviolet; */
-  /* margin-left: 20px; */
-  /* caret-color: transparent; */
+   background-color: blueviolet; 
+   margin-left: 20px; 
+   caret-color: transparent; 
 }
 input::after {
   content: "|";
@@ -28,12 +82,18 @@ input::after {
   }
 }
 
+.nav-button {
+  background-color: rgba(255, 255, 255, 0.514);
+  margin: 20px;
+}
+
 .terminal-section {
   margin: 100px auto;
   font-size: 30px;
   font-family: monospace;
   display: flex;
 }
+*/
 
 /* .text-form {
   display: flex;
@@ -43,67 +103,5 @@ input::after {
   flex: 1;
 } */
 
-.text-form input[type="text"] {
-  font: inherit;
-}
-
-.errorMsg {
-  max-width: 350px;
-  color: #f21e08;
-  padding: 2px 0;
-  margin-top: 2px;
-  font-size: 14px;
-  font-weight: 300;
-}
-
-.form-control {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-.form-control label {
-  width: 20%;
-  padding-right: 20px;
-  margin-bottom: 5px;
-}
-
-.form-control input[type="text"],
-.form-control input[type="password"] {
-  width: 40%;
-  padding: 5px;
-}
-
-.form-control input[type="input"] {
-  cursor: pointer;
-  margin: 20px;
-}
-
-button {
-  max-width: 150px;
-  padding: 5px 10px;
-}
-
-.nav-button {
-  background-color: rgba(255, 255, 255, 0.514);
-  margin: 20px;
-}
-
 @media screen and (max-width: 600px) {
-  body {
-    width: 90%;
-  }
-
-  .errorMsg {
-    max-width: 100%;
-  }
-
-  .form-control {
-    flex-direction: column;
-  }
-
-  .form-control input[type="text"],
-  .form-control input[type="password"] {
-    width: inherit;
-  }
 }

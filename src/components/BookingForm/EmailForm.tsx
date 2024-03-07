@@ -23,7 +23,11 @@ export function EmailForm({ email, updateFields }: EmailFormProps) {
   }, []);
   return (
     <>
-      <FormWrapper promptSequence={promptSequence} onPrompt={onPrompt}>
+      <FormWrapper
+        promptSequence={promptSequence}
+        onPrompt={onPrompt}
+        activeInput={activeInput}
+      >
         {activeInput && (
           <input
             autoFocus

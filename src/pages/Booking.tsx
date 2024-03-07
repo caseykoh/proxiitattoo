@@ -1,154 +1,214 @@
-import { TypeAnimation } from "react-type-animation";
+import { Control, SubmitHandler, useForm, useWatch } from "react-hook-form";
 import "./Booking.css";
-import { useMultiStepForm } from "../useMultiStepForm";
-import { NameForm } from "../components/BookingForm/NameForm";
-import { EmailForm } from "../components/BookingForm/EmailForm";
-import { DescriptionForm } from "../components/BookingForm/DescriptionForm";
-import { DateForm } from "../components/BookingForm/DateForm";
-import { DesignTypeForm } from "../components/BookingForm/DesignTypeForm";
-import { InstagramForm } from "../components/BookingForm/InstagramForm";
-import { FormEvent, useState } from "react";
-import { DummyForm } from "../components/BookingForm/DummyForm";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-export enum DesignTypeEnum {
-  flash = "flash",
-  custom = "custom",
-  freehand = "freehand",
-}
+const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
+type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
 
-type FormData = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  instagram: string;
-  designType: string;
-  description: string;
-  date: string;
-  dummy: string;
-};
+const invalid_type_error = "Invalid type provided for this field";
+const required_error = "This field cannot be blank";
 
-const INITIALDATA: FormData = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  instagram: "",
-  designType: "",
-  description: "",
-  date: "",
-  dummy: "",
-};
+// const schema = z.object({
+//   firstName: z
+//     .string({ invalid_type_error, required_error })
+//     .min(1, required_error),
+//   lastName: z.string().min(1),
+//   email: z.string().email(),
+//   instagram: z.string().min(1),
+//   designType: DesignTypeEnum,
+//   description: z.string().min(1),
+// });
 
-export default function Booking() {
-  const [data, setData] = useState(INITIALDATA);
-  function updateFields(fields: Partial<FormData>) {
-    setData((prev) => {
-      return { ...prev, ...fields };
-    });
-  }
-  const { currentStepIndex, step, steps, isFirstStep, isLastStep, back, next } =
-    useMultiStepForm([
-      <NameForm {...data} updateFields={updateFields} />,
-      <EmailForm {...data} updateFields={updateFields} />,
-      <InstagramForm {...data} updateFields={updateFields} />,
-      <DesignTypeForm {...data} updateFields={updateFields} />,
-      <DescriptionForm {...data} updateFields={updateFields} />,
-      <DateForm {...data} updateFields={updateFields} />,
-    ]);
+const schema = z.object({
+  firstName: z.string(),
+  lastName: z.string(),
+  email: z.string(),
+  instagram: z.string(),
+  designType: DesignTypeEnum,
+  description: z.string(),
+  date: z.coerce.date(),
+  toggles: z.array(z.boolean()),
+});
 
-  // pressing enter triggers this as well.
-  function onSubmit(e: FormEvent) {
-    e.preventDefault();
-    console.log(e);
-    //this should only run when the callback has been finished
-    if (!isLastStep) return next();
-    alert;
-  }
+type FormFields = z.infer<typeof schema>;
+
+const endpoint = `http://127.0.0.1:8000/app/inquiry-submission/`;
+
+const availabilityEndpoint = `http://127.0.0.1:8000/app/availability/`;
+
+const Booking = () => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors, isSubmitting },
+  } = useForm<FormFields>({
+    defaultValues: {
+      designType: DesignTypeEnum.enum.Custom,
+    },
+    resolver: zodResolver(schema),
+  });
+
+  const [availabilityData, setAvailabilityData] = useState<any[]>([]);
+
+  const fetchAvailableDates = async () => {
+    try {
+      const response = await axios.get(availabilityEndpoint);
+      const data = response.data;
+      setAvailabilityData(data);
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log("Error fetching available dates", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAvailableDates();
+  }, []);
+
+  const toggles = useWatch({
+    control,
+    name: "toggles",
+    defaultValue: [],
+  });
+  const checkedCount = toggles.filter(Boolean).length;
+
+  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    //formdata is for uploading files of different types, like images/files
+    // var bodyFormData = new FormData();
+    // bodyFormData.append("first_name", data.firstName);
+    // bodyFormData.append("email", data.email);
+
+    const formData = {
+      first_name: data.firstName,
+      email: data.email,
+    };
+    const response = await axios
+      .post(endpoint, formData)
+      .then((result) => {
+        console.log(result.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log(response);
+    // const newData = await postData();
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log(data);
+  };
 
   return (
     <>
-      <main className="booking-page">
-        <section className="terminal-section">
-          <form onSubmit={onSubmit}>
-            <div>
-              step: {currentStepIndex}/ {steps.length}
-            </div>
-            {step}
-            <div className="prompt-button-container">
-              {!isFirstStep && (
-                <button className="nav-button" type="button" onClick={back}>
-                  Back
-                </button>
-              )}
-              <button className="nav-button" type="button" onClick={next}>
-                {isLastStep ? "Finish" : "Next"}
-              </button>
-            </div>
-          </form>
-        </section>
-      </main>
+      <section className="form-section">
+        <form className="booking-form" onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-control">
+            <label>First Name</label>
+            <input
+              {...register("firstName")}
+              type="text"
+              placeholder="First Name"
+            />
+            {errors.firstName && (
+              <div className="text-error">{errors.firstName.message}</div>
+            )}
+          </div>
+          <div className="form-control">
+            <label>Last Name</label>
+            <input
+              {...register("lastName")}
+              type="text"
+              placeholder="Last Name"
+            />
+          </div>
+          <div className="form-control">
+            <label>Email</label>
+            <input {...register("email")} type="text" placeholder="Email" />
+            {errors.email && (
+              <div className="text-error">{errors.email.message}</div>
+            )}
+          </div>
+          <div className="form-control">
+            <label>Instagram Handle</label>
+            <input
+              {...register("instagram", { required: true })}
+              type="text"
+              placeholder="Instagram Handle"
+            />
+          </div>
+          <div className="form-control">
+            <label>Design Type</label>
+            <label htmlFor="designType">
+              <input
+                {...register("designType")}
+                type="radio"
+                value={DesignTypeEnum.enum.Flash}
+                id="designType"
+              />
+              Flash
+            </label>
+            <label htmlFor="designType">
+              <input
+                {...register("designType")}
+                type="radio"
+                value={DesignTypeEnum.enum.Custom}
+                id="designType"
+              />
+              Custom
+            </label>
+            <label htmlFor="designType">
+              <input
+                {...register("designType")}
+                type="radio"
+                value={DesignTypeEnum.enum.Freehand}
+                id="designType"
+              />
+              Freehand
+            </label>
+          </div>
+          <div className="form-control">
+            <label htmlFor="description">Placement and design ideas</label>
+            {/* check that this textarea also goes in data on submit */}
+            <textarea
+              {...register("description")}
+              id="description"
+              name="description"
+              placeholder="Description"
+              rows={4}
+            />
+          </div>
+          <div className="form-control">
+            <p>Select 2 preferred dates. I will book you in for one of them.</p>
+            <ul>
+              {availabilityData.map((el, i) => (
+                <li key={i} className="day-slot">
+                  <input
+                    {...register(`toggles[${i}]` as any)}
+                    // name={`toggles[${i}]`}
+                    type="checkbox"
+                    id={el.date}
+                    disabled={!toggles[i] && checkedCount >= 2}
+                  />
+                  <label htmlFor={el.date}>
+                    {new Date(el.date).toDateString()}
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <button disabled={isSubmitting} type="submit">
+            {isSubmitting ? "Loading..." : "Submit"}
+          </button>
+        </form>
+      </section>
     </>
   );
-}
+};
 
-{
-  /* <section className="terminal-section">
-          <TypeAnimation
-            sequence={[
-              "Hey, did you want to book an appointment with proxii_dream?", // Types 'One'
-              1000, // Waits 1s
-              "ok sick", // Types 'One'
-              1000, // Waits 1s
-              () => {
-                console.log("Sequence completed");
-              },
-            ]}
-            speed={40}
-            wrapper="span"
-            cursor={true}
-            repeat={0}
-            omitDeletionAnimation={true}
-            style={{ fontSize: "2em", display: "inline-block" }}
-          />
-        </section> */
-}
-{
-  /* <section className="form-section">
-          <form className="booking-form" onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-control">
-              <label>First Name</label>
-              <input {...(register("firstName"), { required: true })} />
-            </div>
-            <div className="form-control">
-              <label>Last Name</label>
-              <input {...(register("lastName"), { required: true })} />
-            </div>
-            <div className="form-control">
-              <label>Email</label>
-              <input {...(register("email"), { required: true })} />
-            </div>
-            <div className="form-control">
-              <label>Instagram Handle</label>
-              <input {...register("instagram")} />
-            </div>
-            <div className="form-control">
-              <label>Design Type</label>
-              <select {...(register("designType"), { required: true })}>
-                <option value="flash"></option>
-                <option value="custom"></option>
-                <option value="freehand"></option>
-              </select>
-            </div>
-            <div className="form-control">
-              <label>Placement and design ideas</label>
-              <input {...register("description", { required: true })} />
-            </div>
-            {errors.firstName && <span>This field is required</span>}
-
-            <input type="submit" />
-          </form>
-        </section>
-      </main>
-    </>
-  );
-} */
-}
+export default Booking;

@@ -30,7 +30,7 @@ export function FormWrapper({
             (el) => el.classList.remove(CURSOR_CLASS_NAME),
             onPrompt,
           ]}
-          speed={40}
+          speed={80}
           wrapper="span"
           repeat={0}
           // omitDeletionAnimation={true}

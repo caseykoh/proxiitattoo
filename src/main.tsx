@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar/Navbar.tsx";
 import Gallery from "./pages/Gallery.tsx";
 import Info from "./pages/Info.tsx";
 import Booking from "./pages/Booking.tsx";
+import Admin from "./Admin.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         element: <Booking />,
       },
     ],
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
   },
 ]);
 
