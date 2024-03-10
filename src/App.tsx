@@ -1,11 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";
-import Gallery from "./pages/Gallery";
-import Info from "./pages/Info";
-import Booking from "./pages/Booking.tsx";
-import HelloWorld from "./HelloWorld.tsx";
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-import { Control, SubmitHandler, useForm, useWatch } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import "./Booking.css";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,12 +6,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment-timezone";
 
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
 type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
-
-const invalid_type_error = "Invalid type provided for this field";
-const required_error = "This field cannot be blank";
 
 // const schema = z.object({
 //   firstName: z
@@ -32,7 +30,7 @@ const schema = z.object({
   designType: DesignTypeEnum,
   description: z.string(),
   date: z.coerce.date(),
-  toggles: z.array(z.boolean()),
+  reference: z.any(),
 });
 
 type FormFields = z.infer<typeof schema>;
@@ -54,13 +52,25 @@ const Booking = () => {
     resolver: zodResolver(schema),
   });
 
+  moment.tz.setDefault("America/Toronto");
+
+  // availabilityData is array of {date, start_time, end_time}
   const [availabilityData, setAvailabilityData] = useState<any[]>([]);
+  const [, setDate] = useState(new Date());
+  const available = (date: Date) =>
+    // new Date() < date &&
+    availabilityData.some(
+      (availableData) =>
+        new Date(availableData.date + "T00:00").toDateString() ===
+        date.toDateString()
+    );
 
   const fetchAvailableDates = async () => {
     try {
       const response = await axios.get(availabilityEndpoint);
       const data = response.data;
       setAvailabilityData(data);
+      setDate(new Date(data[0].date + "T00:00"));
       console.log(data);
       return data;
     } catch (error) {
@@ -72,25 +82,38 @@ const Booking = () => {
     fetchAvailableDates();
   }, []);
 
-  const toggles = useWatch({
-    control,
-    name: "toggles",
-    defaultValue: [],
-  });
-  const checkedCount = toggles.filter(Boolean).length;
+  const [images, setImages] = useState<string[]>([]);
+
+  const onImageChange = (event: any) => {
+    if (event.target.files) {
+      const fileList = Array.from(event.target.files);
+      console.log(fileList);
+      setImages(fileList.map((file: any) => file && URL.createObjectURL(file)));
+    }
+  };
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    // const formData = {
+    //   first_name: data.firstName,
+    //   email: data.email,
+    // };
     //formdata is for uploading files of different types, like images/files
-    // var bodyFormData = new FormData();
-    // bodyFormData.append("first_name", data.firstName);
-    // bodyFormData.append("email", data.email);
+    const formData = new FormData();
+    formData.append("first_name", data.firstName);
+    formData.append("last_name", data.lastName);
+    formData.append("email", data.email);
+    formData.append("instagram", data.instagram);
 
-    const formData = {
-      first_name: data.firstName,
-      email: data.email,
-    };
+    formData.append("design_type", data.designType);
+    formData.append("description", data.description);
+    formData.append("images", data.reference);
+    formData.append("date", data.date.toISOString().split("T")[0]);
     const response = await axios
-      .post(endpoint, formData)
+      .post(endpoint, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((result) => {
         console.log(result.data);
       })
@@ -183,23 +206,36 @@ const Booking = () => {
             />
           </div>
           <div className="form-control">
-            <p>Select 2 preferred dates. I will book you in for one of them.</p>
-            <ul>
-              {availabilityData.map((el, i) => (
-                <li key={i} className="day-slot">
-                  <input
-                    {...register(`toggles[${i}]` as any)}
-                    // name={`toggles[${i}]`}
-                    type="checkbox"
-                    id={el.date}
-                    disabled={!toggles[i] && checkedCount >= 2}
-                  />
-                  <label htmlFor={el.date}>
-                    {new Date(el.date).toDateString()}
-                  </label>
-                </li>
-              ))}
-            </ul>
+            <label htmlFor="reference">Reference photos</label>
+            <input
+              {...register("reference")}
+              id="reference"
+              name="reference"
+              accept="image/*"
+              type="file"
+              multiple
+              onChange={onImageChange}
+            />
+            {images.map((imageURL) => (
+              <img alt="preview image" src={imageURL} />
+            ))}
+          </div>
+          <div className="form-control">
+            <label htmlFor="date">Select a preferred date</label>
+            <Controller
+              control={control}
+              name="date"
+              render={({ field }) => (
+                <DatePicker
+                  filterDate={available}
+                  onChange={(date) => {
+                    date && setDate(date);
+                    field.onChange(date);
+                  }}
+                  inline
+                />
+              )}
+            />
           </div>
 
           <button disabled={isSubmitting} type="submit">
