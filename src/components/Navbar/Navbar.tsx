@@ -19,28 +19,28 @@ const Navbar = () => {
   return (
     <header className="header">
       <nav className="nav container">
-        <NavLink to="/" className="nav-logo">
+        {/* <NavLink to="/" className="nav-logo">
           PROXII
-        </NavLink>
+        </NavLink> */}
         <div
           className={`nav-menu ${showMenu ? "show-menu" : ""}`}
           id="nav-menu"
         >
           <ul className="nav-list">
             <li className="nav-item">
-              <NavLink to="/" className="nav-link" onClick={closeMenuOnMobile}>
-                h0m3
-              </NavLink>
-            </li>
-            <li className="nav-item">
               <NavLink
-                to="/info"
+                to="/booking"
                 className="nav-link"
                 onClick={closeMenuOnMobile}
               >
-                1nf0
+                bo0K1ng
               </NavLink>
             </li>
+            {/* <li className="nav-item">
+              <NavLink to="/" className="nav-link" onClick={closeMenuOnMobile}>
+                h0m3
+              </NavLink>
+            </li> */}
             <li className="nav-item">
               <NavLink
                 to="/gallery"
@@ -52,11 +52,11 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <NavLink
-                to="/booking"
+                to="/info"
                 className="nav-link"
                 onClick={closeMenuOnMobile}
               >
-                bo0K1ng
+                1nf0
               </NavLink>
             </li>
           </ul>

@@ -51,32 +51,6 @@ function NavbarWrapper() {
   );
 }
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <App />,
-//     // errorElement: <ErrorPage />,
-//   },
-//   {
-//     path: "/info",
-//     element: <Info />,
-//   },
-//   {
-//     path: "/gallery",
-//     element: <Gallery />,
-//   },
-//   {
-//     path: "/booking",
-//     element: <Booking />,
-//     // children: [
-//     //   {
-//     //     path: "name",
-//     //     element: <NamePrompt />,
-//     //   },
-//     // ],
-//   },
-// ]);
-
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     {/* <Navbar /> */}
