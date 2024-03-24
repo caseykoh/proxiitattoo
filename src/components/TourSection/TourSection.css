@@ -1,0 +1,134 @@
+.tour-section {
+  min-height: 500px;
+  padding: 100px 20px 100px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tour-table-container {
+  background-color: black;
+  color: white;
+
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 500px;
+  margin-inline: auto;
+
+  animation: fade-in linear both;
+  animation-timeline: view();
+  animation-range: entry 40% cover 50%;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.tab-header {
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  /* text-transform: uppercase; */
+}
+
+.tab-header a {
+  color: white;
+  letter-spacing: 0px;
+}
+
+.tab-header p {
+  letter-spacing: 0px;
+}
+
+.waitlist-button {
+  position: relative;
+  width: 100px;
+  height: 26px;
+  /* border-radius: 20px; */
+  /* border: 1px white solid; */
+  /* padding-inline: 8px; */
+  /* cursor: pointer; */
+}
+
+.waitlist-button a {
+  z-index: 2;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  top: 1px;
+}
+
+.waitlist-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: 0.2s ease-in-out;
+  border: 1px solid white;
+  border-radius: 100px;
+}
+
+.waitlist-button:hover::before {
+  transform-origin: center;
+  transform: scale(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.425);
+}
+
+.tab-header,
+.table-div {
+  padding: 20px;
+}
+
+.table-div {
+  padding-top: 40px;
+}
+
+.tour-table {
+  color: rgba(255, 255, 255, 0.559);
+  font-size: 16px;
+  width: 100%;
+  text-align: left;
+  table-layout: fixed;
+}
+
+.tour-table th {
+  font-weight: 400;
+  padding-block: 20px 10px;
+}
+
+.tour-table caption {
+  text-align: left;
+}
+
+.tour-table td {
+  font-size: 14px;
+}
+
+tr td:nth-child(1) {
+  width: 35%;
+}
+
+tr td:nth-child(2) {
+  width: 35%;
+}
+
+thead th:nth-child(3),
+tbody td:nth-child(3) {
+  width: 30%;
+  text-align: right;
+}
+
+td a {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}

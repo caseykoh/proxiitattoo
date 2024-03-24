@@ -19,9 +19,11 @@ const Navbar = () => {
   return (
     <header className="header">
       <nav className="nav container">
-        {/* <NavLink to="/" className="nav-logo">
-          PROXII
-        </NavLink> */}
+        <div className="nav-logo-container">
+          <NavLink to="/" className="nav-logo">
+            proxiiworld
+          </NavLink>
+        </div>
         <div
           className={`nav-menu ${showMenu ? "show-menu" : ""}`}
           id="nav-menu"
@@ -29,25 +31,29 @@ const Navbar = () => {
           <ul className="nav-list">
             <li className="nav-item">
               <NavLink
+                to="/"
+                className="nav-link home-link"
+                onClick={closeMenuOnMobile}
+              >
+                home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
                 to="/booking"
                 className="nav-link"
                 onClick={closeMenuOnMobile}
               >
-                bo0K1ng
+                booking
               </NavLink>
             </li>
-            {/* <li className="nav-item">
-              <NavLink to="/" className="nav-link" onClick={closeMenuOnMobile}>
-                h0m3
-              </NavLink>
-            </li> */}
             <li className="nav-item">
               <NavLink
                 to="/gallery"
                 className="nav-link"
                 onClick={closeMenuOnMobile}
               >
-                g4113rY
+                gallery
               </NavLink>
             </li>
             <li className="nav-item">
@@ -56,16 +62,16 @@ const Navbar = () => {
                 className="nav-link"
                 onClick={closeMenuOnMobile}
               >
-                1nf0
+                info
               </NavLink>
             </li>
           </ul>
           <div className="nav-close" id="nav-close" onClick={toggleMenu}>
-            <IoClose />
+            <p>close</p>
           </div>
         </div>
         <div className="nav-toggle" id="nav-toggle" onClick={toggleMenu}>
-          <IoMenu />
+          <p>menu</p>
         </div>
       </nav>
     </header>

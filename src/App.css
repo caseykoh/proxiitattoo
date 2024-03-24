@@ -1,6 +1,7 @@
 html,
 body {
-  background-color: #ffffff;
+  background-color: #fff;
+  background: white;
   /* background-image: url("arch.jpg");
   background-position: center;
   background-size: cover;
@@ -49,12 +50,14 @@ h3 {
 p {
   font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: -1px;
 }
 
 a {
   font-size: 16px;
-  line-height: 18px;
+  letter-spacing: -1px;
   color: black;
-  font-family: "Times New Roman", Times, serif;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
   cursor: pointer;
 }
