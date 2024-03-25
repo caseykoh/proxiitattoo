@@ -23,7 +23,7 @@
     transform: rotate(1deg) translate(1px, -2px);
   } */
   to {
-    transform: rotate(3deg) translate(10px, 4px);
+    transform: rotate(1deg) translate(10px, 10px);
   }
 }
 
@@ -32,7 +32,7 @@
     transform: rotate(1deg) translate(1px, -2px);
   } */
   to {
-    transform: rotate(-1deg) translate(-10px, 12px);
+    transform: rotate(-3deg) translate(-15px, 15px);
   }
 }
 
@@ -41,13 +41,13 @@
     transform: rotate(1deg) translate(1px, -2px);
   } */
   to {
-    transform: rotate(-2deg) translate(12px, -5px);
+    transform: rotate(1deg) translate(28px, -18px);
   }
 }
 
 .page {
-  width: 300px;
-  height: 400px;
+  width: 280px;
+  height: 380px;
   background-color: rgb(223, 217, 211);
   position: absolute;
 }
@@ -60,7 +60,7 @@
   box-shadow: 0px 2px 5px rgba(94, 94, 94, 0.527);
   animation: splay1 linear forwards;
   animation-timeline: view();
-  animation-range: entry 5% cover 50%;
+  animation-range: entry 20% cover 80%;
 }
 
 #page2 {

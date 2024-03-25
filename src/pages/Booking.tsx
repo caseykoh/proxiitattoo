@@ -1,12 +1,18 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import "./Booking.css";
-import { z } from "zod";
+import { custom, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment-timezone";
+import {
+  IoCheckbox,
+  IoCheckboxOutline,
+  IoCloudUpload,
+  IoSquareOutline,
+} from "react-icons/io5";
 
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
 type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
@@ -46,9 +52,7 @@ const Booking = () => {
     control,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
-    defaultValues: {
-      designType: DesignTypeEnum.enum.Custom,
-    },
+    defaultValues: {},
     resolver: zodResolver(schema),
   });
 
@@ -126,10 +130,163 @@ const Booking = () => {
     console.log(data);
   };
 
+  const [flashSelected, setFlashSelected] = useState(false);
+  const [customSelected, setCustomSelected] = useState(false);
+  const [freehandSelected, setFreehandSelected] = useState(false);
+
   return (
     <>
       <section className="form-section">
         <form className="booking-form" onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-control">
+            <label>I'm looking for a...</label>
+            <div className="design-type-container">
+              <input
+                {...register("designType")}
+                type="radio"
+                value={DesignTypeEnum.enum.Flash}
+                id="flash-select"
+              />
+              <input
+                {...register("designType")}
+                type="radio"
+                value={DesignTypeEnum.enum.Custom}
+                id="custom-select"
+              />
+              <input
+                {...register("designType")}
+                type="radio"
+                value={DesignTypeEnum.enum.Freehand}
+                id="freehand-select"
+              />
+              <label
+                htmlFor="flash-select"
+                onClick={() => {
+                  if (!flashSelected) {
+                    setFlashSelected(!flashSelected);
+                    setCustomSelected(false);
+                    setFreehandSelected(false);
+                  }
+                }}
+              >
+                <div className="card">
+                  <span className="check-btn">
+                    {flashSelected ? <IoCheckbox /> : <IoSquareOutline />}
+                  </span>
+                  <div className="card-info">
+                    <h2 className="card-title">Flash</h2>
+                    <p>Choose a ready-made design from my flash.</p>
+                  </div>
+                </div>
+              </label>
+              <label
+                htmlFor="custom-select"
+                onClick={() => {
+                  if (!customSelected) {
+                    setFlashSelected(false);
+                    setCustomSelected(!customSelected);
+                    setFreehandSelected(false);
+                  }
+                }}
+              >
+                <div className="card">
+                  <span className="check-btn">
+                    {customSelected ? <IoCheckbox /> : <IoSquareOutline />}
+                  </span>
+                  <div className="card-info">
+                    <h2 className="card-title">Custom</h2>
+                    <p>
+                      Specify a placement and size with references, and a design
+                      will be custom made for you.
+                    </p>
+                  </div>
+                </div>
+              </label>
+              <label
+                htmlFor="freehand-select"
+                onClick={() => {
+                  if (!freehandSelected) {
+                    setFlashSelected(false);
+                    setCustomSelected(false);
+                    setFreehandSelected(!freehandSelected);
+                  }
+                }}
+              >
+                <div className="card">
+                  <span className="check-btn">
+                    {freehandSelected ? <IoCheckbox /> : <IoSquareOutline />}
+                  </span>
+                  <div className="card-info">
+                    <h2 className="card-title">Freehand</h2>
+                    <p>
+                      For the spontaneous and utmost fan of my work: you show up
+                      and a design is drawn directly on skin and is then
+                      tattooed.
+                    </p>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div className="form-control">
+            <label>Image references</label>
+            <input
+              {...register("reference")}
+              id="reference"
+              name="reference"
+              accept="image/*"
+              type="file"
+              multiple
+              onChange={onImageChange}
+            />
+            {images.length === 0 ? (
+              <label htmlFor="reference" className="empty-references">
+                <IoCloudUpload className="upload-icon" />
+                <span>Choose file</span>
+              </label>
+            ) : (
+              <label htmlFor="reference" className="add-references">
+                {images.map((imageURL) => (
+                  <img alt="preview image" src={imageURL} />
+                ))}
+
+                <div className="add-image-btn">
+                  <IoCloudUpload className="upload-icon" />
+                  <span>Add image</span>
+                </div>
+              </label>
+            )}
+          </div>
+          <div className="form-control">
+            <label htmlFor="description">Placement and design ideas</label>
+            {/* check that this textarea also goes in data on submit */}
+            <textarea
+              {...register("description")}
+              id="description"
+              name="description"
+              placeholder="Description"
+              rows={4}
+            />
+          </div>
+          <h3>Preferred Date</h3>
+          <div className="form-control">
+            <label htmlFor="date">Select a preferred date</label>
+            <Controller
+              control={control}
+              name="date"
+              render={({ field }) => (
+                <DatePicker
+                  filterDate={available}
+                  onChange={(date) => {
+                    date && setDate(date);
+                    field.onChange(date);
+                  }}
+                  inline
+                />
+              )}
+            />
+          </div>
+          <h3>Client Info</h3>
           <div className="form-control">
             <label>First Name</label>
             <input
@@ -161,80 +318,7 @@ const Booking = () => {
             <input
               {...register("instagram", { required: true })}
               type="text"
-              placeholder="Instagram Handle"
-            />
-          </div>
-          <div className="form-control">
-            <label>Design Type</label>
-            <label htmlFor="designType">
-              <input
-                {...register("designType")}
-                type="radio"
-                value={DesignTypeEnum.enum.Flash}
-                id="designType"
-              />
-              Flash
-            </label>
-            <label htmlFor="designType">
-              <input
-                {...register("designType")}
-                type="radio"
-                value={DesignTypeEnum.enum.Custom}
-                id="designType"
-              />
-              Custom
-            </label>
-            <label htmlFor="designType">
-              <input
-                {...register("designType")}
-                type="radio"
-                value={DesignTypeEnum.enum.Freehand}
-                id="designType"
-              />
-              Freehand
-            </label>
-          </div>
-          <div className="form-control">
-            <label htmlFor="description">Placement and design ideas</label>
-            {/* check that this textarea also goes in data on submit */}
-            <textarea
-              {...register("description")}
-              id="description"
-              name="description"
-              placeholder="Description"
-              rows={4}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="reference">Reference photos</label>
-            <input
-              {...register("reference")}
-              id="reference"
-              name="reference"
-              accept="image/*"
-              type="file"
-              multiple
-              onChange={onImageChange}
-            />
-            {images.map((imageURL) => (
-              <img alt="preview image" src={imageURL} />
-            ))}
-          </div>
-          <div className="form-control">
-            <label htmlFor="date">Select a preferred date</label>
-            <Controller
-              control={control}
-              name="date"
-              render={({ field }) => (
-                <DatePicker
-                  filterDate={available}
-                  onChange={(date) => {
-                    date && setDate(date);
-                    field.onChange(date);
-                  }}
-                  inline
-                />
-              )}
+              placeholder="@"
             />
           </div>
 

@@ -9,6 +9,19 @@ body {
   min-height: 100vh; */
 }
 
+.main_text {
+  color: #444444;
+}
+.secondary_text {
+  color: #765123;
+}
+.main_color {
+  background: #343434;
+}
+.secondary_color {
+  background: #aaa;
+}
+
 * {
   margin: 0;
 }

@@ -19,7 +19,7 @@
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
 
-.card {
+.photo-grid .card {
   position: relative;
   background-size: cover;
   background-repeat: no-repeat;
@@ -29,7 +29,7 @@
   /* border: 1px solid black; */
 }
 
-.card img {
+.photo-grid .card img {
   /* border: 10px solid rgb(255, 255, 255); */
   /* box-shadow: 0 2px 3px #00000087; */
   border-radius: 50%;
@@ -37,7 +37,7 @@
   border: 1px solid white;
 }
 
-.card::after {
+.photo-grid .card::after {
   content: "";
   display: block;
   width: 100%;
