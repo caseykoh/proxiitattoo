@@ -138,6 +138,14 @@ const Booking = () => {
     <>
       <section className="form-section">
         <form className="booking-form" onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-header">
+            <h2>Booking Form</h2>
+            <p>
+              Please fill out this form to inquire for a tattoo. If your project
+              gets accepted, we'll reach out to you via email. Please be ready
+              to place a booking fee to secure your appointment.
+            </p>
+          </div>
           <div className="form-control">
             <label>I'm looking for a...</label>
             <div className="design-type-container">

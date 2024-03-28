@@ -43,6 +43,11 @@ function TourSection() {
                 <tr>
                   <td>Vancouver</td>
                   <td>TBD</td>
+                  <td>05/18-19/2024</td>
+                </tr>
+                <tr>
+                  <td>Tokyo</td>
+                  <td>TBD</td>
                   <td>05/2024</td>
                 </tr>
                 <tr>
