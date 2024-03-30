@@ -53,7 +53,16 @@ const Navbar = () => {
                 className="nav-link"
                 onClick={closeMenuOnMobile}
               >
-                gallery
+                select work
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/flash"
+                className="nav-link"
+                onClick={closeMenuOnMobile}
+              >
+                flash
               </NavLink>
             </li>
             <li className="nav-item">

@@ -2,7 +2,7 @@ import "./Gallery.css";
 
 const Gallery = () => {
   return (
-    <section className="grid-container">
+    <section className="gallery-container">
       <section className="photo-grid">
         <div className="card">
           <img src="https://corner4art.com/wp-content/uploads/2023/05/bazal_30x21_father_son_pig_ink-scaled.jpg" />

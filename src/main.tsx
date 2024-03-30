@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Outlet,
+  RouterProvider,
+  useLocation,
+} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar.tsx";
 import Gallery from "./pages/Gallery.tsx";
 import Info from "./pages/Info.tsx";
 import Booking from "./pages/Booking.tsx";
 import Admin from "./Admin.tsx";
+import FlashPage from "./pages/FlashPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/gallery",
         element: <Gallery />,
+      },
+      {
+        path: "/flash",
+        element: <FlashPage />,
       },
       {
         path: "/booking",

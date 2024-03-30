@@ -1,9 +1,7 @@
 import ArtBanner from "../components/ArtBanner/ArtBanner";
-import StorySection from "../components/StorySection/StorySection";
 import { WorkSection } from "../components/WorkSection/WorkSection";
 import "./Home.css";
 import "../components/ArtBanner/ArtBanner.css";
-import { useEffect, useState } from "react";
 import FlashSection from "../components/FlashSection/FlashSection";
 import TourSection from "../components/TourSection/TourSection";
 import CalendarSection from "../components/CalendarSection/CalendarSection";
