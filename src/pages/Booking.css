@@ -227,7 +227,7 @@ input[type="file"] {
 .reference-upload img {
 }
 
-.booking-form button {
+.submit-button {
   font: inherit;
   cursor: pointer;
   outline: inherit;

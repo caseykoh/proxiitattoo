@@ -6,10 +6,6 @@ import { useState } from "react";
 import { now } from "moment-timezone";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
-function isSameDay(a: Date, b: Date) {
-  return differenceInCalendarDays(a, b) === 0;
-}
-
 function containsDate(dates: Date[], date: Date) {
   return dates.some(
     (dDate: Date) => dDate.toDateString() === date.toDateString()

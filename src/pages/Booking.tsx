@@ -1,18 +1,13 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import "./Booking.css";
-import { custom, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment-timezone";
-import {
-  IoCheckbox,
-  IoCheckboxOutline,
-  IoCloudUpload,
-  IoSquareOutline,
-} from "react-icons/io5";
+import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
@@ -321,22 +316,14 @@ const Booking = () => {
             <div className="contact-input-group">
               <div className="form-control">
                 <label>Full Name *</label>
-                <input
-                  {...register("name")}
-                  type="text"
-                  placeholder="First Name"
-                />
+                <input {...register("name")} type="text" />
                 {errors.name && (
                   <div className="text-error">{errors.name.message}</div>
                 )}
               </div>
               <div className="form-control">
                 <label>Email</label>
-                <input
-                  {...register("email")}
-                  type="text"
-                  placeholder="example@gmail.com"
-                />
+                <input {...register("email")} type="text" />
                 {errors.email && (
                   <div className="text-error">{errors.email.message}</div>
                 )}
@@ -352,7 +339,11 @@ const Booking = () => {
             </div>
           </div>
 
-          <button disabled={isSubmitting} type="submit">
+          <button
+            disabled={isSubmitting}
+            type="submit"
+            className="submit-button"
+          >
             {isSubmitting ? "Loading..." : "Submit"}
           </button>
         </form>
