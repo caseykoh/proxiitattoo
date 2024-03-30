@@ -11,15 +11,15 @@ import IMG_3372 from "../assets/drawings/IMG_3372.png";
 import IMG_3370 from "../assets/drawings/IMG_3370.png";
 
 export default [
-  { image: IMG_3473, title: "e3473" },
-  { image: IMG_3472, title: "e3473" },
-  { image: IMG_3377, title: "e3473" },
+  { image: IMG_3473, title: "e73" },
+  { image: IMG_3472, title: "e72" },
+  { image: IMG_3377, title: "e77" },
   { image: circle, title: "circle" },
-  { image: IMG_3378, title: "e3378" },
-  { image: IMG_3380, title: "e3380" },
+  { image: IMG_3378, title: "e78" },
+  { image: IMG_3380, title: "e80" },
   { image: ripples, title: "ripples" },
-  { image: IMG_3379, title: "e3379" },
-  { image: IMG_3371, title: "e3371" },
-  { image: IMG_3372, title: "e3372" },
-  { image: IMG_3370, title: "e3370" },
+  { image: IMG_3379, title: "e79" },
+  { image: IMG_3371, title: "e71" },
+  { image: IMG_3372, title: "e72" },
+  { image: IMG_3370, title: "e70" },
 ];
