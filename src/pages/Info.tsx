@@ -6,18 +6,15 @@ const Info = () => {
       <main className="info-page">
         <section className="info-section">
           <p className="info-text">
-            Welcome to PROXII_WORLD, where all of proxii_dream's artifacts and
-            storylines live. Here lives the creatures and stories stemming from
-            my personal experiences, some of which are manifested into physical
-            mediums like pencil on paper and ink on skin.
+            Welcome to PROXII_WORLD. Here lives the creatures and stories
+            stemming from my personal experiences, some of which are manifested
+            into physical mediums like pencil on paper and ink on skin.
           </p>
           <p className="info-text">
-            My tattoo style can be characterized as abstract blackwork designs
-            that seamlessly blend with the body's natural architecture. Pulling
-            textures and elements from organic forms, I create tattoos that
-            reflect each person's individual style and story. My approach is
-            grounded in collaboration and innovation, aiming to bring the
-            internal rhythms of your body to the surface.
+            Pulling textures and elements from organic forms, I create tattoos
+            that blend with the body's natural flow. My approach is grounded in
+            collaboration and innovation, aiming to bring the internal rhythms
+            of your body to the surface.
           </p>
         </section>
         <section className="tattoo-faq">
