@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment-timezone";
 import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
+import Calendar from "../components/Calendar/Calendar";
 
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
 type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
@@ -294,6 +295,7 @@ const Booking = () => {
               <label htmlFor="date">
                 Select a date that works for your appointment *
               </label>
+              <Calendar />
               <Controller
                 control={control}
                 name="date"
