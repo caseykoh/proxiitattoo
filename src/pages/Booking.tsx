@@ -9,7 +9,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment-timezone";
 import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
-import Calendar from "../components/Calendar/Calendar";
 
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
 type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
@@ -286,29 +285,6 @@ const Booking = () => {
                 name="description"
                 placeholder="Describe your vision"
                 rows={4}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <h3>Preferred Date</h3>
-            <div className="form-control">
-              <label htmlFor="date">
-                Select a date that works for your appointment *
-              </label>
-              <Calendar />
-              <Controller
-                control={control}
-                name="date"
-                render={({ field }) => (
-                  <DatePicker
-                    filterDate={available}
-                    onChange={(date) => {
-                      date && setDate(date);
-                      field.onChange(date);
-                    }}
-                    inline
-                  />
-                )}
               />
             </div>
           </div>

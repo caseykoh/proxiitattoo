@@ -28,7 +28,6 @@ const Home = () => {
         {/* <StorySection></StorySection> */}
         <TourSection></TourSection>
         <FlashSection></FlashSection>
-        <CalendarSection></CalendarSection>
       </div>
     </>
   );
