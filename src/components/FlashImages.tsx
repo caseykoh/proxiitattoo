@@ -1,25 +1,13 @@
-import IMG_3473 from "../assets/IMG_3473.png";
-import IMG_3472 from "../assets/IMG_3472.png";
-import IMG_3377 from "../assets/IMG_3377.png";
-import circle from "../assets/circle.png";
-import IMG_3378 from "../assets/IMG_3378.png";
-import IMG_3380 from "../assets/IMG_3380.png";
-import ripples from "../assets/ripples.jpg";
-import IMG_3379 from "../assets/IMG_3379.png";
-import IMG_3371 from "../assets/IMG_3371.png";
-import IMG_3372 from "../assets/IMG_3372.png";
-import IMG_3370 from "../assets/IMG_3370.png";
-
 export default [
-  { image: IMG_3473, title: "e73" },
-  { image: IMG_3472, title: "e72" },
-  { image: IMG_3377, title: "e77" },
-  { image: circle, title: "circle" },
-  { image: IMG_3378, title: "e78" },
-  { image: IMG_3380, title: "e80" },
-  { image: ripples, title: "ripples" },
-  { image: IMG_3379, title: "e79" },
-  { image: IMG_3371, title: "e71" },
-  { image: IMG_3372, title: "e72" },
-  { image: IMG_3370, title: "e70" },
+  { image: "/assets/IMG_3473.png", title: "e73" },
+  { image: "/assets/IMG_3472.png", title: "e72" },
+  { image: "/assets/IMG_3377.png", title: "e77" },
+  { image: "/assets/circle.png", title: "circle" },
+  { image: "/assets/IMG_3378.png", title: "e78" },
+  { image: "/assets/IMG_3380.png", title: "e80" },
+  { image: "/assets/ripples.jpg", title: "ripples" },
+  { image: "/assets/IMG_3379.png", title: "e79" },
+  { image: "/assets/IMG_3371.png", title: "e71" },
+  { image: "/assets/IMG_3372.png", title: "e72" },
+  { image: "/assets/IMG_3370.png", title: "e70" },
 ];

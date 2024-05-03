@@ -1,6 +1,4 @@
 import "./ArtBanner.css";
-import proxii_header from "../../assets/proxii_header.png";
-import world_header from "../../assets/world_header.png";
 
 function ArtBanner() {
   return (
@@ -8,10 +6,10 @@ function ArtBanner() {
       <main className="art-banner-container">
         <div className="main-title">
           <div className="first-header">
-            <img src={proxii_header} />
+            <img src="/assets/proxii_header.png" />
           </div>
           <div className="second-header">
-            <img src={world_header} />
+            <img src="/assets/world_header.png" />
           </div>
         </div>
         <div className="banner-description">

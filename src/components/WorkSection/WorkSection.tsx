@@ -1,7 +1,4 @@
 import "./WorkSection.css";
-import first_work from "../../assets/first_work.jpg";
-import second_work from "../../assets/cool_work.jpg";
-import third_work from "../../assets/third_work.jpg";
 import { NavLink } from "react-router-dom";
 
 export const WorkSection = () => {
@@ -28,9 +25,9 @@ export const WorkSection = () => {
             <p>toronto,on</p>
           </div>
           <div className="work-gallery-grid">
-            <img src={first_work} />
-            <img src={second_work} />
-            <img src={third_work} />
+            <img src="/assets/first_work.jpg" />
+            <img src="/assets/cool_work.jpg" />
+            <img src="/assets/third_work.jpg" />
           </div>
           <NavLink to="/gallery" className="gallery-link">
             see more
