@@ -1,13 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import {
-  createBrowserRouter,
-  Outlet,
-  RouterProvider,
-  useLocation,
-} from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar.tsx";
 import Gallery from "./pages/Gallery.tsx";
 import Info from "./pages/Info.tsx";

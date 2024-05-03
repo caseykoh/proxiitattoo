@@ -4,7 +4,6 @@ import "./Home.css";
 import "../components/ArtBanner/ArtBanner.css";
 import FlashSection from "../components/FlashSection/FlashSection";
 import TourSection from "../components/TourSection/TourSection";
-import CalendarSection from "../components/CalendarSection/CalendarSection";
 
 const Home = () => {
   // const [, setScrollable] = useState(false);
@@ -25,7 +24,6 @@ const Home = () => {
       <div className="main-view">
         <ArtBanner></ArtBanner>
         <WorkSection></WorkSection>
-        {/* <StorySection></StorySection> */}
         <TourSection></TourSection>
         <FlashSection></FlashSection>
       </div>

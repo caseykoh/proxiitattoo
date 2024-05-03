@@ -1,12 +1,9 @@
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import "./Booking.css";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import moment from "moment-timezone";
+import { useState } from "react";
 import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 
@@ -30,7 +27,6 @@ const schema = z.object({
   instagram: z.string(),
   designType: DesignTypeEnum,
   description: z.string(),
-  date: z.coerce.date(),
   reference: z.any(),
   specs: z.string(),
 });
@@ -39,48 +35,15 @@ type FormFields = z.infer<typeof schema>;
 
 const endpoint = `http://127.0.0.1:8000/app/inquiry-submission/`;
 
-const availabilityEndpoint = `http://127.0.0.1:8000/app/availability/`;
-
 const Booking = () => {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
     defaultValues: {},
     resolver: zodResolver(schema),
   });
-
-  moment.tz.setDefault("America/Toronto");
-
-  // availabilityData is array of {date, start_time, end_time}
-  const [availabilityData, setAvailabilityData] = useState<any[]>([]);
-  const [, setDate] = useState(new Date());
-  const available = (date: Date) =>
-    // new Date() < date &&
-    availabilityData.some(
-      (availableData) =>
-        new Date(availableData.date + "T00:00").toDateString() ===
-        date.toDateString()
-    );
-
-  const fetchAvailableDates = async () => {
-    try {
-      const response = await axios.get(availabilityEndpoint);
-      const data = response.data;
-      setAvailabilityData(data);
-      setDate(new Date(data[0].date + "T00:00"));
-      console.log(data);
-      return data;
-    } catch (error) {
-      console.log("Error fetching available dates", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchAvailableDates();
-  }, []);
 
   const [images, setImages] = useState<string[]>([]);
 
@@ -106,7 +69,6 @@ const Booking = () => {
     formData.append("design_type", data.designType);
     formData.append("description", data.description);
     formData.append("images", data.reference);
-    formData.append("date", data.date.toISOString().split("T")[0]);
     const response = await axios
       .post(endpoint, formData, {
         headers: {
