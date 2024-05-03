@@ -1,7 +1,7 @@
 import "./WorkSection.css";
-import first_work from "../../assets/select-work/first_work.jpg";
-import second_work from "../../assets/select-work/cool_work.jpg";
-import third_work from "../../assets/select-work/third_work.jpg";
+import first_work from "../../assets/first_work.jpg";
+import second_work from "../../assets/cool_work.jpg";
+import third_work from "../../assets/third_work.jpg";
 import { NavLink } from "react-router-dom";
 
 export const WorkSection = () => {

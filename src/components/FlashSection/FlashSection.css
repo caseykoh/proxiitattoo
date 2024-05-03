@@ -53,7 +53,7 @@
 }
 
 #page1 {
-  background-image: url("../../assets/drawings/collage.PNG");
+  background-image: url("../../assets/collage.PNG");
   background-size: cover;
   background-position: center;
   z-index: 3;
@@ -65,7 +65,7 @@
 
 #page2 {
   /* background-color: aquamarine; */
-  background-image: url("../../assets/drawings/halftone.PNG");
+  background-image: url("../../assets/halftone.PNG");
   background-size: cover;
   background-position: center;
   z-index: 2;
@@ -77,7 +77,7 @@
 
 #page3 {
   /* background-color: brown; */
-  background-image: url("../../assets/drawings/corner.PNG");
+  background-image: url("../../assets/corner.PNG");
   background-size: cover;
   background-position: center;
   z-index: 1;
