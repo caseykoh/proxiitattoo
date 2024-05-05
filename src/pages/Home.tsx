@@ -4,26 +4,28 @@ import "./Home.css";
 import "../components/ArtBanner/ArtBanner.css";
 import FlashSection from "../components/FlashSection/FlashSection";
 import TourSection from "../components/TourSection/TourSection";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
+
+gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
-  // const [, setScrollable] = useState(false);
-
-  // useEffect(() => {
-  //   //disable scrolling for 2 seconds
-  //   document.body.style.overflow = "hidden";
-
-  //   const timeout = setTimeout(() => {
-  //     setScrollable(true);
-  //     document.body.style.overflow = "auto";
-  //   }, 2000);
-  //   return () => clearTimeout(timeout);
-  // }, []);
+  const banner = useRef<HTMLDivElement>(null);
+  const workSection = useRef<HTMLDivElement>(null);
+  useGSAP(() => {});
 
   return (
     <>
       <div className="main-view">
-        <ArtBanner></ArtBanner>
-        <WorkSection></WorkSection>
+        <div ref={banner}>
+          <ArtBanner></ArtBanner>
+        </div>
+        <div ref={workSection}>
+          <WorkSection></WorkSection>
+        </div>
         <TourSection></TourSection>
         <FlashSection></FlashSection>
       </div>

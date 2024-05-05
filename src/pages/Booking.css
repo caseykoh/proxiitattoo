@@ -206,10 +206,6 @@ input[type="file"] {
   font-size: 28px;
 }
 
-.add-references img,
-.add-image-btn {
-}
-
 .add-image-btn {
   border: 1px dashed #ccc;
   border-radius: 8px;
@@ -224,15 +220,12 @@ input[type="file"] {
   font-size: 16px;
 }
 
-.reference-upload img {
-}
-
 .submit-button {
   font: inherit;
   cursor: pointer;
   outline: inherit;
   background-color: aqua;
-  color: #ff00dd;
+  color: #000000;
   font-size: 20px;
   font-weight: 600;
   padding: 12px;
