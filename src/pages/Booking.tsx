@@ -97,10 +97,10 @@ const Booking = () => {
         <form className="booking-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-header">
             <h2>Booking Form</h2>
+            <p>Please fill out this form to inquire for a tattoo.</p>
             <p>
-              Please fill out this form to inquire for a tattoo. If your project
-              gets accepted, we'll reach out to you via email. Please be ready
-              to place a booking fee to secure your appointment.
+              If your project gets accepted, we'll reach out to you via email.
+              Please be ready to place a booking fee to secure your appointment.
             </p>
           </div>
           <div className="form-group">
@@ -141,7 +141,10 @@ const Booking = () => {
                     </span>
                     <div className="card-info">
                       <h2 className="card-title">Flash</h2>
-                      <p>Choose a ready-made design from my flash.</p>
+                      <p>
+                        Choose a ready-made design from my flash. Flash can be
+                        modified.
+                      </p>
                       <div className="flash-button">
                         <NavLink to="/gallery" className="view-flash-link">
                           view flash
@@ -190,9 +193,8 @@ const Booking = () => {
                     <div className="card-info">
                       <h2 className="card-title">Freehand</h2>
                       <p>
-                        For the spontaneous and utmost fan of my work: you show
-                        up and a design is drawn directly on skin and is then
-                        tattooed.
+                        You show up and a design is drawn directly on skin and
+                        is then tattooed.
                       </p>
                     </div>
                   </div>
