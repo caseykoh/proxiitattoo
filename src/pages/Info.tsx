@@ -6,18 +6,26 @@ const Info = () => {
       <main className="info-page">
         <section className="info-section">
           <p className="info-text">
-            Welcome to PROXII_WORLD. Here lives the creatures and stories
-            stemming from my personal experiences, some of which are manifested
-            into physical mediums like pencil on paper and ink on skin.
+            Welcome to PROXII_WORLD. Here lives the sounds and whispers of this
+            invisible world, manifested into ink on skin.
           </p>
           <p className="info-text">
             Pulling textures and elements from organic forms, I create tattoos
             that blend with the body's natural flow. My approach is grounded in
             collaboration and innovation, aiming to bring the internal rhythms
-            of your body to the surface.
+            of the body to the surface.
           </p>
         </section>
         <section className="tattoo-faq">
+          <details>
+            <summary>How do I book?</summary>
+            <p>
+              Send me a dm on Instagram @proxii_dream. Please detail your design
+              idea, placement and size. I will get back to you with my next
+              availability. Feel free to send images of designs/works from my
+              page.
+            </p>
+          </details>
           <details>
             <summary>Where are you located?</summary>
             <p>
@@ -58,8 +66,8 @@ const Info = () => {
           <details>
             <summary>Do you do custom tattoos?</summary>
             <p>
-              I do flash, custom and freehand tattoos. I'm pretty flexible with
-              my designs.
+              Yes, I do flash, custom and freehand tattoos. I'm pretty flexible
+              with my flash designs, as well.
             </p>
           </details>
           <details>
