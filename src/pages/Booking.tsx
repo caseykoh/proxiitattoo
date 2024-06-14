@@ -227,8 +227,8 @@ const Booking = () => {
                 </label>
               ) : (
                 <label htmlFor="reference" className="add-references">
-                  {images.map((imageURL) => (
-                    <img alt="preview image" src={imageURL} />
+                  {images.map((imageURL, i) => (
+                    <img alt="preview image" src={imageURL} key={i} />
                   ))}
 
                   <div className="add-image-btn">
