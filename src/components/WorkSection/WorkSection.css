@@ -40,7 +40,7 @@
 }
 
 .instagram-link:hover {
-  color: aqua;
+  color: var(--accent-color);
 }
 
 .general-info-div {
@@ -66,7 +66,7 @@
 }
 
 .gallery-link:hover {
-  color: aqua;
+  color: var(--accent-color);
 }
 
 @keyframes fade-in {

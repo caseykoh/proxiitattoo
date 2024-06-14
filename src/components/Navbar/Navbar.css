@@ -84,11 +84,11 @@
 }
 
 .nav-link:hover {
-  color: aqua;
+  color: var(--accent-color);
 }
 
 .nav-link.active {
-  color: aqua;
+  color: var(--accent-color);
 }
 
 .nav-close {

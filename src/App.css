@@ -9,6 +9,11 @@ body {
   min-height: 100vh; */
 }
 
+:root {
+  --accent-color: #92ff3d;
+  --accent-color-dark: #254a09;
+}
+
 .main_text {
   color: #444444;
 }

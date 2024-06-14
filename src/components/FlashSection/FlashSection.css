@@ -64,7 +64,6 @@
 }
 
 #page2 {
-  /* background-color: aquamarine; */
   background-image: url("/assets/halftone.png");
   background-size: cover;
   background-position: center;
@@ -93,5 +92,5 @@
 }
 
 .flash-link:hover {
-  color: aqua;
+  color: var(--accent-color);
 }

@@ -1,9 +1,9 @@
 .form-section {
   width: 100%;
   padding-top: 60px;
-  background-color: #242424;
   min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
+  color: #535353;
 }
 
 .form-header h2 {
@@ -23,13 +23,11 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
-  background-color: #242424;
-  color: white;
 }
 
 .booking-form h3 {
   font-family: Arial, Helvetica, sans-serif;
-  color: rgb(175, 175, 175);
+  color: rgb(98, 98, 98);
 }
 
 .form-group {
@@ -47,7 +45,6 @@
   font-size: 16px;
   /* font-weight: 600; */
   margin-bottom: 10px;
-  color: #afafaf;
 }
 
 .form-control input[type="text"],
@@ -57,19 +54,16 @@
   border: 1px rgba(168, 168, 168, 0.63) solid;
   padding-block: 10px;
   padding-inline: 14px;
-  transition: 0.2s;
+  transition: 0.3s;
   background: rgba(207, 207, 207, 0.164);
-  color: white;
 }
 
 .form-control input[type="text"]:focus,
 .form-control textarea:focus {
   outline: none !important;
-  border: 1px solid red;
-  box-shadow: 0 0 4px rgb(0, 141, 141);
-  background: rgba(207, 207, 207, 0.075);
-  border-color: aqua;
-  color: white;
+  border: 1px solid rgb(73, 73, 73);
+  box-shadow: 0 0 1px rgb(110, 110, 110);
+  /* background: rgba(207, 207, 207, 0.075); */
 }
 
 .contact-input-group {
@@ -95,11 +89,11 @@
 }
 
 .booking-form .card {
-  border: 1px rgb(77, 77, 77) solid;
+  border: 1px rgb(91, 91, 91) solid;
   border-radius: 20px;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.055);
-  color: rgb(77, 77, 77);
+  color: rgb(124, 124, 124);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -109,7 +103,6 @@
 }
 
 .booking-form .card .card-info {
-  color: white;
   display: block;
 }
 
@@ -120,16 +113,15 @@
 input[id="flash-select"]:checked ~ label[for="flash-select"] .card,
 input[id="custom-select"]:checked ~ label[for="custom-select"] .card,
 input[id="freehand-select"]:checked ~ label[for="freehand-select"] .card {
-  border: 1px rgb(255, 255, 255) solid;
-  /* transform: scale(0.97); */
-  background-color: rgb(51, 51, 51);
-  color: rgb(255, 255, 255);
+  border: 1px #535353 solid;
+  background-color: rgba(196, 196, 196, 0.417);
+  color: #535353;
 }
 
 input[id="flash-select"]:checked ~ label[for="flash-select"] .card-info,
 input[id="custom-select"]:checked ~ label[for="custom-select"] .card-info,
 input[id="freehand-select"]:checked ~ label[for="freehand-select"] .card-info {
-  color: rgb(255, 255, 255);
+  color: #535353;
 }
 
 .flash-button {
@@ -148,7 +140,7 @@ input[id="freehand-select"]:checked ~ label[for="freehand-select"] .card-info {
   height: 100%;
   text-align: center;
   top: 1px;
-  color: white;
+  color: #535353;
 }
 
 .flash-button::before {
@@ -160,7 +152,7 @@ input[id="freehand-select"]:checked ~ label[for="freehand-select"] .card-info {
   height: 100%;
   z-index: 1;
   transition: 0.2s ease-in-out;
-  border: 1px solid white;
+  border: 1px solid #535353;
   border-radius: 100px;
 }
 
@@ -175,7 +167,7 @@ input[type="file"] {
 }
 
 .empty-references {
-  border: 1px dashed #ccc;
+  border: 1px dashed #535353;
   cursor: pointer;
   border-radius: 8px;
   display: flex;
@@ -209,7 +201,7 @@ input[type="file"] {
 }
 
 .add-image-btn {
-  border: 1px dashed #ccc;
+  border: 1px dashed #535353;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -223,11 +215,13 @@ input[type="file"] {
 }
 
 .submit-button {
+  width: 200px;
+  margin-inline: auto;
   font: inherit;
   cursor: pointer;
   outline: inherit;
-  background-color: aqua;
-  color: #000000;
+  background-color: var(--accent-color);
+  color: var(--accent-color-dark);
   font-size: 20px;
   font-weight: 600;
   padding: 12px;
