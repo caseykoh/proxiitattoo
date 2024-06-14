@@ -5,7 +5,6 @@ export default [
   "/assets/IMG_2015.webp",
   "/assets/IMG_2032.webp",
   "/assets/IMG_2140.webp",
-  "/assets/IMG_2161.webp",
   "/assets/IMG_2195.webp",
   "/assets/IMG_2242.webp",
   "/assets/IMG_2264.webp",
