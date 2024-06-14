@@ -11,6 +11,7 @@ function TourSection() {
             <div className="waitlist-button">
               <NavLink
                 to="https://form.jotform.com/233556816876067"
+                target="_blank"
                 className="waitlist-link"
               >
                 join waitlist
