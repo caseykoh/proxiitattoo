@@ -2,7 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Outlet,
+  RouterProvider,
+  ScrollRestoration,
+} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar.tsx";
 import Gallery from "./pages/Gallery.tsx";
 import Info from "./pages/Info.tsx";
@@ -50,6 +55,7 @@ const router = createBrowserRouter([
 function NavbarWrapper() {
   return (
     <div>
+      <ScrollRestoration />
       <Navbar />
       <Outlet />
     </div>

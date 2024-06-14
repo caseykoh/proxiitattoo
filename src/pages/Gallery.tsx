@@ -5,8 +5,8 @@ const Gallery = () => {
   return (
     <section className="gallery-container">
       <section className="photo-grid">
-        {workImages?.map((img) => (
-          <div className="card">
+        {workImages?.map((img, i) => (
+          <div className="card" key={i}>
             <img src={img} />
           </div>
         ))}
