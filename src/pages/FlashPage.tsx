@@ -6,6 +6,7 @@ const FlashPage = () => {
   return (
     <section className="gallery-container">
       <h1>Flash</h1>
+      <p>Available flash. Flash can be modified to fit your idea/placement.</p>
       {/* <p>Available for booking.</p> */}
       <section className="photo-grid">
         {flashImages?.map((flashImg, i) => (
