@@ -9,7 +9,7 @@ const FlashPage = () => {
       <section className="photo-grid">
         {flashImages?.map((flashImg, i) => (
           <div className="card flash-card" key={i}>
-            <img src={flashImg.image} />
+            <img src={flashImg.image} loading="lazy" />
             <div className="img-caption">
               <button className="book-btn">{"[request flash]"}</button>
             </div>
