@@ -25,9 +25,9 @@ export const WorkSection = () => {
             <p>toronto,on</p>
           </div>
           <div className="work-gallery-grid">
-            <img src="/assets/first_work.jpg" />
+            <img src="/assets/IMG_2348.webp" />
             <img src="/assets/cool_work.jpg" />
-            <img src="/assets/third_work.jpg" />
+            <img src="/assets/IMG_2717.webp" />
           </div>
           <NavLink to="/gallery" className="gallery-link">
             see more
