@@ -3,9 +3,9 @@ import "./Booking.css";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
 type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
@@ -36,6 +36,8 @@ type FormFields = z.infer<typeof schema>;
 const endpoint = `http://127.0.0.1:8000/app/inquiry-submission/`;
 
 const Booking = () => {
+  const { state } = useLocation();
+
   const {
     register,
     handleSubmit,
@@ -46,6 +48,12 @@ const Booking = () => {
   });
 
   const [images, setImages] = useState<string[]>([]);
+  useEffect(() => {
+    if (state?.flashImg) {
+      console.log(state.flashImg);
+      setImages([state.flashImg]);
+    }
+  }, []);
 
   const onImageChange = (event: any) => {
     if (event.target.files) {
