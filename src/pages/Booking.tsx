@@ -146,7 +146,7 @@ const Booking = () => {
                         modified.
                       </p>
                       <div className="flash-button">
-                        <NavLink to="/gallery" className="view-flash-link">
+                        <NavLink to="/flash" className="view-flash-link">
                           view flash
                         </NavLink>
                       </div>
