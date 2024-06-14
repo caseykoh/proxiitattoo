@@ -201,6 +201,7 @@ input[type="file"] {
   grid-template-columns: repeat(3, minmax(100px, 1fr));
   grid-template-rows: 110px;
   gap: 10px;
+  padding-bottom: 30px;
 }
 
 .add-references .upload-icon {
