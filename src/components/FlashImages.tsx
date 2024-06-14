@@ -1,5 +1,6 @@
 export default [
   { image: "/assets/IMG_3473.png", title: "e73" },
+  { image: "/assets/ponyflash.jpg", title: "pony" },
   { image: "/assets/IMG_3472.png", title: "e72" },
   { image: "/assets/IMG_3377.png", title: "e77" },
   { image: "/assets/circle.png", title: "circle" },

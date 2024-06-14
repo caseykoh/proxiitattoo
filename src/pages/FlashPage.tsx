@@ -12,11 +12,13 @@ const FlashPage = () => {
           <div className="card flash-card" key={i}>
             <img src={flashImg.image} loading="lazy" />
             <div className="img-caption">
-              <button className="book-btn">
-                <Link to={"/booking"} state={{ flashImg: flashImg.image }}>
-                  {"[request flash]"}
-                </Link>
-              </button>
+              <Link
+                className="book-btn"
+                to={"/booking"}
+                state={{ flashImg: flashImg.image }}
+              >
+                {"[request flash]"}
+              </Link>
             </div>
           </div>
         ))}
