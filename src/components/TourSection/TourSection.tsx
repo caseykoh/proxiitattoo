@@ -35,26 +35,31 @@ function TourSection() {
                 <tr>
                   <td>Toronto</td>
                   <td>
-                    <a href="https://www.instagram.com/000000000000_studio/">
+                    <a
+                      href="https://www.instagram.com/000000000000_studio/"
+                      target="_blank"
+                    >
                       @0Studio
                     </a>
                   </td>
-                  <td>03-04/2024</td>
+                  <td>2023-Now</td>
                 </tr>
                 <tr>
                   <td>Vancouver</td>
-                  <td>TBD</td>
+                  <td>
+                    <a
+                      href="https://www.instagram.com/subdidink"
+                      target="_blank"
+                    >
+                      @subdidink studio
+                    </a>
+                  </td>
                   <td>05/18-19/2024</td>
                 </tr>
                 <tr>
-                  <td>Tokyo</td>
-                  <td>TBD</td>
-                  <td>05/2024</td>
-                </tr>
-                <tr>
                   <td>Montreal</td>
-                  <td>?</td>
-                  <td>?</td>
+                  <td>TBD</td>
+                  <td>TBD</td>
                 </tr>
               </tbody>
             </table>
