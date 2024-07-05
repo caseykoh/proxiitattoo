@@ -12,17 +12,6 @@ import goToTop from "../GoToTop";
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
 type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
 
-// const schema = z.object({
-//   firstName: z
-//     .string({ invalid_type_error, required_error })
-//     .min(1, required_error),
-//   lastName: z.string().min(1),
-//   email: z.string().email(),
-//   instagram: z.string().min(1),
-//   designType: DesignTypeEnum,
-//   description: z.string().min(1),
-// });
-
 const formSchema = z.object({
   name: z
     .string({ required_error: "Name is required" })
