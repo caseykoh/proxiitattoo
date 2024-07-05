@@ -337,7 +337,7 @@ const Booking = () => {
             </div>
             <div className="form-control">
               <label htmlFor="description">
-                What's your vision for the piece?
+                What's your vision for the piece? *
               </label>
               {/* check that this textarea also goes in data on submit */}
               <textarea
