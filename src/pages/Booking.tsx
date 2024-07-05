@@ -23,9 +23,17 @@ const formSchema = z.object({
     .min(1, { message: "Valid email is required" })
     .max(254, { message: "Email is over 254 characters" }),
   instagram: z
-    .string()
-    .max(30, { message: "Instagram handle is over 30 characters" })
-    .optional(),
+    .union([
+      z
+        .string()
+        .max(30, { message: "Instagram handle is over 30 characters" })
+        .refine((val) => !val.trim().includes(" "), {
+          message: "Instagram handle cannot contain spaces",
+        }),
+      z.string().length(0),
+    ])
+    .optional()
+    .transform((e) => (e === "" ? undefined : e)),
   designType: DesignTypeEnum,
   description: z
     .string({ required_error: "Description is required" })
@@ -373,6 +381,9 @@ const Booking = () => {
               <div className="form-control">
                 <label>Instagram Handle</label>
                 <input {...register("instagram")} type="text" placeholder="@" />
+                {errors.instagram && (
+                  <div className="text-error">{errors.instagram.message}</div>
+                )}
               </div>
             </div>
           </div>
