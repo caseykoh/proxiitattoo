@@ -240,6 +240,11 @@ input[type="file"] {
   border-radius: 8px;
 }
 
+.disabled-button {
+  cursor: default;
+  opacity: 50%;
+}
+
 .text-error {
   font-size: 20px;
   color: red;

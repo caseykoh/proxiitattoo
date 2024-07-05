@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
@@ -84,6 +84,8 @@ const Booking = () => {
     }
   };
 
+  const navigate = useNavigate();
+
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     //validate form to ensure:
     if (!images || images.length === 0) {
@@ -138,6 +140,7 @@ const Booking = () => {
 
       // await submitForm(finalFormData);
       console.log("Form submitted successfully!");
+      navigate("/confirmation");
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -353,7 +356,9 @@ const Booking = () => {
           <button
             disabled={isSubmitting}
             type="submit"
-            className="submit-button"
+            className={
+              "submit-button " + (isSubmitting ? "disabled-button" : "")
+            }
           >
             {isSubmitting ? "Please wait..." : "Submit"}
           </button>
