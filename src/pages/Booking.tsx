@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { uploadFileToS3, submitForm } from "../api";
 
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
 type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
@@ -29,12 +30,11 @@ const schema = z.object({
   designType: DesignTypeEnum,
   description: z.string(),
   reference: z.any(),
-  specs: z.string(),
+  size: z.string(),
+  placement: z.string(),
 });
 
 type FormFields = z.infer<typeof schema>;
-
-const endpoint = `http://127.0.0.1:8000/app/inquiry-submission/`;
 
 const Booking = () => {
   const { state } = useLocation();
@@ -49,6 +49,7 @@ const Booking = () => {
   });
 
   const [images, setImages] = useState<{ file: File; id: any }[] | null>([]);
+
   useEffect(() => {
     if (state?.flashImg) {
       console.log(state.flashImg);
@@ -71,35 +72,62 @@ const Booking = () => {
   };
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    // const formData = {
-    //   first_name: data.firstName,
-    //   email: data.email,
-    // };
-    //formdata is for uploading files of different types, like images/files
-    const formData = new FormData();
-    formData.append("first_name", data.name);
-    formData.append("email", data.email);
-    formData.append("instagram", data.instagram);
+    //validate form to ensure:
+    if (!images || images.length === 0) {
+      return;
+    }
+    try {
+      //get image urls
+      const payload = {
+        imageList: images.map(({ id }) => {
+          return id;
+        }),
+      };
+      console.log("payload that is being sent to lambda: " + payload);
+      const response = await axios.post(
+        import.meta.env.VITE_AWS_PRESIGNED_URLS,
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const presignedUrls = response.data.presignedUrls;
+      console.log(presignedUrls);
+      // got back {imageId, url}
+      // find through images array for imageid and upload accordingly
 
-    formData.append("design_type", data.designType);
-    formData.append("description", data.description);
-    formData.append("images", data.reference);
-    const response = await axios
-      .post(endpoint, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((result) => {
-        console.log(result.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    console.log(response);
-    // const newData = await postData();
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(data);
+      // const urls = await Promise.all(
+      //   presignedUrls.map(async (imageData: { imageId: any; url: any }) => {
+      //     const imgToUpload = images.find(
+      //       (image) => image.id.toString() === imageData.imageId.toString()
+      //     )?.file;
+      //     if (imgToUpload) {
+      //       await uploadFileToS3(imgToUpload, imageData.url);
+      //     } else {
+      //       throw "No matching image with id";
+      //     }
+      //     return imageData.url;
+      //   })
+      // );
+      // console.log(urls);
+
+      // const finalFormData = new FormData();
+      // finalFormData.append("full_name", data.name);
+      // finalFormData.append("email", data.email);
+      // finalFormData.append("instagram", data.instagram);
+      // finalFormData.append("design_type", data.designType);
+      // finalFormData.append("size", data.size);
+      // finalFormData.append("placement", data.placement);
+      // finalFormData.append("description", data.description);
+      // finalFormData.append("images", JSON.stringify(urls));
+
+      // await submitForm(finalFormData);
+      console.log("Form submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   const [flashSelected, setFlashSelected] = useState(false);
@@ -255,12 +283,16 @@ const Booking = () => {
               )}
             </div>
             <div className="form-control">
-              <label>Where do you want it and how big? *</label>
+              <label>Where do you want it? *</label>
               <input
-                {...register("specs")}
+                {...register("placement")}
                 type="text"
-                placeholder="Size + Placement"
+                placeholder="Placement"
               />
+            </div>
+            <div className="form-control">
+              <label>How big? *</label>
+              <input {...register("size")} type="text" placeholder="Size" />
             </div>
             <div className="form-control">
               <label htmlFor="description">
