@@ -3,7 +3,7 @@ import "./Booking.css";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
