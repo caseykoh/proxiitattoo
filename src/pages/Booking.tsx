@@ -24,14 +24,33 @@ type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
 // });
 
 const formSchema = z.object({
-  name: z.string().min(1).max(70),
-  email: z.string().email().min(5).max(254),
-  instagram: z.string().min(1).max(30),
+  name: z
+    .string({ required_error: "Name is required" })
+    .min(1, { message: "Name is required" })
+    .max(70, { message: "Name is over 70 characters" }),
+  email: z
+    .string({ required_error: "Email is required" })
+    .email({ message: "Email is invalid" })
+    .min(1, { message: "Valid email is required" })
+    .max(254, { message: "Email is over 254 characters" }),
+  instagram: z
+    .string()
+    .max(30, { message: "Instagram handle is over 30 characters" })
+    .optional(),
   designType: DesignTypeEnum,
-  description: z.string().min(1).max(500),
+  description: z
+    .string({ required_error: "Description is required" })
+    .min(1, { message: "Description is required" })
+    .max(500, { message: "Description is over 500 characters" }),
   reference: z.any(),
-  size: z.string().min(1).max(100),
-  placement: z.string().min(1).max(200),
+  size: z
+    .string({ required_error: "Size is required" })
+    .min(1, { message: "Size is required" })
+    .max(100, { message: "Size is over 100 characters" }),
+  placement: z
+    .string({ required_error: "Placement is required" })
+    .min(1, { message: "Placement is required" })
+    .max(200, { message: "Placement is over 200 characters" }),
 });
 
 type FormFields = z.infer<typeof formSchema>;
@@ -42,6 +61,7 @@ const Booking = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
     defaultValues: {},
@@ -89,7 +109,7 @@ const Booking = () => {
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    //validate form to ensure:
+    console.log("onsubmit called");
     if (!images || images.length === 0) {
       return;
     }
@@ -133,7 +153,9 @@ const Booking = () => {
       const finalFormData = new FormData();
       finalFormData.append("full_name", data.name);
       finalFormData.append("email", data.email);
-      finalFormData.append("instagram", data.instagram);
+      if (data.instagram) {
+        finalFormData.append("instagram", data.instagram);
+      }
       finalFormData.append("design_type", data.designType);
       finalFormData.append("size", data.size);
       finalFormData.append("placement", data.placement);
@@ -144,6 +166,9 @@ const Booking = () => {
       console.log("Form submitted successfully!");
       navigate("/confirmation");
     } catch (error) {
+      setError("root", {
+        message: "Form could not be submitted.",
+      });
       console.error("Error submitting form:", error);
     }
   };
@@ -299,6 +324,9 @@ const Booking = () => {
                   <span>Choose images</span>
                 </label>
               )}
+              {errors.reference && (
+                <div className="text-error">Image references are required.</div>
+              )}
             </div>
             <div className="form-control">
               <label>Where do you want it? *</label>
@@ -307,10 +335,16 @@ const Booking = () => {
                 type="text"
                 placeholder="Placement"
               />
+              {errors.placement && (
+                <div className="text-error">{errors.placement.message}</div>
+              )}
             </div>
             <div className="form-control">
               <label>How big? *</label>
               <input {...register("size")} type="text" placeholder="Size" />
+              {errors.size && (
+                <div className="text-error">{errors.size.message}</div>
+              )}
             </div>
             <div className="form-control">
               <label htmlFor="description">
@@ -324,6 +358,9 @@ const Booking = () => {
                 placeholder="Describe your vision"
                 rows={4}
               />
+              {errors.description && (
+                <div className="text-error">{errors.description.message}</div>
+              )}
             </div>
           </div>
 
@@ -338,19 +375,15 @@ const Booking = () => {
                 )}
               </div>
               <div className="form-control">
-                <label>Email</label>
+                <label>Email *</label>
                 <input {...register("email")} type="text" />
                 {errors.email && (
                   <div className="text-error">{errors.email.message}</div>
                 )}
               </div>
               <div className="form-control">
-                <label>Instagram Handle *</label>
-                <input
-                  {...register("instagram", { required: true })}
-                  type="text"
-                  placeholder="@"
-                />
+                <label>Instagram Handle</label>
+                <input {...register("instagram")} type="text" placeholder="@" />
               </div>
             </div>
           </div>
@@ -364,6 +397,9 @@ const Booking = () => {
           >
             {isSubmitting ? "Please wait..." : "Submit"}
           </button>
+          {errors.root && (
+            <div className="text-error">{errors.root.message}</div>
+          )}
         </form>
       </section>
     </>
