@@ -6,6 +6,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
 type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
@@ -47,19 +48,25 @@ const Booking = () => {
     resolver: zodResolver(schema),
   });
 
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<{ file: File; id: any }[] | null>([]);
   useEffect(() => {
     if (state?.flashImg) {
       console.log(state.flashImg);
-      setImages([state.flashImg]);
+      setImages([{ file: state.flashImg, id: uuidv4() }]);
     }
   }, []);
 
   const onImageChange = (event: any) => {
     if (event.target.files) {
-      const fileList = Array.from(event.target.files);
-      console.log(fileList);
-      setImages(fileList.map((file: any) => file && URL.createObjectURL(file)));
+      const fileList = Array.from(event.target.files as ArrayLike<File>);
+      const uniqueList = fileList.map((file) => {
+        return {
+          file,
+          id: uuidv4(),
+        };
+      });
+      console.log(uniqueList);
+      setImages(uniqueList);
     }
   };
 
@@ -220,21 +227,24 @@ const Booking = () => {
                 multiple
                 onChange={onImageChange}
               />
-              {images.length === 0 ? (
-                <label htmlFor="reference" className="empty-references">
-                  <IoCloudUpload className="upload-icon" />
-                  <span>Choose file</span>
-                </label>
-              ) : (
+              {images && images.length > 0 ? (
                 <label htmlFor="reference" className="add-references">
-                  {images.map((imageURL, i) => (
-                    <img alt="preview image" src={imageURL} key={i} />
+                  {images.map(({ file, id }) => (
+                    <img
+                      alt="preview image"
+                      src={URL.createObjectURL(file)}
+                      key={id}
+                    />
                   ))}
-
                   <div className="add-image-btn">
                     <IoCloudUpload className="upload-icon" />
                     <span>Add image</span>
                   </div>
+                </label>
+              ) : (
+                <label htmlFor="reference" className="empty-references">
+                  <IoCloudUpload className="upload-icon" />
+                  <span>Choose file</span>
                 </label>
               )}
             </div>
