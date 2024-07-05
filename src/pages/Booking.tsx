@@ -288,7 +288,7 @@ const Booking = () => {
                     <label htmlFor="reference">
                       <div className="add-image-btn">
                         <IoCloudUpload className="upload-icon" />
-                        <span>Add image</span>
+                        <span>Replace images</span>
                       </div>
                     </label>
                   )}
@@ -296,7 +296,7 @@ const Booking = () => {
               ) : (
                 <label htmlFor="reference" className="empty-references">
                   <IoCloudUpload className="upload-icon" />
-                  <span>Choose file</span>
+                  <span>Choose images</span>
                 </label>
               )}
             </div>
