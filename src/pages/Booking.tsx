@@ -355,7 +355,7 @@ const Booking = () => {
             type="submit"
             className="submit-button"
           >
-            {isSubmitting ? "Loading..." : "Submit"}
+            {isSubmitting ? "Please wait..." : "Submit"}
           </button>
         </form>
       </section>

@@ -14,6 +14,7 @@ import Info from "./pages/Info.tsx";
 import Booking from "./pages/Booking.tsx";
 import Admin from "./Admin.tsx";
 import FlashPage from "./pages/FlashPage.tsx";
+import ConfirmationPage from "./pages/ConfirmationPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/booking",
         element: <Booking />,
+      },
+      {
+        path: "/confirmation",
+        element: <ConfirmationPage />,
       },
     ],
   },
