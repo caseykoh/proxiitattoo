@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import goToTop from "../GoToTop";
 
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
 type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
@@ -50,6 +51,7 @@ const Booking = () => {
   const [images, setImages] = useState<{ file: File; id: any }[] | null>([]);
 
   useEffect(() => {
+    goToTop();
     if (state?.flashImg) {
       console.log(state.flashImg);
       setImages([{ file: state.flashImg, id: uuidv4() }]);

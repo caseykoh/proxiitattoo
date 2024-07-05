@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import "./App.css";
 import Home from "./pages/Home";
+import goToTop from "./GoToTop";
 
 function App() {
+  useEffect(() => {
+    goToTop();
+  }, []);
   return (
     <>
       {/* <HelloWorld /> */}

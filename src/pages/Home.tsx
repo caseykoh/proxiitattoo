@@ -7,7 +7,8 @@ import TourSection from "../components/TourSection/TourSection";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import goToTop from "../GoToTop";
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
@@ -15,6 +16,9 @@ gsap.registerPlugin(ScrollTrigger);
 const Home = () => {
   const banner = useRef<HTMLDivElement>(null);
   const workSection = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    goToTop();
+  }, []);
   useGSAP(() => {});
 
   return (

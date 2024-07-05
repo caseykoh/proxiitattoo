@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import "./ConfirmationPage.css";
 import { IoCheckmarkCircleSharp } from "react-icons/io5";
+import goToTop from "../GoToTop";
 
 const ConfirmationPage = () => {
+  useEffect(() => {
+    goToTop();
+  }, []);
   return (
     <>
       <section className="confirmation-section">

@@ -1,7 +1,12 @@
 import "./FlashPage.css";
 import flashImages from "../components/FlashImages.tsx";
+import { useEffect } from "react";
+import goToTop from "../GoToTop.tsx";
 
 const FlashPage = () => {
+  useEffect(() => {
+    goToTop();
+  }, []);
   return (
     <section className="gallery-container">
       <h1>Flash</h1>

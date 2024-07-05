@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 import "./Info.css";
+import goToTop from "../GoToTop";
 
 const Info = () => {
+  useEffect(() => {
+    goToTop();
+  }, []);
   return (
     <>
       <main className="info-page">
