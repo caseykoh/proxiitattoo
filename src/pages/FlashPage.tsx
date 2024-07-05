@@ -12,15 +12,17 @@ const FlashPage = () => {
         {flashImages?.map((flashImg, i) => (
           <div className="card flash-card" key={i}>
             <img src={flashImg.image} loading="lazy" />
-            <div className="img-caption">
+            {/* <div className="img-caption">
               <Link
                 className="book-btn"
                 to={"/booking"}
-                state={{ flashImg: flashImg.image }}
+                state={{
+                  flashImg: new URL(flashImg.image, document.baseURI).href,
+                }}
               >
                 {"[request flash]"}
               </Link>
-            </div>
+            </div> */}
           </div>
         ))}
       </section>
