@@ -23,18 +23,18 @@ type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
 //   description: z.string().min(1),
 // });
 
-const schema = z.object({
-  name: z.string(),
-  email: z.string(),
-  instagram: z.string(),
+const formSchema = z.object({
+  name: z.string().min(1).max(70),
+  email: z.string().email().min(5).max(254),
+  instagram: z.string().min(1).max(30),
   designType: DesignTypeEnum,
-  description: z.string(),
+  description: z.string().min(1).max(500),
   reference: z.any(),
-  size: z.string(),
-  placement: z.string(),
+  size: z.string().min(1).max(100),
+  placement: z.string().min(1).max(200),
 });
 
-type FormFields = z.infer<typeof schema>;
+type FormFields = z.infer<typeof formSchema>;
 
 const Booking = () => {
   const { state } = useLocation();
@@ -45,7 +45,7 @@ const Booking = () => {
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
     defaultValues: {},
-    resolver: zodResolver(schema),
+    resolver: zodResolver(formSchema),
   });
 
   const [images, setImages] = useState<{ file: File; id: any }[] | null>([]);
