@@ -3,7 +3,7 @@ import "./Booking.css";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
@@ -58,7 +58,21 @@ const Booking = () => {
 
   const onImageChange = (event: any) => {
     if (event.target.files) {
+      console.log(event.target.files);
       const fileList = Array.from(event.target.files as ArrayLike<File>);
+      if (fileList.length > 3) {
+        console.log(event.target.files);
+        alert("Maximum of 3 files are allowed.");
+        console.log("Maximum of 3 files are allowed.");
+        const imageInput: HTMLInputElement | null = document.getElementById(
+          "reference"
+        ) as HTMLInputElement;
+        if (imageInput) {
+          imageInput.value = "";
+        }
+        console.log(event.target.files);
+        return;
+      }
       const uniqueList = fileList.map((file) => {
         return {
           file,
@@ -244,7 +258,7 @@ const Booking = () => {
               </div>
             </div>
             <div className="form-control">
-              <label>Image references *</label>
+              <label>Include up to 3 image references. *</label>
               <input
                 {...register("reference")}
                 id="reference"
