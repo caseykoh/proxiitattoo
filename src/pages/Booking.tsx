@@ -228,19 +228,25 @@ const Booking = () => {
                 onChange={onImageChange}
               />
               {images && images.length > 0 ? (
-                <label htmlFor="reference" className="add-references">
+                <div className="reference-list">
                   {images.map(({ file, id }) => (
-                    <img
-                      alt="preview image"
-                      src={URL.createObjectURL(file)}
-                      key={id}
-                    />
+                    <div className="image-preview">
+                      <img
+                        alt="preview image"
+                        src={URL.createObjectURL(file)}
+                        key={id}
+                      />
+                    </div>
                   ))}
-                  <div className="add-image-btn">
-                    <IoCloudUpload className="upload-icon" />
-                    <span>Add image</span>
-                  </div>
-                </label>
+                  {images.length < 3 && (
+                    <label htmlFor="reference">
+                      <div className="add-image-btn">
+                        <IoCloudUpload className="upload-icon" />
+                        <span>Add image</span>
+                      </div>
+                    </label>
+                  )}
+                </div>
               ) : (
                 <label htmlFor="reference" className="empty-references">
                   <IoCloudUpload className="upload-icon" />
