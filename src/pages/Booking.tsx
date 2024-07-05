@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { uploadFileToS3, submitForm } from "../api";
 
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
 type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;

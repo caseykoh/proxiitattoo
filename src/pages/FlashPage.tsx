@@ -1,6 +1,5 @@
 import "./FlashPage.css";
 import flashImages from "../components/FlashImages.tsx";
-import { Link } from "react-router-dom";
 
 const FlashPage = () => {
   return (
