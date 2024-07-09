@@ -11,7 +11,7 @@ function FlashSection() {
           <div className="page" id="page3"></div>
         </div>
         <NavLink to="/flash" className="flash-link">
-          see flash
+          view flash
         </NavLink>
       </section>
     </>
