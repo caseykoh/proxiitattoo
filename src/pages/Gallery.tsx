@@ -15,7 +15,8 @@ const Gallery = () => {
             <img
               width="400"
               height="400"
-              src={img}
+              alt={img.alt}
+              src={img.src}
               loading={i > 1 ? "lazy" : "eager"}
             />
           </div>

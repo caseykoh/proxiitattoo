@@ -25,9 +25,24 @@ export const WorkSection = () => {
             <p>toronto,on</p>
           </div>
           <div className="work-gallery-grid">
-            <img width="400" height="400" src="/assets/IMG_2348.jpg" />
-            <img width="400" height="400" src="/assets/cool_work.jpg" />
-            <img width="400" height="400" src="/assets/IMG_2717.jpg" />
+            <img
+              width="400"
+              height="400"
+              alt="A large tattoo of a fern on a back"
+              src="/assets/IMG_2348.jpg"
+            />
+            <img
+              width="400"
+              height="400"
+              alt="An organic tattoo on the hip"
+              src="/assets/cool_work.jpg"
+            />
+            <img
+              width="400"
+              height="400"
+              alt="A closeup of an abstract tattoo on the shoulder"
+              src="/assets/IMG_2717.jpg"
+            />
           </div>
           <NavLink to="/gallery" className="gallery-link">
             see more

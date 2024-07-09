@@ -18,6 +18,7 @@ const FlashPage = () => {
             <img
               width="400"
               height="400"
+              alt={flashImg.alt}
               src={flashImg.image}
               loading={i > 1 ? "lazy" : "eager"}
             />
