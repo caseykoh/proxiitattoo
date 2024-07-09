@@ -36,6 +36,10 @@
   /* grid-auto-rows: 200px; */
 }
 
+.main-title img {
+  height: auto;
+}
+
 .first-header {
   grid-row: 1;
   grid-column: 1 / 3;

@@ -6,10 +6,20 @@ function ArtBanner() {
       <main className="art-banner-container">
         <div className="main-title">
           <div className="first-header">
-            <img src="/assets/proxii_header.png" />
+            <img
+              width="250"
+              height="250"
+              alt="proxii"
+              src="/assets/proxii_header.png"
+            />
           </div>
           <div className="second-header">
-            <img src="/assets/world_header.png" />
+            <img
+              width="250"
+              height="250"
+              alt="world"
+              src="/assets/world_header.png"
+            />
           </div>
         </div>
         <div className="banner-description">
