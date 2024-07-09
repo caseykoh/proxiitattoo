@@ -15,7 +15,7 @@ const FlashPage = () => {
       <section className="photo-grid">
         {flashImages?.map((flashImg, i) => (
           <div className="card flash-card" key={i}>
-            <img src={flashImg.image} loading="lazy" />
+            <img width="400" height="400" src={flashImg.image} loading="lazy" />
             {/* <div className="img-caption">
               <Link
                 className="book-btn"
