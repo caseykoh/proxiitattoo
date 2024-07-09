@@ -1,4 +1,5 @@
 .art-banner-container {
+  display: block;
   position: relative;
   height: 100vh;
   animation: fade-up 0.8s 1.5s backwards;
