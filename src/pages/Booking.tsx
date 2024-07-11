@@ -130,6 +130,7 @@ const Booking = () => {
       );
       const presignedUrls = response.data.presignedUrls;
       console.log(presignedUrls);
+      const urls = presignedUrls.map((obj: { url: any }) => obj.url);
       // got back {imageId, url}
       // find through images array for imageid and upload accordingly
 
@@ -156,7 +157,7 @@ const Booking = () => {
         size: data.size,
         placement: data.placement,
         description: data.description,
-        urls: presignedUrls,
+        urls: urls,
       };
 
       await submitForm(formFields);
