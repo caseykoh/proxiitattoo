@@ -8,6 +8,7 @@ import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import goToTop from "../GoToTop";
+import { submitForm } from "../api.ts";
 
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
 type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
@@ -157,9 +158,9 @@ const Booking = () => {
       finalFormData.append("size", data.size);
       finalFormData.append("placement", data.placement);
       finalFormData.append("description", data.description);
-      // finalFormData.append("images", JSON.stringify(urls));
+      finalFormData.append("images", JSON.stringify(presignedUrls));
 
-      // await submitForm(finalFormData);
+      await submitForm(finalFormData);
       console.log("Form submitted successfully!");
       navigate("/confirmation");
     } catch (error) {

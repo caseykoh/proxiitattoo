@@ -12,7 +12,7 @@ export async function uploadFileToS3(imageLink: File, url: string) {
 
 export async function submitForm(formData: FormData) {
   const response = await axios
-    .put("/appointments", formData, {
+    .post(import.meta.env.VITE_APP_API_ENDPOINT, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
