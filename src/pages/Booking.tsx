@@ -148,19 +148,18 @@ const Booking = () => {
       // );
       // console.log(urls);
 
-      const finalFormData = new FormData();
-      finalFormData.append("full_name", data.name);
-      finalFormData.append("email", data.email);
-      if (data.instagram) {
-        finalFormData.append("instagram", data.instagram);
-      }
-      finalFormData.append("design_type", data.designType);
-      finalFormData.append("size", data.size);
-      finalFormData.append("placement", data.placement);
-      finalFormData.append("description", data.description);
-      finalFormData.append("images", JSON.stringify(presignedUrls));
+      const formFields = {
+        full_name: data.name,
+        email: data.email,
+        instagram: data.instagram || null,
+        design_type: data.designType,
+        size: data.size,
+        placement: data.placement,
+        description: data.description,
+        urls: presignedUrls,
+      };
 
-      await submitForm(finalFormData);
+      await submitForm(formFields);
       console.log("Form submitted successfully!");
       navigate("/confirmation");
     } catch (error) {
