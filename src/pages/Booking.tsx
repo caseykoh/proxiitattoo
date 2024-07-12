@@ -10,7 +10,9 @@ import { v4 as uuidv4 } from "uuid";
 import goToTop from "../GoToTop";
 import { submitForm } from "../api.ts";
 
-const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"]);
+const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"], {
+  errorMap: () => ({ message: "Please select an option" }),
+});
 type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
 
 const formSchema = z.object({
@@ -40,7 +42,9 @@ const formSchema = z.object({
     .string({ required_error: "Description is required" })
     .min(1, { message: "Description is required" })
     .max(500, { message: "Description is over 500 characters" }),
-  reference: z.any(),
+  reference: z.any().refine((files) => files?.length > 0, {
+    message: "At least one image reference is required.",
+  }),
   size: z
     .string({ required_error: "Size is required" })
     .min(1, { message: "Size is required" })
@@ -101,6 +105,7 @@ const Booking = () => {
       });
       console.log(uniqueList);
       setImages(uniqueList);
+      console.log();
     }
   };
 
@@ -219,7 +224,11 @@ const Booking = () => {
                     }
                   }}
                 >
-                  <div className="card">
+                  <div
+                    className={
+                      "card " + (errors.designType ? "card-error" : "")
+                    }
+                  >
                     <span className="check-btn">
                       {flashSelected ? <IoCheckbox /> : <IoSquareOutline />}
                     </span>
@@ -247,7 +256,11 @@ const Booking = () => {
                     }
                   }}
                 >
-                  <div className="card">
+                  <div
+                    className={
+                      "card " + (errors.designType ? "card-error" : "")
+                    }
+                  >
                     <span className="check-btn">
                       {customSelected ? <IoCheckbox /> : <IoSquareOutline />}
                     </span>
@@ -270,7 +283,11 @@ const Booking = () => {
                     }
                   }}
                 >
-                  <div className="card">
+                  <div
+                    className={
+                      "card " + (errors.designType ? "card-error" : "")
+                    }
+                  >
                     <span className="check-btn">
                       {freehandSelected ? <IoCheckbox /> : <IoSquareOutline />}
                     </span>
@@ -284,26 +301,27 @@ const Booking = () => {
                   </div>
                 </label>
               </div>
+              {errors.designType && (
+                <div className="text-error">{errors.designType.message}</div>
+              )}
             </div>
             <div className="form-control">
               <label>Include up to 3 image references. *</label>
               <input
-                {...register("reference")}
+                {...register("reference", { onChange: onImageChange })}
                 id="reference"
                 name="reference"
                 accept="image/*"
                 type="file"
                 multiple
-                onChange={onImageChange}
               />
               {images && images.length > 0 ? (
                 <div className="reference-list">
                   {images.map(({ file, id }) => (
-                    <div className="image-preview">
+                    <div key={id} className="image-preview">
                       <img
                         alt="preview image"
                         src={URL.createObjectURL(file)}
-                        key={id}
                       />
                     </div>
                   ))}
@@ -323,7 +341,9 @@ const Booking = () => {
                 </label>
               )}
               {errors.reference && (
-                <div className="text-error">Image references are required.</div>
+                <div className="text-error">
+                  {errors.reference.message?.toString()}
+                </div>
               )}
             </div>
             <div className="form-control">

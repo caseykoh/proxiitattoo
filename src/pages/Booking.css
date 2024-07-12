@@ -245,6 +245,20 @@ input[type="file"] {
   opacity: 50%;
 }
 
+.card-error {
+  border: 1px solid #ff6262 !important;
+  background-color: rgba(255, 160, 160, 0.055) !important;
+  color: #ff6262 !important;
+
+  .flash-button a {
+    color: #ff6262 !important;
+  }
+
+  .flash-button::before {
+    border: 1px solid #ff6262 !important;
+  }
+}
+
 .text-input-error {
   border: 1px solid #ff6262 !important;
 }
