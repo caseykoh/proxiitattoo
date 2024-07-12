@@ -331,6 +331,7 @@ const Booking = () => {
               <input
                 {...register("placement")}
                 type="text"
+                className={errors.placement ? "text-input-error" : ""}
                 placeholder="Placement"
               />
               {errors.placement && (
@@ -339,7 +340,12 @@ const Booking = () => {
             </div>
             <div className="form-control">
               <label>How big? *</label>
-              <input {...register("size")} type="text" placeholder="Size" />
+              <input
+                {...register("size")}
+                type="text"
+                className={errors.size ? "text-input-error" : ""}
+                placeholder="Size"
+              />
               {errors.size && (
                 <div className="text-error">{errors.size.message}</div>
               )}
@@ -353,6 +359,7 @@ const Booking = () => {
                 {...register("description")}
                 id="description"
                 name="description"
+                className={errors.description ? "text-input-error" : ""}
                 placeholder="Describe your vision"
                 rows={4}
               />
@@ -367,21 +374,34 @@ const Booking = () => {
             <div className="contact-input-group">
               <div className="form-control">
                 <label>Full Name *</label>
-                <input {...register("name")} type="text" />
+                <input
+                  {...register("name")}
+                  type="text"
+                  className={errors.name ? "text-input-error" : ""}
+                />
                 {errors.name && (
                   <div className="text-error">{errors.name.message}</div>
                 )}
               </div>
               <div className="form-control">
                 <label>Email *</label>
-                <input {...register("email")} type="text" />
+                <input
+                  {...register("email")}
+                  type="text"
+                  className={errors.email ? "text-input-error" : ""}
+                />
                 {errors.email && (
                   <div className="text-error">{errors.email.message}</div>
                 )}
               </div>
               <div className="form-control">
                 <label>Instagram Handle</label>
-                <input {...register("instagram")} type="text" placeholder="@" />
+                <input
+                  {...register("instagram")}
+                  type="text"
+                  className={errors.instagram ? "text-input-error" : ""}
+                  placeholder="@"
+                />
                 {errors.instagram && (
                   <div className="text-error">{errors.instagram.message}</div>
                 )}
