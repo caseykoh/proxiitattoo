@@ -335,7 +335,13 @@ const Booking = () => {
                   )}
                 </div>
               ) : (
-                <label htmlFor="reference" className="empty-references">
+                <label
+                  htmlFor="reference"
+                  className={
+                    "empty-references " +
+                    (errors.reference ? "reference-error" : "")
+                  }
+                >
                   <IoCloudUpload className="upload-icon" />
                   <span>Choose images</span>
                 </label>

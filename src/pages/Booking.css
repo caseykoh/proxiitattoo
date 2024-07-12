@@ -246,10 +246,6 @@ input[type="file"] {
 }
 
 .card-error {
-  border: 1px solid #ff6262 !important;
-  background-color: rgba(255, 160, 160, 0.055) !important;
-  color: #ff6262 !important;
-
   .flash-button a {
     color: #ff6262 !important;
   }
@@ -259,6 +255,14 @@ input[type="file"] {
   }
 }
 
+.card-error,
+.reference-error {
+  background-color: rgba(255, 160, 160, 0.055) !important;
+  color: #ff6262 !important;
+}
+
+.card-error,
+.reference-error,
 .text-input-error {
   border: 1px solid #ff6262 !important;
 }
