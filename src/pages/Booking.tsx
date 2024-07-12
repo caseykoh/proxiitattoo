@@ -353,7 +353,7 @@ const Booking = () => {
               )}
             </div>
             <div className="form-control">
-              <label>Where do you want it? *</label>
+              <label>Where do you want it? (Left or right side) *</label>
               <input
                 {...register("placement")}
                 type="text"
