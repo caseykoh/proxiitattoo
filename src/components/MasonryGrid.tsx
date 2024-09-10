@@ -71,9 +71,9 @@ const Post: React.FC<PostProps> = ({ post }) => {
   return (
     <div className="post">
       <img src={post.src} alt={post.alt} />
-      <div className="overlay">
+      {/* <div className="overlay">
         <h3>{post.title}</h3>
-      </div>
+      </div> */}
     </div>
   );
 };
