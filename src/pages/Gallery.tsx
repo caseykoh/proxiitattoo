@@ -1,7 +1,5 @@
 import "./Gallery.css";
 import workImages from "../components/SelectWorkImages.tsx";
-import TestImages from "../components/TestImages.tsx";
-import MasonryBase from "../components/MasonryBase.tsx";
 import { useEffect } from "react";
 import goToTop from "../GoToTop.tsx";
 
