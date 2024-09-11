@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import MasonryGrid from "./MasonryGrid";
+import MasonryGrid from "./MasonryGrid.tsx";
 import goToTop from "../GoToTop.tsx";
 
-interface GalleryBaseProps {
+interface MasonryBaseProps {
   images: { src: string; alt: string }[];
   columnsDefault: number; // Default number of columns for large screens
   columnsMobile: number; // Number of columns for mobile screens
   children?: React.ReactNode; // Allow passing additional content
 }
 
-const GalleryBase: React.FC<GalleryBaseProps> = ({
+const MasonryBase: React.FC<MasonryBaseProps> = ({
   images,
   columnsDefault,
   columnsMobile,
@@ -40,4 +40,4 @@ const GalleryBase: React.FC<GalleryBaseProps> = ({
   );
 };
 
-export default GalleryBase;
+export default MasonryBase;
