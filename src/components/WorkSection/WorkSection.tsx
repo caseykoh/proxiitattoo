@@ -8,10 +8,9 @@ export const WorkSection = () => {
         <div className="work-container">
           <div className="mission-statement">
             <p>
-              proxii_world is a figment of imagination, a proxii_dream, where
-              proxii lies in the silent, the invisible. sometimes i lie and
-              wonder if i've been replaced with a proxii, one that would feel
-              lucky to have this body.
+              proxii_world is a song of the invisible, a proxii_dream, where the
+              waves of the essence rise to the surface of the body. things only
+              you could hear.
             </p>
           </div>
           <div className="general-info-div">
