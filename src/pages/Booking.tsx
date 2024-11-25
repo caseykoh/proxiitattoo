@@ -75,7 +75,7 @@ const Booking = () => {
   useEffect(() => {
     goToTop();
     if (state?.flashImg) {
-      console.log(state.flashImg);
+      // console.log(state.flashImg);
       setImages([{ file: state.flashImg, id: uuidv4() }]);
     }
   }, []);
@@ -83,7 +83,7 @@ const Booking = () => {
   const onImageChange = (event: any) => {
     const validTypes = ["image/jpeg", "image/png"];
     if (event.target.files) {
-      console.log(event.target.files);
+      // console.log(event.target.files);
       const fileList = Array.from(event.target.files as ArrayLike<File>);
 
       const invalidFiles = fileList.filter(
@@ -102,7 +102,7 @@ const Booking = () => {
       }
 
       if (fileList.length > 3) {
-        console.log(event.target.files);
+        // console.log(event.target.files);
         alert("Maximum of 3 files are allowed.");
         console.log("Maximum of 3 files are allowed.");
         const imageInput: HTMLInputElement | null = document.getElementById(
@@ -111,7 +111,7 @@ const Booking = () => {
         if (imageInput) {
           imageInput.value = "";
         }
-        console.log(event.target.files);
+        // console.log(event.target.files);
         return;
       }
       const uniqueList = fileList.map((file) => {
@@ -120,7 +120,7 @@ const Booking = () => {
           id: uuidv4(),
         };
       });
-      console.log(uniqueList);
+      // console.log(uniqueList);
       setImages(uniqueList);
     }
   };
@@ -141,7 +141,7 @@ const Booking = () => {
           return { id, extension };
         }),
       };
-      console.log("payload that is being sent to lambda: " + payload);
+      // console.log("payload that is being sent to lambda: " + payload);
       const response = await axios.post(
         import.meta.env.VITE_AWS_PRESIGNED_URLS,
         payload,
@@ -152,14 +152,14 @@ const Booking = () => {
         }
       );
       const presignedUrls = response.data.presignedUrls;
-      console.log(presignedUrls);
+      // console.log(presignedUrls);
       // const urls = presignedUrls.map((obj: { url: any }) => obj.url);
       // got back {imageId, url}
       // find through images array for imageid and upload accordingly
 
       const urls = await Promise.all(
         presignedUrls.map(async (imageData: { imageId: any; url: any }) => {
-          console.log(imageData);
+          // console.log(imageData);
           const imgToUpload = images.find(
             (image) => image.id.toString() === imageData.imageId.toString()
           )?.file;
@@ -171,7 +171,7 @@ const Booking = () => {
           return imageData.url;
         })
       );
-      console.log(urls);
+      // console.log(urls);
 
       const formFields = {
         full_name: data.name,
