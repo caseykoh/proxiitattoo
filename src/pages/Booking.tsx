@@ -81,9 +81,26 @@ const Booking = () => {
   }, []);
 
   const onImageChange = (event: any) => {
+    const validTypes = ["image/jpeg", "image/png"];
     if (event.target.files) {
       console.log(event.target.files);
       const fileList = Array.from(event.target.files as ArrayLike<File>);
+
+      const invalidFiles = fileList.filter(
+        (file) => !validTypes.includes(file.type)
+      );
+      if (invalidFiles.length > 0) {
+        alert("Please upload only valid image formats: JPEG, PNG.");
+        // clear imageInput completely.
+        const imageInput: HTMLInputElement | null = document.getElementById(
+          "reference"
+        ) as HTMLInputElement;
+        if (imageInput) {
+          imageInput.value = "";
+        }
+        return;
+      }
+
       if (fileList.length > 3) {
         console.log(event.target.files);
         alert("Maximum of 3 files are allowed.");
@@ -307,12 +324,14 @@ const Booking = () => {
               )}
             </div>
             <div className="form-control">
-              <label>Include up to 3 image references. *</label>
+              <label htmlFor="reference">
+                Include up to 3 image references (PNG or JPEG files only). *
+              </label>
               <input
                 {...register("reference", { onChange: onImageChange })}
                 id="reference"
                 name="reference"
-                accept="image/*"
+                accept="image/png, image/jpeg"
                 type="file"
                 multiple
               />
