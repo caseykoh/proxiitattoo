@@ -105,7 +105,6 @@ const Booking = () => {
       });
       console.log(uniqueList);
       setImages(uniqueList);
-      console.log();
     }
   };
 
@@ -119,8 +118,10 @@ const Booking = () => {
     try {
       //get image urls
       const payload = {
-        imageList: images.map(({ id }) => {
-          return id;
+        imageList: images.map(({ id, file }) => {
+          const lowExtension = file.type.toLowerCase();
+          const extension = lowExtension === "jpeg" ? "jpg" : lowExtension;
+          return { id, extension };
         }),
       };
       console.log("payload that is being sent to lambda: " + payload);
