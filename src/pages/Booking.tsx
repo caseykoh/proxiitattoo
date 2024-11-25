@@ -8,7 +8,7 @@ import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import goToTop from "../GoToTop";
-import { submitForm } from "../api.ts";
+import { uploadFileToS3, submitForm } from "../api.ts";
 
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"], {
   errorMap: () => ({ message: "Please select an option" }),
@@ -136,7 +136,7 @@ const Booking = () => {
       //get image urls
       const payload = {
         imageList: images.map(({ id, file }) => {
-          const lowExtension = file.type.toLowerCase();
+          const lowExtension = file.type.split("/")[1].toLowerCase();
           const extension = lowExtension === "jpeg" ? "jpg" : lowExtension;
           return { id, extension };
         }),
@@ -153,24 +153,25 @@ const Booking = () => {
       );
       const presignedUrls = response.data.presignedUrls;
       console.log(presignedUrls);
-      const urls = presignedUrls.map((obj: { url: any }) => obj.url);
+      // const urls = presignedUrls.map((obj: { url: any }) => obj.url);
       // got back {imageId, url}
       // find through images array for imageid and upload accordingly
 
-      // const urls = await Promise.all(
-      //   presignedUrls.map(async (imageData: { imageId: any; url: any }) => {
-      //     const imgToUpload = images.find(
-      //       (image) => image.id.toString() === imageData.imageId.toString()
-      //     )?.file;
-      //     if (imgToUpload) {
-      //       await uploadFileToS3(imgToUpload, imageData.url);
-      //     } else {
-      //       throw "No matching image with id";
-      //     }
-      //     return imageData.url;
-      //   })
-      // );
-      // console.log(urls);
+      const urls = await Promise.all(
+        presignedUrls.map(async (imageData: { imageId: any; url: any }) => {
+          console.log(imageData);
+          const imgToUpload = images.find(
+            (image) => image.id.toString() === imageData.imageId.toString()
+          )?.file;
+          if (imgToUpload) {
+            await uploadFileToS3(imgToUpload, imageData.url);
+          } else {
+            throw "No matching image with id";
+          }
+          return imageData.url;
+        })
+      );
+      console.log(urls);
 
       const formFields = {
         full_name: data.name,
