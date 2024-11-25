@@ -10,6 +10,9 @@ import { v4 as uuidv4 } from "uuid";
 import goToTop from "../GoToTop";
 import { uploadFileToS3, submitForm } from "../api.ts";
 
+const imageReferencesAccessBase = import.meta.env.VITE_AWS_IMAGE_REFERENCES_URL;
+const presignedApiUrl = import.meta.env.VITE_AWS_PRESIGNED_URLS;
+
 const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"], {
   errorMap: () => ({ message: "Please select an option" }),
 });
@@ -142,15 +145,11 @@ const Booking = () => {
         }),
       };
       // console.log("payload that is being sent to lambda: " + payload);
-      const response = await axios.post(
-        import.meta.env.VITE_AWS_PRESIGNED_URLS,
-        payload,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(presignedApiUrl, payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const presignedUrls = response.data.presignedUrls;
       // console.log(presignedUrls);
       // const urls = presignedUrls.map((obj: { url: any }) => obj.url);
@@ -158,18 +157,21 @@ const Booking = () => {
       // find through images array for imageid and upload accordingly
 
       const urls = await Promise.all(
-        presignedUrls.map(async (imageData: { imageId: any; url: any }) => {
-          // console.log(imageData);
-          const imgToUpload = images.find(
-            (image) => image.id.toString() === imageData.imageId.toString()
-          )?.file;
-          if (imgToUpload) {
-            await uploadFileToS3(imgToUpload, imageData.url);
-          } else {
-            throw "No matching image with id";
+        presignedUrls.map(
+          async (imageData: { imageId: any; url: any; key: any }) => {
+            // console.log(imageData);
+            const imgToUpload = images.find(
+              (image) => image.id.toString() === imageData.imageId.toString()
+            )?.file;
+            if (imgToUpload) {
+              await uploadFileToS3(imgToUpload, imageData.url);
+            } else {
+              throw "No matching image with id";
+            }
+            const accessUrl = imageReferencesAccessBase + imageData.key;
+            return accessUrl;
           }
-          return imageData.url;
-        })
+        )
       );
       // console.log(urls);
 
