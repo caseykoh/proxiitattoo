@@ -17,6 +17,7 @@ body {
   margin: 0px;
   padding: 0px;
   overflow-x: hidden;
+  @apply font-sans;
 }
 
 /* Preferred box-sizing value */
