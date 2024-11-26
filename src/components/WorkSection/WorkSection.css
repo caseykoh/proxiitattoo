@@ -21,7 +21,6 @@
   margin-inline: auto;
   max-width: 600px;
   min-height: 300px;
-  font-family: Arial, Helvetica, sans-serif;
   letter-spacing: -1px;
   display: flex;
   justify-content: center;
@@ -34,7 +33,6 @@
 }
 
 .instagram-link {
-  font-family: Arial, Helvetica, sans-serif;
   letter-spacing: -1px;
   cursor: pointer;
 }
