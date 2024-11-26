@@ -193,9 +193,9 @@ input[type="file"] {
   height: 200px;
 }
 
-.reference-list label {
+/* .reference-list label {
   margin-bottom: 0;
-}
+} */
 
 .reference-list img {
   display: block;
