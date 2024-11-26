@@ -264,7 +264,7 @@ const Booking = () => {
                 {...register("placement")}
                 type="text"
                 className={errors.placement ? "text-input-error" : ""}
-                placeholder="Placement"
+                placeholder="Placement, Left/Right/Middle"
               />
               {errors.placement && (
                 <div className="text-error">{errors.placement.message}</div>
@@ -276,7 +276,7 @@ const Booking = () => {
                 {...register("size")}
                 type="text"
                 className={errors.size ? "text-input-error" : ""}
-                placeholder="Size"
+                placeholder="Size (can be in inches)"
               />
               {errors.size && (
                 <div className="text-error">{errors.size.message}</div>
@@ -312,6 +312,7 @@ const Booking = () => {
                   {...register("name")}
                   type="text"
                   className={errors.name ? "text-input-error" : ""}
+                  placeholder="Name"
                 />
                 {errors.name && (
                   <div className="text-error">{errors.name.message}</div>
@@ -323,6 +324,7 @@ const Booking = () => {
                   {...register("email")}
                   type="text"
                   className={errors.email ? "text-input-error" : ""}
+                  placeholder="youremail@gmail.com"
                 />
                 {errors.email && (
                   <div className="text-error">{errors.email.message}</div>
