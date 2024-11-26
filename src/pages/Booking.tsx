@@ -181,9 +181,7 @@ const Booking = () => {
     }
   };
 
-  const [flashSelected, setFlashSelected] = useState(false);
-  const [customSelected, setCustomSelected] = useState(false);
-  const [freehandSelected, setFreehandSelected] = useState(false);
+  const [selectedDesignType, setSelectedDesignType] = useState("");
 
   return (
     <>
@@ -205,112 +203,34 @@ const Booking = () => {
           </div>
           <div className="form-group">
             <div className="form-control">
-              <label className="font-semibold">I'm looking for a... *</label>
-              <div className="design-type-container">
-                <input
-                  {...register("designType")}
-                  type="radio"
-                  value={DesignTypeEnum.enum.Flash}
-                  id="flash-select"
-                />
-                <input
-                  {...register("designType")}
-                  type="radio"
-                  value={DesignTypeEnum.enum.Custom}
-                  id="custom-select"
-                />
-                <input
-                  {...register("designType")}
-                  type="radio"
-                  value={DesignTypeEnum.enum.Freehand}
-                  id="freehand-select"
-                />
-                <label
-                  htmlFor="flash-select"
-                  onClick={() => {
-                    if (!flashSelected) {
-                      setFlashSelected(!flashSelected);
-                      setCustomSelected(false);
-                      setFreehandSelected(false);
-                    }
-                  }}
-                >
-                  <div
-                    className={
-                      "card " + (errors.designType ? "card-error" : "")
-                    }
-                  >
-                    <span className="check-btn">
-                      {flashSelected ? <IoCheckbox /> : <IoSquareOutline />}
-                    </span>
-                    <div className="card-info">
-                      <h2 className="card-title">Flash</h2>
-                      <p>
-                        Choose a ready-made design from my flash. Flash can be
-                        modified.
-                      </p>
-                      <div className="flash-button">
-                        <NavLink to="/flash" className="view-flash-link">
-                          view flash
-                        </NavLink>
+              <label className="font-semibold">I'm Looking To Get... *</label>
+              <div className="flex flex-row gap-2">
+                {Object.values(DesignTypeEnum.enum).map((designType) => (
+                  <div key={designType}>
+                    <input
+                      {...register("designType")}
+                      className="hidden"
+                      type="radio"
+                      value={designType}
+                      id={`${designType}-select`}
+                      checked={selectedDesignType === designType}
+                      onChange={() => setSelectedDesignType(designType)}
+                    />
+                    <label htmlFor={`${designType}-select`}>
+                      <div
+                        className={`card cursor-pointer ${
+                          selectedDesignType === designType
+                            ? "bg-slate-950  text-white"
+                            : ""
+                        } hover:bg-slate-200 border-solid p-2 rounded-xl border-2 border-slate-950 ${
+                          errors.designType ? "card-error" : ""
+                        }`}
+                      >
+                        <div className="card-info text-base">{designType}</div>
                       </div>
-                    </div>
+                    </label>
                   </div>
-                </label>
-                <label
-                  htmlFor="custom-select"
-                  onClick={() => {
-                    if (!customSelected) {
-                      setFlashSelected(false);
-                      setCustomSelected(!customSelected);
-                      setFreehandSelected(false);
-                    }
-                  }}
-                >
-                  <div
-                    className={
-                      "card " + (errors.designType ? "card-error" : "")
-                    }
-                  >
-                    <span className="check-btn">
-                      {customSelected ? <IoCheckbox /> : <IoSquareOutline />}
-                    </span>
-                    <div className="card-info">
-                      <h2 className="card-title">Custom</h2>
-                      <p>
-                        Specify a placement and size with references, and a
-                        design will be custom made for you.
-                      </p>
-                    </div>
-                  </div>
-                </label>
-                <label
-                  htmlFor="freehand-select"
-                  onClick={() => {
-                    if (!freehandSelected) {
-                      setFlashSelected(false);
-                      setCustomSelected(false);
-                      setFreehandSelected(!freehandSelected);
-                    }
-                  }}
-                >
-                  <div
-                    className={
-                      "card " + (errors.designType ? "card-error" : "")
-                    }
-                  >
-                    <span className="check-btn">
-                      {freehandSelected ? <IoCheckbox /> : <IoSquareOutline />}
-                    </span>
-                    <div className="card-info">
-                      <h2 className="card-title">Freehand</h2>
-                      <p>
-                        You show up and a design is drawn directly on skin and
-                        is then tattooed.
-                      </p>
-                    </div>
-                  </div>
-                </label>
+                ))}
               </div>
               {errors.designType && (
                 <div className="text-error">{errors.designType.message}</div>
@@ -339,9 +259,7 @@ const Booking = () => {
               )}
             </div>
             <div className="form-control">
-              <label className="font-semibold">
-                Where do you want it? (Left or right side) *
-              </label>
+              <label className="font-semibold">Where do you want it? *</label>
               <input
                 {...register("placement")}
                 type="text"

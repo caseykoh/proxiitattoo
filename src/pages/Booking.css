@@ -31,7 +31,7 @@
 }
 
 .form-control label {
-  font-size: 16px;
+  /* font-size: 16px; */
   /* font-weight: 600; */
   margin-bottom: 10px;
 }
@@ -62,55 +62,9 @@
   margin-bottom: 20px;
 }
 
-.design-type-container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 .check-btn {
   font-size: 30px;
   flex-shrink: 0;
-}
-
-.design-type-container input {
-  display: none;
-}
-
-.booking-form .card {
-  border: 1px rgb(91, 91, 91) solid;
-  border-radius: 20px;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.055);
-  color: rgb(124, 124, 124);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 20px;
-  cursor: pointer;
-  transition: 0.4s;
-}
-
-.booking-form .card .card-info {
-  display: block;
-}
-
-.booking-form .card:hover {
-  transform: scale(1.02);
-}
-
-input[id="flash-select"]:checked ~ label[for="flash-select"] .card,
-input[id="custom-select"]:checked ~ label[for="custom-select"] .card,
-input[id="freehand-select"]:checked ~ label[for="freehand-select"] .card {
-  border: 1px #535353 solid;
-  background-color: rgba(196, 196, 196, 0.417);
-  color: #535353;
-}
-
-input[id="flash-select"]:checked ~ label[for="flash-select"] .card-info,
-input[id="custom-select"]:checked ~ label[for="custom-select"] .card-info,
-input[id="freehand-select"]:checked ~ label[for="freehand-select"] .card-info {
-  color: #535353;
 }
 
 .flash-button {
