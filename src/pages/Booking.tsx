@@ -201,7 +201,7 @@ const Booking = () => {
               appointment.
             </p>
           </div>
-          <div className="form-group">
+          <div className="flex flex-col gap-8">
             <div className="form-control">
               <label className="font-semibold">I'm Looking To Get... *</label>
               <div className="flex flex-row gap-2">
@@ -300,9 +300,11 @@ const Booking = () => {
               )}
             </div>
           </div>
-
+          <hr className="border-t-2 border-gray-300 my-4" />
           <div className="form-group">
-            <h3>Contact Info</h3>
+            <h2 className="text-black font-bold text-2xl font-mono mb-5">
+              Contact Info
+            </h2>
             <div className="contact-input-group">
               <div className="form-control">
                 <label className="font-semibold">Full Name *</label>
