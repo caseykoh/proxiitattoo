@@ -4,14 +4,6 @@
   min-height: 100vh;
 }
 
-.form-header h2 {
-  margin-bottom: 20px;
-}
-
-.form-header p {
-  margin-bottom: 10px;
-}
-
 .booking-form {
   margin-inline: auto;
   padding: 30px;

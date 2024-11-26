@@ -190,16 +190,22 @@ const Booking = () => {
       <section className="form-section">
         <form className="booking-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-header">
-            <h2>Booking Form</h2>
-            <p>Please fill out this form to inquire for a tattoo.</p>
-            <p>
+            <h2 className="font-bold text-3xl font-mono mb-5">
+              Books are currently: [OPEN]
+            </h2>
+            <p className="mb-3 text-gray-500">
+              To request an appointment with <span>proxii_dream</span>, please
+              fill out this form.
+            </p>
+            <p className="text-gray-500">
               If your project gets accepted, we'll reach out to you via email.
-              Please be ready to place a booking fee to secure your appointment.
+              Please be ready to place a booking fee (50) to secure your
+              appointment.
             </p>
           </div>
           <div className="form-group">
             <div className="form-control">
-              <label>I'm looking for a... *</label>
+              <label className="font-semibold">I'm looking for a... *</label>
               <div className="design-type-container">
                 <input
                   {...register("designType")}
@@ -311,7 +317,7 @@ const Booking = () => {
               )}
             </div>
             <div className="form-control">
-              <label htmlFor="reference" className="font-bold">
+              <label htmlFor="reference" className="font-semibold">
                 Upload Image References (Max 3)*
               </label>
 
@@ -333,7 +339,9 @@ const Booking = () => {
               )}
             </div>
             <div className="form-control">
-              <label>Where do you want it? (Left or right side) *</label>
+              <label className="font-semibold">
+                Where do you want it? (Left or right side) *
+              </label>
               <input
                 {...register("placement")}
                 type="text"
@@ -345,7 +353,7 @@ const Booking = () => {
               )}
             </div>
             <div className="form-control">
-              <label>How big? *</label>
+              <label className="font-semibold">How big? *</label>
               <input
                 {...register("size")}
                 type="text"
@@ -357,7 +365,7 @@ const Booking = () => {
               )}
             </div>
             <div className="form-control">
-              <label htmlFor="description">
+              <label htmlFor="description" className="font-semibold">
                 What's your vision for the piece? *
               </label>
               {/* check that this textarea also goes in data on submit */}
@@ -379,7 +387,7 @@ const Booking = () => {
             <h3>Contact Info</h3>
             <div className="contact-input-group">
               <div className="form-control">
-                <label>Full Name *</label>
+                <label className="font-semibold">Full Name *</label>
                 <input
                   {...register("name")}
                   type="text"
@@ -390,7 +398,7 @@ const Booking = () => {
                 )}
               </div>
               <div className="form-control">
-                <label>Email *</label>
+                <label className="font-semibold">Email *</label>
                 <input
                   {...register("email")}
                   type="text"
@@ -401,7 +409,7 @@ const Booking = () => {
                 )}
               </div>
               <div className="form-control">
-                <label>Instagram Handle</label>
+                <label className="font-semibold">Instagram Handle</label>
                 <input
                   {...register("instagram")}
                   type="text"
