@@ -16,8 +16,8 @@ const Navbar = () => {
   };
 
   return (
-    <header className="header">
-      <nav className="nav container">
+    <header className="fixed w-full top-0 left-0 z-50">
+      <nav className="flex items-center justify-between relative h-14 m-4">
         <div className="nav-logo-container">
           <NavLink to="/" className="nav-logo">
             proxiiworld
