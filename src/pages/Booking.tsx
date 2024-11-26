@@ -1,14 +1,15 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import "./Booking.css";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { IoCheckbox, IoCloudUpload, IoSquareOutline } from "react-icons/io5";
+import { IoCheckbox, IoSquareOutline } from "react-icons/io5";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import goToTop from "../GoToTop";
 import { uploadFileToS3, submitForm } from "../api.ts";
+import { ImageUpload } from "../components/ImageUpload.tsx";
 
 const imageReferencesAccessBase = import.meta.env.VITE_AWS_IMAGE_REFERENCES_URL;
 const presignedApiUrl = import.meta.env.VITE_AWS_PRESIGNED_URLS;
@@ -17,6 +18,11 @@ const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"], {
   errorMap: () => ({ message: "Please select an option" }),
 });
 type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
+
+const imageReferenceSchema = z.object({
+  file: z.any(),
+  id: z.any(),
+});
 
 const formSchema = z.object({
   name: z
@@ -45,9 +51,11 @@ const formSchema = z.object({
     .string({ required_error: "Description is required" })
     .min(1, { message: "Description is required" })
     .max(500, { message: "Description is over 500 characters" }),
-  reference: z.any().refine((files) => files?.length > 0, {
-    message: "At least one image reference is required.",
-  }),
+  reference: z
+    .array(imageReferenceSchema)
+    .refine((files) => files?.length > 0, {
+      message: "At least one image reference is required.",
+    }),
   size: z
     .string({ required_error: "Size is required" })
     .min(1, { message: "Size is required" })
@@ -65,11 +73,16 @@ const Booking = () => {
 
   const {
     register,
+    control,
+    setValue,
     handleSubmit,
+    clearErrors,
     setError,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
-    defaultValues: {},
+    defaultValues: {
+      reference: [], // Initialize as an empty array
+    },
     resolver: zodResolver(formSchema),
   });
 
@@ -83,48 +96,19 @@ const Booking = () => {
     }
   }, []);
 
-  const onImageChange = (event: any) => {
-    const validTypes = ["image/jpeg", "image/png"];
-    if (event.target.files) {
-      // console.log(event.target.files);
-      const fileList = Array.from(event.target.files as ArrayLike<File>);
-
-      const invalidFiles = fileList.filter(
-        (file) => !validTypes.includes(file.type)
-      );
-      if (invalidFiles.length > 0) {
-        alert("Please upload only valid image formats: JPEG, PNG.");
-        // clear imageInput completely.
-        const imageInput: HTMLInputElement | null = document.getElementById(
-          "reference"
-        ) as HTMLInputElement;
-        if (imageInput) {
-          imageInput.value = "";
-        }
-        return;
-      }
-
-      if (fileList.length > 3) {
-        // console.log(event.target.files);
-        alert("Maximum of 3 files are allowed.");
-        console.log("Maximum of 3 files are allowed.");
-        const imageInput: HTMLInputElement | null = document.getElementById(
-          "reference"
-        ) as HTMLInputElement;
-        if (imageInput) {
-          imageInput.value = "";
-        }
-        // console.log(event.target.files);
-        return;
-      }
-      const uniqueList = fileList.map((file) => {
+  const onImageChange = (selectedImages: File[] | null) => {
+    if (selectedImages) {
+      const uniqueList = selectedImages.map((file) => {
         return {
           file,
           id: uuidv4(),
         };
       });
-      // console.log(uniqueList);
       setImages(uniqueList);
+      if (uniqueList.length > 0) {
+        setValue("reference", uniqueList);
+        clearErrors(["reference"]);
+      }
     }
   };
 
@@ -327,48 +311,21 @@ const Booking = () => {
               )}
             </div>
             <div className="form-control">
-              <label htmlFor="reference">
-                Include up to 3 image references (PNG or JPEG files only). *
+              <label htmlFor="reference" className="font-bold">
+                Upload Image References (Max 3)*
               </label>
-              <input
-                {...register("reference", { onChange: onImageChange })}
-                id="reference"
+
+              <Controller
                 name="reference"
-                accept="image/png, image/jpeg"
-                type="file"
-                multiple
+                control={control}
+                render={() => (
+                  <ImageUpload
+                    onChange={onImageChange}
+                    maxImages={3}
+                    acceptTypes={["image/jpeg", "image/png"]}
+                  />
+                )}
               />
-              {images && images.length > 0 ? (
-                <div className="reference-list">
-                  {images.map(({ file, id }) => (
-                    <div key={id} className="image-preview">
-                      <img
-                        alt="preview image"
-                        src={URL.createObjectURL(file)}
-                      />
-                    </div>
-                  ))}
-                  {images.length < 3 && (
-                    <label htmlFor="reference">
-                      <div className="add-image-btn">
-                        <IoCloudUpload className="upload-icon" />
-                        <span>Replace images</span>
-                      </div>
-                    </label>
-                  )}
-                </div>
-              ) : (
-                <label
-                  htmlFor="reference"
-                  className={
-                    "empty-references " +
-                    (errors.reference ? "reference-error" : "")
-                  }
-                >
-                  <IoCloudUpload className="upload-icon" />
-                  <span>Choose images</span>
-                </label>
-              )}
               {errors.reference && (
                 <div className="text-error">
                   {errors.reference.message?.toString()}
