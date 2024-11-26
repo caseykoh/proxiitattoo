@@ -62,7 +62,7 @@ export function ImageUpload({
             <button
               type="button"
               onClick={() => handleRemoveImage(index)}
-              className="absolute top-1 right-1 bg-slate-900 text-white rounded-full p-1"
+              className="absolute top-1 right-1 bg-slate-900/75 text-white rounded-full p-1"
               aria-label={`Remove image ${index + 1}`}
             >
               <X size={16} />
