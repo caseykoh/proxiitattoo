@@ -15,6 +15,9 @@ import Booking from "./pages/Booking.tsx";
 import Admin from "./Admin.tsx";
 import FlashPage from "./pages/FlashPage.tsx";
 import ConfirmationPage from "./pages/ConfirmationPage.tsx";
+import axios from "axios";
+
+axios.defaults.headers["x-api-key"] = import.meta.env.REACT_APP_API_KEY;
 
 const router = createBrowserRouter([
   {
