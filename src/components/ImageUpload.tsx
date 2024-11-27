@@ -89,24 +89,6 @@ export function ImageUpload({
           </label>
         )}
       </div>
-      <div className="mt-4 flex justify-center">
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            document.getElementById("image-upload")?.click();
-          }}
-          disabled={selectedImages.length >= maxImages}
-          className="px-6 bg-slate-950 text-white w-full rounded-md font-medium py-2 text-sm disabled:bg-gray-400 disabled:cursor-not-allowed"
-        >
-          {selectedImages.length === 0
-            ? "Upload Images"
-            : `${
-                selectedImages.length === maxImages
-                  ? "Max Images Selected"
-                  : "Add Images"
-              } (${selectedImages.length}/${maxImages})`}
-        </button>
-      </div>
     </div>
   );
 }

@@ -4,8 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { IoCheckbox, IoSquareOutline } from "react-icons/io5";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import goToTop from "../GoToTop";
 import { uploadFileToS3, submitForm } from "../api.ts";
@@ -181,138 +180,67 @@ const Booking = () => {
     }
   };
 
-  const [flashSelected, setFlashSelected] = useState(false);
-  const [customSelected, setCustomSelected] = useState(false);
-  const [freehandSelected, setFreehandSelected] = useState(false);
+  const [selectedDesignType, setSelectedDesignType] = useState("");
 
   return (
     <>
       <section className="form-section">
         <form className="booking-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-header">
-            <h2>Booking Form</h2>
-            <p>Please fill out this form to inquire for a tattoo.</p>
-            <p>
+            <h2 className="font-bold text-3xl font-mono mb-5">
+              Books are currently: [OPEN]
+            </h2>
+            <p className="mb-3 text-gray-500">
+              To request an appointment with <span>proxii_dream</span>, please
+              fill out this form.
+            </p>
+            <p className="text-gray-500">
               If your project gets accepted, we'll reach out to you via email.
-              Please be ready to place a booking fee to secure your appointment.
+              Please be ready to place a booking fee (50) to secure your
+              appointment.
             </p>
           </div>
-          <div className="form-group">
+          <div className="flex flex-col gap-8">
             <div className="form-control">
-              <label>I'm looking for a... *</label>
-              <div className="design-type-container">
-                <input
-                  {...register("designType")}
-                  type="radio"
-                  value={DesignTypeEnum.enum.Flash}
-                  id="flash-select"
-                />
-                <input
-                  {...register("designType")}
-                  type="radio"
-                  value={DesignTypeEnum.enum.Custom}
-                  id="custom-select"
-                />
-                <input
-                  {...register("designType")}
-                  type="radio"
-                  value={DesignTypeEnum.enum.Freehand}
-                  id="freehand-select"
-                />
-                <label
-                  htmlFor="flash-select"
-                  onClick={() => {
-                    if (!flashSelected) {
-                      setFlashSelected(!flashSelected);
-                      setCustomSelected(false);
-                      setFreehandSelected(false);
-                    }
-                  }}
-                >
-                  <div
-                    className={
-                      "card " + (errors.designType ? "card-error" : "")
-                    }
-                  >
-                    <span className="check-btn">
-                      {flashSelected ? <IoCheckbox /> : <IoSquareOutline />}
-                    </span>
-                    <div className="card-info">
-                      <h2 className="card-title">Flash</h2>
-                      <p>
-                        Choose a ready-made design from my flash. Flash can be
-                        modified.
-                      </p>
-                      <div className="flash-button">
-                        <NavLink to="/flash" className="view-flash-link">
-                          view flash
-                        </NavLink>
+              <label className="font-semibold">
+                I'm Looking To Get... <span className="required-q">*</span>
+              </label>
+              <div className="flex flex-row gap-2">
+                {Object.values(DesignTypeEnum.enum).map((designType) => (
+                  <div key={designType}>
+                    <input
+                      {...register("designType")}
+                      className="hidden"
+                      type="radio"
+                      value={designType}
+                      id={`${designType}-select`}
+                      checked={selectedDesignType === designType}
+                      onChange={() => setSelectedDesignType(designType)}
+                    />
+                    <label htmlFor={`${designType}-select`}>
+                      <div
+                        className={`cursor-pointer ${
+                          selectedDesignType === designType
+                            ? "bg-slate-950  text-white border-slate-950"
+                            : "border-slate-950 hover:bg-slate-200"
+                        }  border-solid p-2 rounded-xl border-2  ${
+                          errors.designType ? "card-error" : ""
+                        }`}
+                      >
+                        <div className="card-info text-base">{designType}</div>
                       </div>
-                    </div>
+                    </label>
                   </div>
-                </label>
-                <label
-                  htmlFor="custom-select"
-                  onClick={() => {
-                    if (!customSelected) {
-                      setFlashSelected(false);
-                      setCustomSelected(!customSelected);
-                      setFreehandSelected(false);
-                    }
-                  }}
-                >
-                  <div
-                    className={
-                      "card " + (errors.designType ? "card-error" : "")
-                    }
-                  >
-                    <span className="check-btn">
-                      {customSelected ? <IoCheckbox /> : <IoSquareOutline />}
-                    </span>
-                    <div className="card-info">
-                      <h2 className="card-title">Custom</h2>
-                      <p>
-                        Specify a placement and size with references, and a
-                        design will be custom made for you.
-                      </p>
-                    </div>
-                  </div>
-                </label>
-                <label
-                  htmlFor="freehand-select"
-                  onClick={() => {
-                    if (!freehandSelected) {
-                      setFlashSelected(false);
-                      setCustomSelected(false);
-                      setFreehandSelected(!freehandSelected);
-                    }
-                  }}
-                >
-                  <div
-                    className={
-                      "card " + (errors.designType ? "card-error" : "")
-                    }
-                  >
-                    <span className="check-btn">
-                      {freehandSelected ? <IoCheckbox /> : <IoSquareOutline />}
-                    </span>
-                    <div className="card-info">
-                      <h2 className="card-title">Freehand</h2>
-                      <p>
-                        You show up and a design is drawn directly on skin and
-                        is then tattooed.
-                      </p>
-                    </div>
-                  </div>
-                </label>
+                ))}
               </div>
               {errors.designType && (
                 <div className="text-error">{errors.designType.message}</div>
               )}
             </div>
             <div className="form-control">
-              <label htmlFor="reference" className="font-bold">
-                Upload Image References (Max 3)*
+              <label htmlFor="reference" className="font-semibold">
+                Upload Image References (Max 3){" "}
+                <span className="required-q">*</span>
               </label>
 
               <Controller
@@ -333,32 +261,37 @@ const Booking = () => {
               )}
             </div>
             <div className="form-control">
-              <label>Where do you want it? (Left or right side) *</label>
+              <label className="font-semibold">
+                Where do you want it? <span className="required-q">*</span>
+              </label>
               <input
                 {...register("placement")}
                 type="text"
                 className={errors.placement ? "text-input-error" : ""}
-                placeholder="Placement"
+                placeholder="Placement, Left/Right/Middle"
               />
               {errors.placement && (
                 <div className="text-error">{errors.placement.message}</div>
               )}
             </div>
             <div className="form-control">
-              <label>How big? *</label>
+              <label className="font-semibold">
+                How big? <span className="required-q">*</span>
+              </label>
               <input
                 {...register("size")}
                 type="text"
                 className={errors.size ? "text-input-error" : ""}
-                placeholder="Size"
+                placeholder="Size (can be in inches)"
               />
               {errors.size && (
                 <div className="text-error">{errors.size.message}</div>
               )}
             </div>
             <div className="form-control">
-              <label htmlFor="description">
-                What's your vision for the piece? *
+              <label htmlFor="description" className="font-semibold">
+                What's your vision for the piece?{" "}
+                <span className="required-q">*</span>
               </label>
               {/* check that this textarea also goes in data on submit */}
               <textarea
@@ -374,34 +307,42 @@ const Booking = () => {
               )}
             </div>
           </div>
-
+          <hr className="border-t-2 border-gray-300 my-4" />
           <div className="form-group">
-            <h3>Contact Info</h3>
+            <h2 className="text-black font-bold text-2xl font-mono mb-5">
+              Contact Info
+            </h2>
             <div className="contact-input-group">
               <div className="form-control">
-                <label>Full Name *</label>
+                <label className="font-semibold">
+                  Full Name <span className="required-q">*</span>
+                </label>
                 <input
                   {...register("name")}
                   type="text"
                   className={errors.name ? "text-input-error" : ""}
+                  placeholder="Name"
                 />
                 {errors.name && (
                   <div className="text-error">{errors.name.message}</div>
                 )}
               </div>
               <div className="form-control">
-                <label>Email *</label>
+                <label className="font-semibold">
+                  Email <span className="required-q">*</span>
+                </label>
                 <input
                   {...register("email")}
                   type="text"
                   className={errors.email ? "text-input-error" : ""}
+                  placeholder="youremail@gmail.com"
                 />
                 {errors.email && (
                   <div className="text-error">{errors.email.message}</div>
                 )}
               </div>
               <div className="form-control">
-                <label>Instagram Handle</label>
+                <label className="font-semibold">Instagram Handle</label>
                 <input
                   {...register("instagram")}
                   type="text"

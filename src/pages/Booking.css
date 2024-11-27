@@ -4,14 +4,6 @@
   min-height: 100vh;
 }
 
-.form-header h2 {
-  margin-bottom: 20px;
-}
-
-.form-header p {
-  margin-bottom: 10px;
-}
-
 .booking-form {
   margin-inline: auto;
   padding: 30px;
@@ -23,14 +15,17 @@
   gap: 40px;
 }
 
-.booking-form h3 {
-  color: rgb(98, 98, 98);
+.booking-form .required-q {
+  @apply text-slate-500 text-sm;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.booking-form input[type="text"],
+.booking-form textarea {
+  @apply p-2 text-base rounded-lg py-2 px-3 border border-solid border-slate-300 duration-150 focus:outline-none focus:border-slate-700;
+}
+
+.booking-form h3 {
+  color: rgb(98, 98, 98);
 }
 
 .form-control {
@@ -39,28 +34,7 @@
 }
 
 .form-control label {
-  font-size: 16px;
-  /* font-weight: 600; */
   margin-bottom: 10px;
-}
-
-.form-control input[type="text"],
-.form-control textarea {
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px rgba(168, 168, 168, 0.63) solid;
-  padding-block: 10px;
-  padding-inline: 14px;
-  transition: 0.3s;
-  background: rgba(207, 207, 207, 0.164);
-}
-
-.form-control input[type="text"]:focus,
-.form-control textarea:focus {
-  outline: none !important;
-  border: 1px solid rgb(73, 73, 73);
-  box-shadow: 0 0 1px rgb(110, 110, 110);
-  /* background: rgba(207, 207, 207, 0.075); */
 }
 
 .contact-input-group {
@@ -68,57 +42,6 @@
   flex-direction: column;
   gap: 30px;
   margin-bottom: 20px;
-}
-
-.design-type-container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.check-btn {
-  font-size: 30px;
-  flex-shrink: 0;
-}
-
-.design-type-container input {
-  display: none;
-}
-
-.booking-form .card {
-  border: 1px rgb(91, 91, 91) solid;
-  border-radius: 20px;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.055);
-  color: rgb(124, 124, 124);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 20px;
-  cursor: pointer;
-  transition: 0.4s;
-}
-
-.booking-form .card .card-info {
-  display: block;
-}
-
-.booking-form .card:hover {
-  transform: scale(1.02);
-}
-
-input[id="flash-select"]:checked ~ label[for="flash-select"] .card,
-input[id="custom-select"]:checked ~ label[for="custom-select"] .card,
-input[id="freehand-select"]:checked ~ label[for="freehand-select"] .card {
-  border: 1px #535353 solid;
-  background-color: rgba(196, 196, 196, 0.417);
-  color: #535353;
-}
-
-input[id="flash-select"]:checked ~ label[for="flash-select"] .card-info,
-input[id="custom-select"]:checked ~ label[for="custom-select"] .card-info,
-input[id="freehand-select"]:checked ~ label[for="freehand-select"] .card-info {
-  color: #535353;
 }
 
 .flash-button {
@@ -161,66 +84,6 @@ input[id="freehand-select"]:checked ~ label[for="freehand-select"] .card-info {
 
 input[type="file"] {
   display: none;
-}
-
-.empty-references {
-  border: 1px dashed #535353;
-  cursor: pointer;
-  border-radius: 8px;
-  display: flex;
-  padding: 12px 12px;
-  min-height: 200px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.empty-references:active {
-  background-color: rgba(255, 255, 255, 0.164);
-}
-
-.empty-references .upload-icon {
-  font-size: 48px;
-}
-
-.reference-list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(100px, 1fr));
-  gap: 10px;
-  height: 200px;
-}
-
-/* .reference-list label {
-  margin-bottom: 0;
-} */
-
-.reference-list img {
-  display: block;
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.upload-icon {
-  font-size: 28px;
-}
-
-.add-image-btn {
-  height: 100%;
-  cursor: pointer;
-  border: 1px dashed #535353;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.reference-upload span {
-  font-size: 16px;
 }
 
 .submit-button {
