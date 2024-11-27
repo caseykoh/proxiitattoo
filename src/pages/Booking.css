@@ -15,11 +15,13 @@
   gap: 40px;
 }
 
-.booking-form h3 {
-  color: rgb(98, 98, 98);
+.booking-form input[type="text"],
+.booking-form textarea {
+  @apply bg-slate-50 p-2 text-base rounded-lg py-2 px-3 border-2 border-solid border-slate-300 duration-150 focus:outline-none focus:border-slate-700;
 }
 
-.form-group {
+.booking-form h3 {
+  color: rgb(98, 98, 98);
 }
 
 .form-control {
@@ -28,28 +30,7 @@
 }
 
 .form-control label {
-  /* font-size: 16px; */
-  /* font-weight: 600; */
   margin-bottom: 10px;
-}
-
-.form-control input[type="text"],
-.form-control textarea {
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px rgba(168, 168, 168, 0.63) solid;
-  padding-block: 10px;
-  padding-inline: 14px;
-  transition: 0.3s;
-  background: rgba(207, 207, 207, 0.164);
-}
-
-.form-control input[type="text"]:focus,
-.form-control textarea:focus {
-  outline: none !important;
-  border: 1px solid rgb(73, 73, 73);
-  box-shadow: 0 0 1px rgb(110, 110, 110);
-  /* background: rgba(207, 207, 207, 0.075); */
 }
 
 .contact-input-group {
