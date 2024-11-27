@@ -220,11 +220,11 @@ const Booking = () => {
                     />
                     <label htmlFor={`${designType}-select`}>
                       <div
-                        className={`card cursor-pointer ${
+                        className={`cursor-pointer ${
                           selectedDesignType === designType
-                            ? "bg-slate-950  text-white"
-                            : ""
-                        } hover:bg-slate-200 border-solid p-2 rounded-xl border-2 border-slate-950 ${
+                            ? "bg-slate-950  text-white border-slate-950"
+                            : "border-slate-950 hover:bg-slate-200"
+                        }  border-solid p-2 rounded-xl border-2  ${
                           errors.designType ? "card-error" : ""
                         }`}
                       >
