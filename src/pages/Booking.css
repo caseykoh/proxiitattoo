@@ -21,7 +21,7 @@
 
 .booking-form input[type="text"],
 .booking-form textarea {
-  @apply bg-slate-50 p-2 text-base rounded-lg py-2 px-3 border-2 border-solid border-slate-300 duration-150 focus:outline-none focus:border-slate-700;
+  @apply p-2 text-base rounded-lg py-2 px-3 border border-solid border-slate-300 duration-150 focus:outline-none focus:border-slate-700;
 }
 
 .booking-form h3 {
