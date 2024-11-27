@@ -171,7 +171,6 @@ const Booking = () => {
 
       await submitForm(formFields);
       console.log("Form submitted successfully!");
-      console.log(formFields);
       navigate("/confirmation");
     } catch (error) {
       setError("root", {
