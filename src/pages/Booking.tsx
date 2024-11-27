@@ -171,6 +171,7 @@ const Booking = () => {
 
       await submitForm(formFields);
       console.log("Form submitted successfully!");
+      console.log(formFields);
       navigate("/confirmation");
     } catch (error) {
       setError("root", {
@@ -179,8 +180,6 @@ const Booking = () => {
       console.error("Error submitting form:", error);
     }
   };
-
-  const [selectedDesignType, setSelectedDesignType] = useState("");
 
   return (
     <>
@@ -208,22 +207,16 @@ const Booking = () => {
               <div className="flex flex-row gap-2">
                 {Object.values(DesignTypeEnum.enum).map((designType) => (
                   <div key={designType}>
-                    <input
-                      {...register("designType")}
-                      className="hidden"
-                      type="radio"
-                      value={designType}
-                      id={`${designType}-select`}
-                      checked={selectedDesignType === designType}
-                      onChange={() => setSelectedDesignType(designType)}
-                    />
                     <label htmlFor={`${designType}-select`}>
+                      <input
+                        {...register("designType")}
+                        className="peer hidden"
+                        type="radio"
+                        value={designType}
+                        id={`${designType}-select`}
+                      />
                       <div
-                        className={`cursor-pointer ${
-                          selectedDesignType === designType
-                            ? "bg-slate-950  text-white border-slate-950"
-                            : "border-slate-950 hover:bg-slate-200"
-                        }  border-solid p-2 rounded-xl border-2  ${
+                        className={`cursor-pointer  border-slate-950 hover:bg-slate-200 peer-checked:bg-slate-950 peer-checked:text-white peer-checked:border-slate-950 border-solid p-2 rounded-xl border-2  ${
                           errors.designType ? "card-error" : ""
                         }`}
                       >
