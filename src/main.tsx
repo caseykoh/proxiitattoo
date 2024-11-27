@@ -17,7 +17,7 @@ import FlashPage from "./pages/FlashPage.tsx";
 import ConfirmationPage from "./pages/ConfirmationPage.tsx";
 import axios from "axios";
 
-axios.defaults.headers["x-api-key"] = import.meta.env.REACT_APP_API_KEY;
+axios.defaults.headers["x-api-key"] = import.meta.env.VITE_REACT_APP_API_KEY;
 
 const router = createBrowserRouter([
   {
