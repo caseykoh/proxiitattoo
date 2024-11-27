@@ -203,7 +203,9 @@ const Booking = () => {
           </div>
           <div className="flex flex-col gap-8">
             <div className="form-control">
-              <label className="font-semibold">I'm Looking To Get... *</label>
+              <label className="font-semibold">
+                I'm Looking To Get... <span className="required-q">*</span>
+              </label>
               <div className="flex flex-row gap-2">
                 {Object.values(DesignTypeEnum.enum).map((designType) => (
                   <div key={designType}>
@@ -238,7 +240,8 @@ const Booking = () => {
             </div>
             <div className="form-control">
               <label htmlFor="reference" className="font-semibold">
-                Upload Image References (Max 3)*
+                Upload Image References (Max 3){" "}
+                <span className="required-q">*</span>
               </label>
 
               <Controller
@@ -259,7 +262,9 @@ const Booking = () => {
               )}
             </div>
             <div className="form-control">
-              <label className="font-semibold">Where do you want it? *</label>
+              <label className="font-semibold">
+                Where do you want it? <span className="required-q">*</span>
+              </label>
               <input
                 {...register("placement")}
                 type="text"
@@ -271,7 +276,9 @@ const Booking = () => {
               )}
             </div>
             <div className="form-control">
-              <label className="font-semibold">How big? *</label>
+              <label className="font-semibold">
+                How big? <span className="required-q">*</span>
+              </label>
               <input
                 {...register("size")}
                 type="text"
@@ -284,7 +291,8 @@ const Booking = () => {
             </div>
             <div className="form-control">
               <label htmlFor="description" className="font-semibold">
-                What's your vision for the piece? *
+                What's your vision for the piece?{" "}
+                <span className="required-q">*</span>
               </label>
               {/* check that this textarea also goes in data on submit */}
               <textarea
@@ -307,7 +315,9 @@ const Booking = () => {
             </h2>
             <div className="contact-input-group">
               <div className="form-control">
-                <label className="font-semibold">Full Name *</label>
+                <label className="font-semibold">
+                  Full Name <span className="required-q">*</span>
+                </label>
                 <input
                   {...register("name")}
                   type="text"
@@ -319,7 +329,9 @@ const Booking = () => {
                 )}
               </div>
               <div className="form-control">
-                <label className="font-semibold">Email *</label>
+                <label className="font-semibold">
+                  Email <span className="required-q">*</span>
+                </label>
                 <input
                   {...register("email")}
                   type="text"
