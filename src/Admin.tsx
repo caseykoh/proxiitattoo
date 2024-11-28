@@ -1,27 +1,37 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+async function fetchAppointments() {
+  const response = await axios
+    .get(import.meta.env.VITE_APP_API_ENDPOINT + "/appointments")
+    .then((response) => {
+      console.log(response.data.appointments);
+      const appointments = response.data.appointments;
+      return appointments;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  console.log(response);
+  return response;
+}
+
 function Admin() {
   const [submissionsData, setSubmissionsData] = useState<any[]>([]);
-  const endpoint = `http://127.0.0.1:8000/app/inquiry-submission/`;
-  const fetchData = async () => {
-    console.log("fetching..");
-    const response = await axios.get(endpoint);
-    console.log(response);
-    const data = response.data;
-    setSubmissionsData(data);
-    console.log(data);
-    return data;
-  };
 
   useEffect(() => {
+    async function fetchData() {
+      const appointments = await fetchAppointments();
+      setSubmissionsData(appointments);
+    }
     fetchData();
   }, []);
   return (
     <>
+      <div>Hello admin!</div>
       <ul>
         {submissionsData.map((el) => (
-          <li key={el.id}>{el.first_name}</li>
+          <li key={el.id}>{el.full_name}</li>
         ))}
       </ul>
     </>
