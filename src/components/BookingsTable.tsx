@@ -1,3 +1,4 @@
+import { Archive } from "lucide-react";
 interface Booking {
   id: string;
   full_name: string;
@@ -22,6 +23,7 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
             <th className="flex-1 p-2 text-left">Email</th>
             <th className="flex-1 p-2 text-left">Design Description</th>
             <th className="flex-1 p-2 text-left">Date Created</th>
+            <th className="flex-1 p-2 text-left">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -32,6 +34,11 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
               <td className="flex-1 p-2">{booking.description}</td>
               <td className="flex-1 p-2">
                 {new Date(booking.createdAt).toLocaleDateString()}
+              </td>
+              <td className="flex-1 p-2">
+                <button>
+                  <Archive className="h-4 w-4 text-muted-foreground" />
+                </button>
               </td>
             </tr>
           ))}
