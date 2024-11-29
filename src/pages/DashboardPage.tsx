@@ -1,29 +1,26 @@
+import { useEffect, useState } from "react";
 import { BookingsTable } from "../components/BookingsTable";
 import { Calendar, ImageIcon, Users } from "lucide-react";
-
-// Mock data - in a real app, this would come from your database
-const recentBookings = [
-  {
-    id: "1",
-    clientName: "John Doe",
-    email: "john@example.com",
-    designDescription: "Small rose tattoo on forearm",
-    preferredDate: "2024-02-15",
-    status: "pending",
-    createdAt: "2024-01-20T10:00:00Z",
-  },
-  {
-    id: "2",
-    clientName: "Jane Smith",
-    email: "jane@example.com",
-    designDescription: "Dragon sleeve design",
-    preferredDate: "2024-02-20",
-    status: "accepted",
-    createdAt: "2024-01-19T15:30:00Z",
-  },
-];
+import axios from "axios";
 
 export default function DashboardPage() {
+  const [bookings, setBookings] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          import.meta.env.VITE_APP_API_ENDPOINT + "/appointments"
+        );
+        console.log(response.data.appointments);
+        setBookings(response.data.appointments);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
       <div className="flex items-center justify-between space-y-2">
@@ -80,7 +77,9 @@ export default function DashboardPage() {
               <button>View All</button>
             </a>
           </div>
-          <div>{/* <BookingsTable bookings={recentBookings} /> */}</div>
+          <div>
+            <BookingsTable bookings={bookings} />
+          </div>
         </div>
       </div>
     </div>
