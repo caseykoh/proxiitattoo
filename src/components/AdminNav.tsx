@@ -1,35 +1,28 @@
-import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { NavLink } from "react-router-dom";
 import { Palette } from "lucide-react";
 
-export function MainNav({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLElement>) {
+export function AdminNav({}: React.HTMLAttributes<HTMLElement>) {
   return (
-    <nav
-      className={cn("flex items-center space-x-4 lg:space-x-6", className)}
-      {...props}
-    >
-      <Link
-        href="/"
+    <nav className="flex items-center space-x-4 lg:space-x-6">
+      <NavLink
+        to="/admin"
         className="flex items-center space-x-2 text-sm font-medium transition-colors hover:text-primary"
       >
         <Palette className="h-6 w-6" />
         <span>Tattoo Admin</span>
-      </Link>
-      <Link
-        href="/dashboard/bookings"
+      </NavLink>
+      <NavLink
+        to="/admin/bookings"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Bookings
-      </Link>
-      <Link
-        href="/dashboard/flash"
+      </NavLink>
+      <NavLink
+        to="/admin/flash"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Flash Designs
-      </Link>
+      </NavLink>
     </nav>
   );
 }
