@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import DashboardPage from "./pages/DashboardPage";
 
 async function fetchAppointments() {
   const response = await axios
@@ -28,12 +29,19 @@ function Admin() {
   }, []);
   return (
     <>
-      <div>Hello admin!</div>
-      <ul>
-        {submissionsData.map((el) => (
-          <li key={el.id}>{el.full_name}</li>
-        ))}
-      </ul>
+      <div>
+        <div className="">
+          <div className="border-b">
+            <div className="flex h-16 items-center px-4">
+              {/* <MainNav className="mx-6" /> */}
+              <div className="ml-auto flex items-center space-x-4">
+                {/* <UserNav /> */}
+              </div>
+            </div>
+          </div>
+          <DashboardPage />
+        </div>
+      </div>
     </>
   );
 }
