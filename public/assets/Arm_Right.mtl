@@ -1,9 +1,8 @@
 # Apple ModelI/O MTL File: Arm_Right.mtl
-
 newmtl _11535_arm_V3_FINALdefault
-	Kd 0.8 0.8 0.8
-    Ka 0.8 0.8 0.8
-    Ks 0
-    metallic 0
-    roughness 0.5
-
+Ka 1.000 1.000 1.000
+Kd 1.000 1.000 1.000
+Ks 0
+d 1.0
+illum 2
+map_Kd _11535_arm_V3_FINALdefault-color.png
