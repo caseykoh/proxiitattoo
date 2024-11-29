@@ -15,22 +15,24 @@ interface BookingsTableProps {
 export function BookingsTable({ bookings }: BookingsTableProps) {
   return (
     <div className="rounded-md border">
-      <table>
-        <thead>
-          <tr>
-            <th>Client Name</th>
-            <th>Email</th>
-            <th>Design Description</th>
-            <th>Date Created</th>
+      <table className="flex flex-col w-full">
+        <thead className="flex flex-col w-full">
+          <tr className="flex w-full">
+            <th className="flex-1 p-2 text-left">Client Name</th>
+            <th className="flex-1 p-2 text-left">Email</th>
+            <th className="flex-1 p-2 text-left">Design Description</th>
+            <th className="flex-1 p-2 text-left">Date Created</th>
           </tr>
         </thead>
         <tbody>
           {bookings.map((booking) => (
-            <tr key={booking.id}>
-              <td>{booking.full_name}</td>
-              <td>{booking.email}</td>
-              <td>{booking.description}</td>
-              <td>{new Date(booking.createdAt).toLocaleDateString()}</td>
+            <tr key={booking.id} className="flex w-full">
+              <td className="flex-1 p-2">{booking.full_name}</td>
+              <td className="flex-1 p-2">{booking.email}</td>
+              <td className="flex-1 p-2">{booking.description}</td>
+              <td className="flex-1 p-2">
+                {new Date(booking.createdAt).toLocaleDateString()}
+              </td>
             </tr>
           ))}
         </tbody>
