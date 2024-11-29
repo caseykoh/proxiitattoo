@@ -1,0 +1,9 @@
+# Apple ModelI/O MTL File: Arm_Right.mtl
+
+newmtl _11535_arm_V3_FINALdefault
+	Kd 0.8 0.8 0.8
+    Ka 0.8 0.8 0.8
+    Ks 0
+    metallic 0
+    roughness 0.5
+
