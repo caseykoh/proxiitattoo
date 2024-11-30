@@ -33,9 +33,9 @@ export default function AdminLoginPage() {
           </button>
         </form>
         <p className="mt-4 text-center text-sm text-muted-foreground">
-          <link href="/forgot-password" className="underline">
+          <a href="/forgot-password" className="underline">
             Forgot your password?
-          </link>
+          </a>
         </p>
       </div>
     </div>
