@@ -3,8 +3,16 @@ import { BookingsTable } from "../components/BookingsTable";
 import { Calendar, ImageIcon, Users } from "lucide-react";
 import axios from "axios";
 import { Booking } from "../types/types";
+import { Navigate } from "react-router-dom";
 
 export default function DashboardPage() {
+  const token = localStorage.getItem("jwt"); // Retrieve token from localStorage
+
+  // If no token, redirect to the login page
+  if (!token) {
+    return <Navigate to="/admin" replace />;
+  }
+
   const [bookings, setBookings] = useState<Booking[]>([]);
 
   useEffect(() => {

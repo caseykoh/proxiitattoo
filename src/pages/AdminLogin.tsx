@@ -10,7 +10,7 @@ export default function AdminLoginPage() {
     e.preventDefault(); // Prevent the page from reloading
     const loginDetails = { username, password };
     // Call the API to authenticate the user and get the JWT token
-    const response = await axios
+    await axios
       .post(import.meta.env.VITE_APP_API_ENDPOINT + "/auth/login", loginDetails)
       .then((result) => {
         console.log(result);
