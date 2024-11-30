@@ -112,21 +112,21 @@
   font-size: 14px;
 }
 
-tr td:nth-child(1) {
+.tour-table tr td:nth-child(1) {
   width: 35%;
 }
 
-tr td:nth-child(2) {
+.tour-table tr td:nth-child(2) {
   width: 35%;
 }
 
-thead th:nth-child(3),
-tbody td:nth-child(3) {
+.tour-table thead th:nth-child(3),
+.tour-table tbody td:nth-child(3) {
   width: 30%;
   text-align: right;
 }
 
-td a {
+.tour-table td a {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.8);
 }
