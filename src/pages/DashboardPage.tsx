@@ -3,21 +3,33 @@ import { BookingsTable } from "../components/BookingsTable";
 import { Calendar, ImageIcon, Users } from "lucide-react";
 import axios from "axios";
 import { Booking } from "../types/types";
+import { useNavigate } from "react-router-dom";
 
 export default function DashboardPage() {
+  const [user, setUser] = useState();
   const [bookings, setBookings] = useState<Booking[]>([]);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          import.meta.env.VITE_APP_API_ENDPOINT + "/appointments"
-        );
-        setBookings(response.data.appointments);
-      } catch (error) {
-        console.log(error);
-      }
+    const getUser = async () => {
+      // This is a placeholder
     };
-    fetchData();
+    getUser();
+    if (!user) {
+      const navigate = useNavigate();
+      navigate("/admin/login");
+    }
+    if (user) {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            import.meta.env.VITE_APP_API_ENDPOINT + "/appointments"
+          );
+          setBookings(response.data.appointments);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }
   }, []);
 
   const handleDelete = async (id: string) => {
