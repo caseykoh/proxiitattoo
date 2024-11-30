@@ -1,19 +1,12 @@
-import { Archive } from "lucide-react";
-interface Booking {
-  id: string;
-  full_name: string;
-  email: string;
-  description: string;
-  // preferredDate: string;
-  // status: "pending";
-  createdAt: string;
-}
+import { Trash } from "lucide-react";
+import { Booking } from "../types/types";
 
 interface BookingsTableProps {
   bookings: Booking[];
+  onDelete: (id: string) => void;
 }
 
-export function BookingsTable({ bookings }: BookingsTableProps) {
+export function BookingsTable({ bookings, onDelete }: BookingsTableProps) {
   return (
     <div className="rounded-md border">
       <table className="flex flex-col w-full">
@@ -36,8 +29,8 @@ export function BookingsTable({ bookings }: BookingsTableProps) {
                 {new Date(booking.createdAt).toLocaleDateString()}
               </td>
               <td className="flex-1 p-2">
-                <button>
-                  <Archive className="h-4 w-4 text-muted-foreground" />
+                <button onClick={() => onDelete(booking.id)}>
+                  <Trash className="h-4 w-4 text-muted-foreground" />
                 </button>
               </td>
             </tr>

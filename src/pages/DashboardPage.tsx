@@ -2,24 +2,35 @@ import { useEffect, useState } from "react";
 import { BookingsTable } from "../components/BookingsTable";
 import { Calendar, ImageIcon, Users } from "lucide-react";
 import axios from "axios";
+import { Booking } from "../types/types";
 
 export default function DashboardPage() {
-  const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState<Booking[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
           import.meta.env.VITE_APP_API_ENDPOINT + "/appointments"
         );
-        console.log(response.data.appointments);
         setBookings(response.data.appointments);
       } catch (error) {
         console.log(error);
       }
     };
-
     fetchData();
   }, []);
+
+  const handleDelete = async (id: string) => {
+    try {
+      const response = await axios.delete(
+        import.meta.env.VITE_APP_API_ENDPOINT + `/appointments/${id}`
+      );
+      console.log(response);
+      setBookings((prev) => prev.filter((booking) => booking.id !== id)); // Update state
+    } catch (error) {
+      console.error("Error deleting booking:", error);
+    }
+  };
 
   return (
     <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
@@ -78,7 +89,7 @@ export default function DashboardPage() {
             </a>
           </div>
           <div>
-            <BookingsTable bookings={bookings} />
+            <BookingsTable bookings={bookings} onDelete={handleDelete} />
           </div>
         </div>
       </div>
