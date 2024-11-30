@@ -1,33 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import DashboardPage from "./pages/DashboardPage";
 import { AdminNav } from "./components/AdminNav";
 
-async function fetchAppointments() {
-  const response = await axios
-    .get(import.meta.env.VITE_APP_API_ENDPOINT + "/appointments")
-    .then((response) => {
-      console.log(response.data.appointments);
-      const appointments = response.data.appointments;
-      return appointments;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  console.log(response);
-  return response;
-}
-
 function Admin() {
-  const [submissionsData, setSubmissionsData] = useState<any[]>([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const appointments = await fetchAppointments();
-      setSubmissionsData(appointments);
-    }
-    fetchData();
-  }, []);
   return (
     <>
       <div>
