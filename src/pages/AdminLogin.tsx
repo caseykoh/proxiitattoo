@@ -1,24 +1,34 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Lock } from "lucide-react";
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent the page from reloading
     const loginDetails = { username, password };
-    // Call the API to authenticate the user and get the JWT token
-    await axios
-      .post(import.meta.env.VITE_APP_API_ENDPOINT + "/auth/login", loginDetails)
-      .then((result) => {
-        console.log(result);
-        localStorage.setItem("jwt", result.data.token);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    setError(null); // Clear previous errors
+
+    try {
+      const result = await axios.post(
+        `${import.meta.env.VITE_APP_API_ENDPOINT}/auth/login`,
+        loginDetails
+      );
+
+      // On success, save the JWT and navigate
+      localStorage.setItem("jwt", result.data.token);
+      navigate("/admin/dashboard");
+    } catch (error: any) {
+      // Handle errors and set the error message
+      const message =
+        error.response?.data || "An error occurred. Please try again.";
+      setError(message);
+    }
   };
 
   return (
@@ -59,6 +69,7 @@ export default function AdminLoginPage() {
               required
             />
           </div>
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           <button type="submit" className="w-full">
             Sign In
           </button>
