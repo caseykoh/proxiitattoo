@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { FlashGallery } from "../components/FlashGallery";
 import { ImageUpload } from "../components/ImageUpload";
+import { Upload } from "lucide-react";
 
 // Mock data - in a real app, this would come from your database
 const flashDesigns = [
@@ -22,6 +24,32 @@ const flashDesigns = [
 ];
 
 export default function AdminFlashPage() {
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(formData: FormData) {
+    setLoading(true);
+    try {
+      await uploadFlashDesign(formData);
+      // Reset form and preview
+      setPreview(null);
+      const form = document.querySelector("form") as HTMLFormElement;
+      form?.reset();
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   return (
     <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
       <div className="flex items-center justify-between space-y-2">
@@ -33,8 +61,62 @@ export default function AdminFlashPage() {
         </div>
       </div>
       <div className="grid gap-8">
-        <ImageUpload onChange={() => {}} maxImages={1} />
-        <ImageUpload onChange={() => {}} maxImages={3} />
+        <div>
+          <div>
+            <h3>Upload New Design</h3>
+            <p>Add a new flash design to your portfolio.</p>
+          </div>
+          <div>
+            <form onSubmit={handleSubmit} className="grid gap-6">
+              <div className="grid gap-2">
+                <label htmlFor="title">Design Title</label>
+                <input id="title" name="title" required />
+              </div>
+              <div className="grid gap-2">
+                <label htmlFor="price">Price</label>
+                <input
+                  id="price"
+                  name="price"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  required
+                />
+              </div>
+              <div className="grid gap-2">
+                <label htmlFor="reference" className="font-semibold">
+                  Upload Main Image <span className="required-q">*</span>
+                </label>
+                <ImageUpload
+                  onChange={() => {}}
+                  maxImages={1}
+                  acceptTypes={["image/jpeg", "image/png"]}
+                />
+              </div>
+              <div className="grid gap-2">
+                <label htmlFor="reference" className="font-semibold">
+                  Upload Extra Images (Max 3){" "}
+                  <span className="required-q">*</span>
+                </label>
+                <ImageUpload
+                  onChange={() => {}}
+                  maxImages={3}
+                  acceptTypes={["image/jpeg", "image/png"]}
+                />
+              </div>
+              <button type="submit" disabled={loading}>
+                {loading ? (
+                  "Uploading..."
+                ) : (
+                  <>
+                    <Upload className="mr-2 h-4 w-4" />
+                    Upload Design
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
+        </div>
         <FlashGallery designs={flashDesigns} />
       </div>
     </div>
