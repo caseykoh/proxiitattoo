@@ -2,6 +2,8 @@ import { useState } from "react";
 import { FlashGallery } from "../components/FlashGallery";
 import { ImageUpload } from "../components/ImageUpload";
 import { Upload } from "lucide-react";
+import { v4 as uuidv4 } from "uuid";
+import { getImageUrls } from "../api";
 
 // Mock data - in a real app, this would come from your database
 const flashDesigns = [
@@ -24,31 +26,85 @@ const flashDesigns = [
 ];
 
 export default function AdminFlashPage() {
+  const [formData, setFormData] = useState({
+    title: "",
+    price: "",
+    dimensions: "",
+    isActive: true,
+    mainImageUrl: "",
+    extraImageUrls: [],
+  });
   const [loading, setLoading] = useState(false);
+  const [mainImage, setMainImage] = useState<{ file: File; id: any }[] | null>(
+    []
+  );
+  const [extraImages, setExtraImages] = useState<
+    { file: File; id: any }[] | null
+  >([]);
 
-  async function handleSubmit(formData: FormData) {
+  const onMainImageChange = (selectedImages: File[] | null) => {
+    if (selectedImages) {
+      const uniqueList = selectedImages.map((file) => {
+        return {
+          file,
+          id: uuidv4(),
+        };
+      });
+      setMainImage(uniqueList);
+    }
+  };
+
+  const onExtraImageChange = (selectedImages: File[] | null) => {
+    if (selectedImages) {
+      const uniqueList = selectedImages.map((file) => {
+        return {
+          file,
+          id: uuidv4(),
+        };
+      });
+      setExtraImages(uniqueList);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!mainImage) {
+      return;
+    }
     setLoading(true);
     try {
-      await uploadFlashDesign(formData);
-      // Reset form and preview
-      setPreview(null);
-      const form = document.querySelector("form") as HTMLFormElement;
-      form?.reset();
+      if (!extraImages || extraImages.length == 0) {
+        return;
+      }
+      const mainImageUrl = await getImageUrls(mainImage);
+      if (!mainImageUrl) {
+        console.log("Could not get url from api.ts for main image");
+        return;
+      }
+      const extraImageUrls = await getImageUrls(extraImages);
+      console.log(mainImageUrl);
+      console.log(extraImageUrls);
+
+      const formFields = {
+        title: formData.title,
+        price: formData.price,
+        dimensions: formData.dimensions,
+        isActive: formData.isActive,
+        mainImageUrl: mainImageUrl[0],
+        extraImageUrls: mainImageUrl,
+      };
+      console.log(formFields);
+      //   await submitForm(formFields);
+      console.log("Form submitted successfully!");
+      //   await uploadFlashDesign(formData);
+      //   // Reset form and preview
+      //   setPreview(null);
+      //   const form = document.querySelector("form") as HTMLFormElement;
+      //   form?.reset();
     } finally {
       setLoading(false);
     }
-  }
-
-  function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  }
+  };
 
   return (
     <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
@@ -88,7 +144,7 @@ export default function AdminFlashPage() {
                   Upload Main Image <span className="required-q">*</span>
                 </label>
                 <ImageUpload
-                  onChange={() => {}}
+                  onChange={onMainImageChange}
                   maxImages={1}
                   acceptTypes={["image/jpeg", "image/png"]}
                 />
@@ -99,7 +155,7 @@ export default function AdminFlashPage() {
                   <span className="required-q">*</span>
                 </label>
                 <ImageUpload
-                  onChange={() => {}}
+                  onChange={onExtraImageChange}
                   maxImages={3}
                   acceptTypes={["image/jpeg", "image/png"]}
                 />
