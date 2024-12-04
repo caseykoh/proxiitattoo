@@ -12,13 +12,13 @@ export function AdminNav({}: React.HTMLAttributes<HTMLElement>) {
         <span>Tattoo Admin</span>
       </NavLink>
       <NavLink
-        to="/admin/bookings"
+        to="/admin/dashboard/bookings"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Bookings
       </NavLink>
       <NavLink
-        to="/admin/flash"
+        to="/admin/dashboard/flash"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Flash Designs

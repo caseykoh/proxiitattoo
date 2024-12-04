@@ -20,6 +20,7 @@ import AdminLayout from "./AdminLayout.tsx";
 import ProtectedRoute from "./ProtectedAdminRoutes.tsx";
 import AdminLoginPage from "./pages/AdminLogin.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
+import AdminFlashPage from "./pages/AdminFlashPage.tsx";
 
 // axios.defaults.headers["x-api-key"] = import.meta.env.VITE_REACT_APP_API_KEY;
 
@@ -67,9 +68,9 @@ const router = createBrowserRouter([
         path: "/admin/dashboard",
         element: <ProtectedRoute element={<AdminLayout />} />, // Dashboard layout with nested routes
         children: [
-          { path: "/admin/dashboard", element: <DashboardPage /> }, // Dashboard overview
-          // { path: "/admin/flash", element: <AdminFlash /> }, // Flash management
-          // { path: "/admin/appointments", element: <AdminAppointments /> }, // Appointment management
+          { path: "", element: <DashboardPage /> }, // Dashboard overview
+          { path: "flash", element: <AdminFlashPage /> }, // Flash management
+          // { path: "bookings", element: <AdminAppointments /> }, // Appointment management
         ],
       },
     ],
