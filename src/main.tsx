@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import {
   createBrowserRouter,
+  Navigate,
   Outlet,
   RouterProvider,
   ScrollRestoration,
@@ -16,6 +17,9 @@ import Admin from "./Admin.tsx";
 import FlashPage from "./pages/FlashPage.tsx";
 import ConfirmationPage from "./pages/ConfirmationPage.tsx";
 import AdminLayout from "./AdminLayout.tsx";
+import ProtectedRoute from "./ProtectedAdminRoutes.tsx";
+import AdminLoginPage from "./pages/AdminLogin.tsx";
+import DashboardPage from "./pages/DashboardPage.tsx";
 
 // axios.defaults.headers["x-api-key"] = import.meta.env.VITE_REACT_APP_API_KEY;
 
@@ -56,11 +60,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <Admin />,
-  },
-  {
-    path: "/admin/dashboard",
-    element: <AdminLayout />,
+    element: <AdminWrapper />, // Handles layout for admin routes
+    children: [
+      { path: "/admin", element: <AdminLoginPage /> }, // Login page
+      {
+        path: "/admin/dashboard",
+        element: <ProtectedRoute element={<AdminLayout />} />, // Dashboard layout with nested routes
+        children: [
+          { path: "/admin/dashboard", element: <DashboardPage /> }, // Dashboard overview
+          // { path: "/admin/flash", element: <AdminFlash /> }, // Flash management
+          // { path: "/admin/appointments", element: <AdminAppointments /> }, // Appointment management
+        ],
+      },
+    ],
   },
 ]);
 
@@ -73,6 +85,16 @@ function NavbarWrapper() {
     </div>
   );
 }
+
+function AdminWrapper() {
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
+}
+
+export default AdminWrapper;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

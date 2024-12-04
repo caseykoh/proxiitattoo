@@ -5,7 +5,7 @@ export function AdminNav({}: React.HTMLAttributes<HTMLElement>) {
   return (
     <nav className="flex items-center space-x-4 lg:space-x-6">
       <NavLink
-        to="/admin"
+        to="/admin/dashboard"
         className="flex items-center space-x-2 text-sm font-medium transition-colors hover:text-primary"
       >
         <Palette className="h-6 w-6" />

@@ -1,15 +1,7 @@
-import { Navigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { AdminNav } from "./components/AdminNav";
-import DashboardPage from "./pages/DashboardPage";
 
 export default function AdminLayout() {
-  const token = localStorage.getItem("jwt"); // Retrieve token from localStorage
-
-  // If no token, redirect to the login page
-  if (!token) {
-    return <Navigate to="/admin" replace />;
-  }
-
   return (
     <>
       <div>
@@ -22,7 +14,9 @@ export default function AdminLayout() {
               </div>
             </div>
           </div>
-          <DashboardPage />
+          <main>
+            <Outlet />
+          </main>
         </div>
       </div>
     </>
