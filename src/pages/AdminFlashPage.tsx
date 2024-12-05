@@ -37,31 +37,15 @@ const defaultFormData = {
 export default function AdminFlashPage() {
   const [formData, setFormData] = useState(defaultFormData);
   const [loading, setLoading] = useState(false);
-  const [mainImage, setMainImage] = useState<{ file: File; id: any }[]>([]);
-  const [extraImages, setExtraImages] = useState<{ file: File; id: any }[]>([]);
+  const [mainImages, setMainImages] = useState<File[]>([]);
+  const [extraImages, setExtraImages] = useState<File[]>([]);
 
-  const onMainImageChange = (selectedImages: File[] | null) => {
-    if (selectedImages) {
-      const uniqueList = selectedImages.map((file) => {
-        return {
-          file,
-          id: uuidv4(),
-        };
-      });
-      setMainImage(uniqueList);
-    }
+  const handleMainImageChange = (images: File[] | null) => {
+    setMainImages(images || []);
   };
 
-  const onExtraImageChange = (selectedImages: File[] | null) => {
-    if (selectedImages) {
-      const uniqueList = selectedImages.map((file) => {
-        return {
-          file,
-          id: uuidv4(),
-        };
-      });
-      setExtraImages(uniqueList);
-    }
+  const handleExtraImageChange = (images: File[] | null) => {
+    setExtraImages(images || []);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,18 +58,30 @@ export default function AdminFlashPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!mainImage) {
+    if (!mainImages || mainImages.length === 0) {
       console.log("Missing main image");
       return;
     }
     setLoading(true);
+    const uniqueMainImages = mainImages.map((file) => {
+      return {
+        file,
+        id: uuidv4(),
+      };
+    });
+    const uniqueExtraImages = extraImages.map((file) => {
+      return {
+        file,
+        id: uuidv4(),
+      };
+    });
     try {
-      const mainImageUrl = await getImageUrls(mainImage);
+      const mainImageUrl = await getImageUrls(uniqueMainImages);
       if (!mainImageUrl) {
         console.log("Could not get url from api.ts for main image");
         return;
       }
-      const extraImageUrls = await getImageUrls(extraImages);
+      const extraImageUrls = await getImageUrls(uniqueExtraImages);
 
       const formFields = {
         title: formData.title,
@@ -154,27 +150,28 @@ export default function AdminFlashPage() {
                   className="p-2 text-base rounded-lg py-2 px-3 border border-solid border-slate-300 duration-150 focus:outline-none focus:border-slate-700"
                 />
               </div>
-
+              <div className="grid gap-2">
+                <label className="font-semibold">
+                  Upload Main Image <span className="required-q">*</span>
+                </label>
+                <ImageUpload
+                  images={mainImages}
+                  key="main-image"
+                  onChange={handleMainImageChange}
+                  maxImages={1}
+                  acceptTypes={["image/jpeg", "image/png"]}
+                />
+              </div>
               <div className="grid gap-2">
                 <label className="font-semibold">
                   Upload Extra Images (Max 3)
                   <span className="required-q">*</span>
                 </label>
                 <ImageUpload
+                  images={extraImages}
                   key="extra-images"
-                  onChange={onExtraImageChange}
+                  onChange={handleExtraImageChange}
                   maxImages={3}
-                  acceptTypes={["image/jpeg", "image/png"]}
-                />
-              </div>
-              <div className="grid gap-2">
-                <label className="font-semibold">
-                  Upload Main Image <span className="required-q">*</span>
-                </label>
-                <ImageUpload
-                  key="main-image"
-                  onChange={onMainImageChange}
-                  maxImages={1}
                   acceptTypes={["image/jpeg", "image/png"]}
                 />
               </div>

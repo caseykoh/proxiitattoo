@@ -1,24 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { X, Upload } from "lucide-react";
 
 interface ImageUploadProps {
-  initialImages?: File[];
+  images: File[];
   onChange: (files: File[] | null) => void;
   maxImages: number;
   acceptTypes?: string[];
 }
 
 export function ImageUpload({
-  initialImages = [],
+  images,
   onChange,
   maxImages,
   acceptTypes = ["image/jpeg", "image/png"],
 }: ImageUploadProps) {
-  const [selectedImages, setSelectedImages] = useState<File[]>(initialImages);
-
   const handleImageSelection = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
-    const remainingSlots = maxImages - selectedImages.length;
+    const remainingSlots = maxImages - images.length;
     const newImages = files.slice(0, remainingSlots);
     console.log("files");
     console.log(files);
@@ -43,15 +41,12 @@ export function ImageUpload({
       return;
     }
 
-    const updatedImages = [...selectedImages, ...newImages];
-    setSelectedImages(updatedImages);
-    // Then update parent component with new value
+    const updatedImages = [...images, ...newImages];
     onChange(updatedImages);
   };
 
   const handleRemoveImage = (index: number) => {
-    const updatedImages = selectedImages.filter((_, i) => i !== index);
-    setSelectedImages(updatedImages);
+    const updatedImages = images.filter((_, i) => i !== index);
     onChange(updatedImages);
   };
 
@@ -60,7 +55,7 @@ export function ImageUpload({
   return (
     <div>
       <div className="grid grid-cols-3 gap-4">
-        {selectedImages.map((image, index) => (
+        {images.map((image, index) => (
           <div
             key={`${image.name}-${index}`}
             className="relative drop-shadow-md"
@@ -80,7 +75,7 @@ export function ImageUpload({
             </button>
           </div>
         ))}
-        {selectedImages.length < maxImages && (
+        {images.length < maxImages && (
           <label
             htmlFor={inputId}
             className="w-full cursor-pointer aspect-square flex items-center justify-center bg-slate-100 rounded-lg !mb-0 border-dashed border-2 border-slate-300"
