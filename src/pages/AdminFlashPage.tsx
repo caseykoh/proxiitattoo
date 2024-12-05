@@ -25,15 +25,17 @@ const flashDesigns = [
   },
 ];
 
+const defaultFormData = {
+  title: "",
+  price: "",
+  dimensions: "",
+  isActive: true,
+  mainImageUrl: "",
+  extraImageUrls: [],
+};
+
 export default function AdminFlashPage() {
-  const [formData, setFormData] = useState({
-    title: "",
-    price: "",
-    dimensions: "",
-    isActive: true,
-    mainImageUrl: "",
-    extraImageUrls: [],
-  });
+  const [formData, setFormData] = useState(defaultFormData);
   const [loading, setLoading] = useState(false);
   const [mainImage, setMainImage] = useState<{ file: File; id: any }[]>([]);
   const [extraImages, setExtraImages] = useState<{ file: File; id: any }[]>([]);
@@ -99,6 +101,7 @@ export default function AdminFlashPage() {
       console.log("Form submitted successfully!");
       //   await uploadFlashDesign(formData);
       //   // Reset form and preview
+      setFormData(defaultFormData);
       //   setPreview(null);
       //   const form = document.querySelector("form") as HTMLFormElement;
       //   form?.reset();
