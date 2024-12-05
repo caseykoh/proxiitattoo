@@ -5,20 +5,20 @@ export function AdminNav({}: React.HTMLAttributes<HTMLElement>) {
   return (
     <nav className="flex items-center space-x-4 lg:space-x-6">
       <NavLink
-        to="/admin"
+        to="/admin/dashboard"
         className="flex items-center space-x-2 text-sm font-medium transition-colors hover:text-primary"
       >
         <Palette className="h-6 w-6" />
         <span>Tattoo Admin</span>
       </NavLink>
       <NavLink
-        to="/admin/bookings"
+        to="/admin/dashboard/bookings"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Bookings
       </NavLink>
       <NavLink
-        to="/admin/flash"
+        to="/admin/dashboard/flash"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Flash Designs

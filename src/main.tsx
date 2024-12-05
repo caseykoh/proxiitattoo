@@ -12,11 +12,13 @@ import Navbar from "./components/Navbar/Navbar.tsx";
 import Gallery from "./pages/Gallery.tsx";
 import Info from "./pages/Info.tsx";
 import Booking from "./pages/Booking.tsx";
-import Admin from "./Admin.tsx";
 import FlashPage from "./pages/FlashPage.tsx";
 import ConfirmationPage from "./pages/ConfirmationPage.tsx";
-// import axios from "axios";
+import AdminLayout from "./AdminLayout.tsx";
+import ProtectedRoute from "./ProtectedAdminRoutes.tsx";
+import AdminLoginPage from "./pages/AdminLogin.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
+import AdminFlashPage from "./pages/AdminFlashPage.tsx";
 
 // axios.defaults.headers["x-api-key"] = import.meta.env.VITE_REACT_APP_API_KEY;
 
@@ -57,11 +59,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <Admin />,
-  },
-  {
-    path: "/admin/dashboard",
-    element: <DashboardPage />,
+    element: <AdminWrapper />, // Handles layout for admin routes
+    children: [
+      { path: "/admin", element: <AdminLoginPage /> }, // Login page
+      {
+        path: "/admin/dashboard",
+        element: <ProtectedRoute element={<AdminLayout />} />, // Dashboard layout with nested routes
+        children: [
+          { path: "", element: <DashboardPage /> }, // Dashboard overview
+          { path: "flash", element: <AdminFlashPage /> }, // Flash management
+          // { path: "bookings", element: <AdminAppointments /> }, // Appointment management
+        ],
+      },
+    ],
   },
 ]);
 
@@ -74,6 +84,16 @@ function NavbarWrapper() {
     </div>
   );
 }
+
+function AdminWrapper() {
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
+}
+
+export default AdminWrapper;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
