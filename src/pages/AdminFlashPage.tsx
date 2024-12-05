@@ -35,12 +35,8 @@ export default function AdminFlashPage() {
     extraImageUrls: [],
   });
   const [loading, setLoading] = useState(false);
-  const [mainImage, setMainImage] = useState<{ file: File; id: any }[] | null>(
-    []
-  );
-  const [extraImages, setExtraImages] = useState<
-    { file: File; id: any }[] | null
-  >([]);
+  const [mainImage, setMainImage] = useState<{ file: File; id: any }[]>([]);
+  const [extraImages, setExtraImages] = useState<{ file: File; id: any }[]>([]);
 
   const onMainImageChange = (selectedImages: File[] | null) => {
     if (selectedImages) {
@@ -66,24 +62,28 @@ export default function AdminFlashPage() {
     }
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!mainImage) {
+      console.log("Missing main image");
       return;
     }
     setLoading(true);
     try {
-      if (!extraImages || extraImages.length == 0) {
-        return;
-      }
       const mainImageUrl = await getImageUrls(mainImage);
       if (!mainImageUrl) {
         console.log("Could not get url from api.ts for main image");
         return;
       }
       const extraImageUrls = await getImageUrls(extraImages);
-      console.log(mainImageUrl);
-      console.log(extraImageUrls);
 
       const formFields = {
         title: formData.title,
@@ -91,8 +91,9 @@ export default function AdminFlashPage() {
         dimensions: formData.dimensions,
         isActive: formData.isActive,
         mainImageUrl: mainImageUrl[0],
-        extraImageUrls: mainImageUrl,
+        extraImageUrls: extraImageUrls,
       };
+      console.log(mainImageUrl);
       console.log(formFields);
       //   await submitForm(formFields);
       console.log("Form submitted successfully!");
@@ -133,6 +134,8 @@ export default function AdminFlashPage() {
                   id="title"
                   name="title"
                   type="text"
+                  value={formData.title}
+                  onChange={handleInputChange}
                   className="p-2 text-base rounded-lg py-2 px-3 border border-solid border-slate-300 duration-150 focus:outline-none focus:border-slate-700"
                   required
                 />
@@ -143,6 +146,8 @@ export default function AdminFlashPage() {
                   id="price"
                   name="price"
                   type="text"
+                  value={formData.price}
+                  onChange={handleInputChange}
                   className="p-2 text-base rounded-lg py-2 px-3 border border-solid border-slate-300 duration-150 focus:outline-none focus:border-slate-700"
                 />
               </div>
