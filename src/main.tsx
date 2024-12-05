@@ -4,7 +4,6 @@ import App from "./App.tsx";
 import "./index.css";
 import {
   createBrowserRouter,
-  Navigate,
   Outlet,
   RouterProvider,
   ScrollRestoration,
@@ -13,7 +12,6 @@ import Navbar from "./components/Navbar/Navbar.tsx";
 import Gallery from "./pages/Gallery.tsx";
 import Info from "./pages/Info.tsx";
 import Booking from "./pages/Booking.tsx";
-import Admin from "./Admin.tsx";
 import FlashPage from "./pages/FlashPage.tsx";
 import ConfirmationPage from "./pages/ConfirmationPage.tsx";
 import AdminLayout from "./AdminLayout.tsx";
