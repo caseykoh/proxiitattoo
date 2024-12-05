@@ -18,10 +18,8 @@ const DesignTypeEnum = z.enum(["Flash", "Custom", "Freehand"], {
 });
 type DesignTypeEnum = z.infer<typeof DesignTypeEnum>;
 
-const imageReferenceSchema = z.object({
-  file: z.any(),
-  id: z.any(),
-});
+const imageTypes = ["image/jpeg", "image/png"];
+const maxImages = 3;
 
 const formSchema = z.object({
   name: z
@@ -51,9 +49,15 @@ const formSchema = z.object({
     .min(1, { message: "Description is required" })
     .max(500, { message: "Description is over 500 characters" }),
   reference: z
-    .array(imageReferenceSchema)
-    .refine((files) => files?.length > 0, {
+    .array(z.instanceof(File))
+    .refine((files) => files.length > 0, {
       message: "At least one image reference is required.",
+    })
+    .refine((files) => files.every((file) => imageTypes.includes(file.type)), {
+      message: "Only JPEG and PNG images are allowed.",
+    })
+    .refine((files) => files.length <= maxImages, {
+      message: "Maximum of 3 images are allowed.",
     }),
   size: z
     .string({ required_error: "Size is required" })
@@ -68,8 +72,6 @@ const formSchema = z.object({
 type FormFields = z.infer<typeof formSchema>;
 
 const Booking = () => {
-  const { state } = useLocation();
-
   const {
     register,
     control,
@@ -85,29 +87,17 @@ const Booking = () => {
     resolver: zodResolver(formSchema),
   });
 
-  const [images, setImages] = useState<{ file: File; id: any }[] | null>([]);
+  const [images, setImages] = useState<File[]>([]);
 
   useEffect(() => {
     goToTop();
-    if (state?.flashImg) {
-      // console.log(state.flashImg);
-      setImages([{ file: state.flashImg, id: uuidv4() }]);
-    }
   }, []);
 
-  const onImageChange = (selectedImages: File[] | null) => {
-    if (selectedImages) {
-      const uniqueList = selectedImages.map((file) => {
-        return {
-          file,
-          id: uuidv4(),
-        };
-      });
-      setImages(uniqueList);
-      if (uniqueList.length > 0) {
-        setValue("reference", uniqueList);
-        clearErrors(["reference"]);
-      }
+  const handleImageChange = (images: File[] | null) => {
+    setImages(images || []);
+    if (images && images.length > 0) {
+      setValue("reference", images);
+      clearErrors(["reference"]);
     }
   };
 
@@ -119,9 +109,15 @@ const Booking = () => {
       return;
     }
     try {
+      const uniqueImages = images.map((file) => {
+        return {
+          file,
+          id: uuidv4(),
+        };
+      });
       //get image urls
       const payload = {
-        imageList: images.map(({ id, file }) => {
+        imageList: uniqueImages.map(({ id, file }) => {
           const lowExtension = file.type.split("/")[1].toLowerCase();
           const extension = lowExtension === "jpeg" ? "jpg" : lowExtension;
           return { id, extension };
@@ -143,7 +139,7 @@ const Booking = () => {
         presignedUrls.map(
           async (imageData: { imageId: any; url: any; key: any }) => {
             // console.log(imageData);
-            const imgToUpload = images.find(
+            const imgToUpload = uniqueImages.find(
               (image) => image.id.toString() === imageData.imageId.toString()
             )?.file;
             if (imgToUpload) {
@@ -240,9 +236,10 @@ const Booking = () => {
                 control={control}
                 render={() => (
                   <ImageUpload
-                    onChange={onImageChange}
-                    maxImages={3}
-                    acceptTypes={["image/jpeg", "image/png"]}
+                    images={images}
+                    onChange={handleImageChange}
+                    maxImages={maxImages}
+                    acceptTypes={imageTypes}
                   />
                 )}
               />
