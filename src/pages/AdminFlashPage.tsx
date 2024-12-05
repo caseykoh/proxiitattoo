@@ -118,49 +118,63 @@ export default function AdminFlashPage() {
       </div>
       <div className="grid gap-8">
         <div>
-          <div>
-            <h3>Upload New Design</h3>
-            <p>Add a new flash design to your portfolio.</p>
-          </div>
-          <div>
-            <form onSubmit={handleSubmit} className="grid gap-6">
+          <div className="p-6 border border-solid border-slate-300 rounded-lg flex">
+            <form
+              onSubmit={handleSubmit}
+              className="grid gap-6 w-full max-w-md"
+            >
+              <div>
+                <h3 className="text-xl font-medium">Upload New Design</h3>
+                <p>Add a new flash design to your portfolio.</p>
+              </div>
               <div className="grid gap-2">
                 <label htmlFor="title">Design Title</label>
-                <input id="title" name="title" required />
+                <input
+                  id="title"
+                  name="title"
+                  type="text"
+                  className="p-2 text-base rounded-lg py-2 px-3 border border-solid border-slate-300 duration-150 focus:outline-none focus:border-slate-700"
+                  required
+                />
               </div>
               <div className="grid gap-2">
                 <label htmlFor="price">Price</label>
                 <input
                   id="price"
                   name="price"
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  required
+                  type="text"
+                  className="p-2 text-base rounded-lg py-2 px-3 border border-solid border-slate-300 duration-150 focus:outline-none focus:border-slate-700"
                 />
               </div>
+
               <div className="grid gap-2">
-                <label htmlFor="reference" className="font-semibold">
-                  Upload Main Image <span className="required-q">*</span>
-                </label>
-                <ImageUpload
-                  onChange={onMainImageChange}
-                  maxImages={1}
-                  acceptTypes={["image/jpeg", "image/png"]}
-                />
-              </div>
-              <div className="grid gap-2">
-                <label htmlFor="reference" className="font-semibold">
-                  Upload Extra Images (Max 3){" "}
+                <label className="font-semibold">
+                  Upload Extra Images (Max 3)
                   <span className="required-q">*</span>
                 </label>
                 <ImageUpload
+                  key="extra-images"
                   onChange={onExtraImageChange}
                   maxImages={3}
                   acceptTypes={["image/jpeg", "image/png"]}
                 />
               </div>
-              <button type="submit" disabled={loading}>
+              <div className="grid gap-2">
+                <label className="font-semibold">
+                  Upload Main Image <span className="required-q">*</span>
+                </label>
+                <ImageUpload
+                  key="main-image"
+                  onChange={onMainImageChange}
+                  maxImages={1}
+                  acceptTypes={["image/jpeg", "image/png"]}
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex items-center w-full bg-slate-800 text-white py-2 px-4 rounded-lg hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 {loading ? (
                   "Uploading..."
                 ) : (

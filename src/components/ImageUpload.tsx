@@ -20,6 +20,12 @@ export function ImageUpload({
     const files = Array.from(event.target.files || []);
     const remainingSlots = maxImages - selectedImages.length;
     const newImages = files.slice(0, remainingSlots);
+    console.log("files");
+    console.log(files);
+    console.log("maxImages");
+    console.log(maxImages);
+    console.log("remainingSlots");
+    console.log(remainingSlots);
 
     const invalidFiles = files.filter(
       (file) => !acceptTypes.includes(file.type)
@@ -49,11 +55,16 @@ export function ImageUpload({
     onChange(updatedImages);
   };
 
+  const inputId = `image-upload-${Math.random().toString(36).substring(7)}`;
+
   return (
     <div>
       <div className="grid grid-cols-3 gap-4">
         {selectedImages.map((image, index) => (
-          <div key={index} className="relative drop-shadow-md">
+          <div
+            key={`${image.name}-${index}`}
+            className="relative drop-shadow-md"
+          >
             <img
               src={URL.createObjectURL(image)}
               alt={`Preview ${index + 1}`}
@@ -71,7 +82,7 @@ export function ImageUpload({
         ))}
         {selectedImages.length < maxImages && (
           <label
-            htmlFor="image-upload"
+            htmlFor={inputId}
             className="w-full cursor-pointer aspect-square flex items-center justify-center bg-slate-100 rounded-lg !mb-0 border-dashed border-2 border-slate-300"
           >
             <div className="flex flex-col items-center">
@@ -79,7 +90,7 @@ export function ImageUpload({
               <span className="mt-2 text-sm text-gray-500">Upload</span>
             </div>
             <input
-              id="image-upload"
+              id={inputId}
               type="file"
               accept={acceptTypes.join(", ")}
               onChange={handleImageSelection}
