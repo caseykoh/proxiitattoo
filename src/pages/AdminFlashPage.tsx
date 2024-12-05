@@ -98,6 +98,8 @@ export default function AdminFlashPage() {
       //   await uploadFlashDesign(formData);
       //   // Reset form and preview
       setFormData(defaultFormData);
+      setMainImages([]);
+      setExtraImages([]);
       //   setPreview(null);
       //   const form = document.querySelector("form") as HTMLFormElement;
       //   form?.reset();

@@ -18,12 +18,6 @@ export function ImageUpload({
     const files = Array.from(event.target.files || []);
     const remainingSlots = maxImages - images.length;
     const newImages = files.slice(0, remainingSlots);
-    console.log("files");
-    console.log(files);
-    console.log("maxImages");
-    console.log(maxImages);
-    console.log("remainingSlots");
-    console.log(remainingSlots);
 
     const invalidFiles = files.filter(
       (file) => !acceptTypes.includes(file.type)
