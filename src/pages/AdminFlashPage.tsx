@@ -3,7 +3,7 @@ import { FlashGallery } from "../components/FlashGallery";
 import { ImageUpload } from "../components/ImageUpload";
 import { Upload } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
-import { getImageUrls } from "../api";
+import { getImageUrls, uploadFlash } from "../api";
 
 // Mock data - in a real app, this would come from your database
 const flashDesigns = [
@@ -93,10 +93,9 @@ export default function AdminFlashPage() {
       };
       console.log(mainImageUrl);
       console.log(formFields);
-      //   await submitForm(formFields);
       console.log("Form submitted successfully!");
-      //   await uploadFlashDesign(formData);
-      //   // Reset form and preview
+      await uploadFlash(formData);
+      // Reset form and preview
       setFormData(defaultFormData);
       setMainImages([]);
       setExtraImages([]);

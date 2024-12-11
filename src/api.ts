@@ -23,6 +23,29 @@ export async function getFlashes() {
   }
 }
 
+export async function uploadFlash(formData: {
+  title: string;
+  price: string;
+  dimensions: string;
+  isActive: boolean;
+  mainImageUrl: any;
+  extraImageUrls: string[];
+}) {
+  const response = await axios
+    .post(import.meta.env.VITE_APP_API_ENDPOINT + "/admin/flash", formData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    })
+    .then((result) => {
+      console.log(result.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  console.log(response);
+}
+
 export async function getImageUrls(images: { file: File; id: any }[]) {
   try {
     const payload = {
