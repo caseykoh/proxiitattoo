@@ -9,22 +9,28 @@ interface BookingsTableProps {
 export function BookingsTable({ bookings, onDelete }: BookingsTableProps) {
   return (
     <div className="rounded-md border">
-      <table className="flex flex-col w-full">
-        <thead className="flex flex-col w-full">
-          <tr className="flex w-full">
+      <table className="table-auto w-full">
+        <thead className="">
+          <tr className="">
             <th className="flex-1 p-2 text-left">Client Name</th>
-            <th className="flex-1 p-2 text-left">Email</th>
-            <th className="flex-1 p-2 text-left">Design Description</th>
+            <th className="flex-1 p-2 text-left hidden lg:table-cell">Email</th>
+            <th className="flex-1 p-2 text-left hidden lg:table-cell">
+              Design Description
+            </th>
             <th className="flex-1 p-2 text-left">Date Created</th>
             <th className="flex-1 p-2 text-left">Actions</th>
           </tr>
         </thead>
         <tbody>
           {bookings.map((booking) => (
-            <tr key={booking.id} className="flex w-full">
+            <tr key={booking.id} className="">
               <td className="flex-1 p-2">{booking.full_name}</td>
-              <td className="flex-1 p-2">{booking.email}</td>
-              <td className="flex-1 p-2">{booking.description}</td>
+              <td className="flex-1 p-2 hidden lg:table-cell">
+                {booking.email}
+              </td>
+              <td className="flex-1 p-2 hidden lg:table-cell">
+                {booking.description}
+              </td>
               <td className="flex-1 p-2">
                 {new Date(booking.createdAt).toLocaleDateString()}
               </td>
