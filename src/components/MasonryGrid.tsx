@@ -1,28 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
-
-interface Image {
-  src: string;
-  alt: string;
-}
-
-interface Post extends Image {
-  id: number;
-  title: string;
-}
+import { Flash } from "../types/types";
 
 interface MasonryGridProps {
-  images: Image[];
+  images: Flash[];
   columns: number;
 }
 
 const MasonryGrid: React.FC<MasonryGridProps> = ({ images, columns }) => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<Flash[]>([]);
 
   // Initialize posts when the component mounts (or whenever images changes.)
   useEffect(() => {
-    const generatedPosts: Post[] = images.map((image, index) => ({
-      id: index,
-      title: `Add to references`,
+    const generatedPosts: Flash[] = images.map((image, index) => ({
+      flashId: index,
+      // title: `Add to references`,
       ...image,
     }));
     setPosts(generatedPosts);
@@ -30,7 +21,7 @@ const MasonryGrid: React.FC<MasonryGridProps> = ({ images, columns }) => {
 
   // Function to distribute posts into columns
   const generateMasonryGrid = useMemo(() => {
-    const columnWrappers: Post[][] = Array.from({ length: columns }, () => []);
+    const columnWrappers: Flash[][] = Array.from({ length: columns }, () => []);
 
     posts.forEach((post, index) => {
       const columnIndex = index % columns;
@@ -50,7 +41,7 @@ const MasonryGrid: React.FC<MasonryGridProps> = ({ images, columns }) => {
 };
 
 interface ColumnProps {
-  posts: Post[];
+  posts: Flash[];
 }
 
 const Column: React.FC<ColumnProps> = ({ posts }) => {
@@ -64,13 +55,13 @@ const Column: React.FC<ColumnProps> = ({ posts }) => {
 };
 
 interface PostProps {
-  post: Post;
+  post: Flash;
 }
 
 const Post: React.FC<PostProps> = ({ post }) => {
   return (
     <div className="post">
-      <img src={post.src} alt={post.alt} />
+      <img src={post.mainImageUrl} />
       {/* <div className="overlay">
         <h3>{post.title}</h3>
       </div> */}

@@ -7,3 +7,12 @@ export interface Booking {
   // status: "pending";
   createdAt: string;
 }
+
+export interface Flash {
+  id: string;
+  price: string;
+  dimensions: string;
+  isActive: boolean;
+  mainImageUrl: string;
+  extraImageUrls: string[];
+}

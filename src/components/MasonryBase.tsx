@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import MasonryGrid from "./MasonryGrid.tsx";
 import goToTop from "../GoToTop.tsx";
+import { Flash } from "../types/types";
 
 interface MasonryBaseProps {
-  images: { src: string; alt: string }[];
+  images: Flash[];
   columnsDefault: number; // Default number of columns for large screens
   columnsMobile: number; // Number of columns for mobile screens
   children?: React.ReactNode; // Allow passing additional content
