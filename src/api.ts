@@ -12,6 +12,17 @@ export async function uploadFileToS3(imageLink: File, url: string) {
   console.log(response);
 }
 
+export async function getFlashes() {
+  try {
+    const response = await axios.get(
+      import.meta.env.VITE_APP_API_ENDPOINT + "/flash"
+    );
+    return response.data.flash;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function getImageUrls(images: { file: File; id: any }[]) {
   try {
     const payload = {
