@@ -89,12 +89,12 @@ export default function AdminFlashPage() {
         dimensions: formData.dimensions,
         isActive: formData.isActive,
         mainImageUrl: mainImageUrl[0],
-        extraImageUrls: extraImageUrls,
+        extraImageUrls: extraImageUrls || [],
       };
       console.log(mainImageUrl);
       console.log(formFields);
       console.log("Form submitted successfully!");
-      await uploadFlash(formData);
+      await uploadFlash(formFields);
       // Reset form and preview
       setFormData(defaultFormData);
       setMainImages([]);
