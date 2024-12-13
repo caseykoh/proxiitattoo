@@ -87,6 +87,9 @@ input[type="file"] {
 }
 
 .submit-button {
+  display: grid;
+  place-items: center;
+  grid-template-areas: "stack";
   width: 200px;
   margin-inline: auto;
   font: inherit;
@@ -101,9 +104,12 @@ input[type="file"] {
   border-radius: 8px;
 }
 
-.disabled-button {
-  cursor: default;
-  opacity: 50%;
+.submit-text {
+  grid-area: stack;
+}
+
+.spinner {
+  grid-area: stack;
 }
 
 .card-error {

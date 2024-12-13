@@ -349,10 +349,24 @@ const Booking = () => {
             disabled={isSubmitting}
             type="submit"
             className={
-              "submit-button " + (isSubmitting ? "disabled-button" : "")
+              "submit-button " +
+              (isSubmitting ? "cursor-default opacity-50 " : "")
             }
           >
-            {isSubmitting ? "Please wait..." : "Submit"}
+            <span
+              className={
+                "submit-text " + (isSubmitting ? "hidden " : "visible")
+              }
+            >
+              Submit
+            </span>
+            <span
+              aria-label="Submitting inquiry "
+              className={"spinner " + (isSubmitting ? "visible " : "hidden")}
+            >
+              <img src="/assets/spinner.svg" />
+            </span>
+            {/* {isSubmitting ? "Please wait..." : "Submit"} */}
           </button>
           {errors.root && (
             <div className="text-error">{errors.root.message}</div>
