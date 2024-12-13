@@ -366,7 +366,6 @@ const Booking = () => {
             >
               <img src="/assets/spinner.svg" />
             </span>
-            {/* {isSubmitting ? "Please wait..." : "Submit"} */}
           </button>
           {errors.root && (
             <div className="text-error">{errors.root.message}</div>
