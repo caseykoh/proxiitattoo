@@ -14,8 +14,15 @@ const FlashPage = () => {
     fetchData();
   }, []);
   return (
-    <MasonryBase images={flashes} columnsDefault={4} columnsMobile={2}>
-      {/* You can pass additional content here if needed */}
+    <MasonryBase
+      images={flashes.sort((a, b) => {
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      })}
+      columnsDefault={4}
+      columnsMobile={2}
+    >
       <h1>Available Flash</h1>
     </MasonryBase>
   );
