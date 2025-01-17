@@ -6,26 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 import { getFlashes, getImageUrls, uploadFlash } from "../api";
 import { Flash } from "../types/types";
 
-// Mock data - in a real app, this would come from your database
-const flashDesigns = [
-  {
-    id: "1",
-    title: "Traditional Rose",
-    imageUrl: "/placeholder.svg?height=200&width=200",
-    price: 150,
-    available: true,
-    createdAt: "2024-01-20T10:00:00Z",
-  },
-  {
-    id: "2",
-    title: "Skull Design",
-    imageUrl: "/placeholder.svg?height=200&width=200",
-    price: 200,
-    available: true,
-    createdAt: "2024-01-19T15:30:00Z",
-  },
-];
-
 const defaultFormData = {
   title: "",
   price: "",
@@ -113,6 +93,7 @@ export default function AdminFlashPage() {
       //   form?.reset();
     } finally {
       setLoading(false);
+      window.location.reload();
     }
   };
 
