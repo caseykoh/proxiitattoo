@@ -19,8 +19,9 @@ import ProtectedRoute from "./ProtectedAdminRoutes.tsx";
 import AdminLoginPage from "./pages/AdminLogin.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
 import AdminFlashPage from "./pages/AdminFlashPage.tsx";
+import axios from "axios";
 
-// axios.defaults.headers["x-api-key"] = import.meta.env.VITE_REACT_APP_API_KEY;
+axios.defaults.headers["x-api-key"] = import.meta.env.VITE_REACT_APP_API_KEY;
 
 const router = createBrowserRouter([
   {
