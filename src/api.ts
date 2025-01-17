@@ -46,6 +46,23 @@ export async function uploadFlash(formData: {
   console.log(response);
 }
 
+export async function deleteFlash(id: string) {
+  try {
+    const response = await axios.delete(
+      import.meta.env.VITE_APP_API_ENDPOINT + `/admin/flash/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      }
+    );
+    console.log(response);
+    window.location.reload();
+  } catch (error) {
+    console.error("Error deleting booking:", error);
+  }
+}
+
 export async function getImageUrls(images: { file: File; id: any }[]) {
   try {
     const payload = {

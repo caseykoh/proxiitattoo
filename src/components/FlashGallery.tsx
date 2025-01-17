@@ -1,5 +1,6 @@
 import { Trash2, Edit } from "lucide-react";
 import { Flash } from "../types/types";
+import { deleteFlash } from "../api";
 
 interface FlashGalleryProps {
   designs: Flash[];
@@ -31,7 +32,7 @@ export function FlashGallery({ designs }: FlashGalleryProps) {
                 <Edit className="h-4 w-4 mr-2" />
                 Edit
               </button>
-              <button>
+              <button onClick={() => deleteFlash(design.id)}>
                 <Trash2 className="h-4 w-4 mr-2" />
                 Delete
               </button>
