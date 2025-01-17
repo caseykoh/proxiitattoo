@@ -15,4 +15,5 @@ export interface Flash {
   isActive: boolean;
   mainImageUrl: string;
   extraImageUrls: string[];
+  title: string;
 }

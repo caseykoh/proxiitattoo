@@ -20,7 +20,7 @@ export function FlashGallery({ designs }: FlashGalleryProps) {
             </div>
             <div className="p-4">
               <div className="flex items-center justify-between">
-                <div className="text-lg">{design.id}</div>
+                <div className="text-lg">{design.title}</div>
                 <div>${design.price}</div>
               </div>
               {/* <div className="mt-2">
