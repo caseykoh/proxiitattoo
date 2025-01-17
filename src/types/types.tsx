@@ -16,4 +16,5 @@ export interface Flash {
   mainImageUrl: string;
   extraImageUrls: string[];
   title: string;
+  createdAt: string;
 }

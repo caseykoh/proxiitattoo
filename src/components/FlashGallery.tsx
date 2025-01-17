@@ -23,9 +23,9 @@ export function FlashGallery({ designs }: FlashGalleryProps) {
                 <div className="text-lg">{design.title}</div>
                 <div>${design.price}</div>
               </div>
-              {/* <div className="mt-2">
+              <div className="mt-2">
                 Added {new Date(design.createdAt).toLocaleDateString()}
-              </div> */}
+              </div>
             </div>
             <div className="p-4 pt-0 flex justify-between">
               <button>
