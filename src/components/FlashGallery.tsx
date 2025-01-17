@@ -15,7 +15,11 @@ export function FlashGallery({ designs }: FlashGalleryProps) {
           <div key={design.id} className="overflow-hidden">
             <div className="p-0">
               <div className="relative aspect-square">
-                <img src={design.mainImageUrl} className="object-cover" />
+                <img
+                  src={design.mainImageUrl}
+                  alt={design.title}
+                  className="object-cover"
+                />
               </div>
             </div>
             <div className="p-4">
