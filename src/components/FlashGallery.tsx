@@ -1,16 +1,8 @@
 import { Trash2, Edit } from "lucide-react";
-
-interface FlashDesign {
-  id: string;
-  title: string;
-  imageUrl: string;
-  price: number;
-  available: boolean;
-  createdAt: string;
-}
+import { Flash } from "../types/types";
 
 interface FlashGalleryProps {
-  designs: FlashDesign[];
+  designs: Flash[];
 }
 
 export function FlashGallery({ designs }: FlashGalleryProps) {
@@ -22,21 +14,17 @@ export function FlashGallery({ designs }: FlashGalleryProps) {
           <div key={design.id} className="overflow-hidden">
             <div className="p-0">
               <div className="relative aspect-square">
-                <img
-                  src={design.imageUrl}
-                  alt={design.title}
-                  className="object-cover"
-                />
+                <img src={design.mainImageUrl} className="object-cover" />
               </div>
             </div>
             <div className="p-4">
               <div className="flex items-center justify-between">
-                <div className="text-lg">{design.title}</div>
+                <div className="text-lg">{design.id}</div>
                 <div>${design.price}</div>
               </div>
-              <div className="mt-2">
+              {/* <div className="mt-2">
                 Added {new Date(design.createdAt).toLocaleDateString()}
-              </div>
+              </div> */}
             </div>
             <div className="p-4 pt-0 flex justify-between">
               <button>

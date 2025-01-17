@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlashGallery } from "../components/FlashGallery";
 import { ImageUpload } from "../components/ImageUpload";
 import { Upload } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
-import { getImageUrls, uploadFlash } from "../api";
+import { getFlashes, getImageUrls, uploadFlash } from "../api";
+import { Flash } from "../types/types";
 
 // Mock data - in a real app, this would come from your database
 const flashDesigns = [
@@ -39,6 +40,14 @@ export default function AdminFlashPage() {
   const [loading, setLoading] = useState(false);
   const [mainImages, setMainImages] = useState<File[]>([]);
   const [extraImages, setExtraImages] = useState<File[]>([]);
+  const [flashes, setFlashes] = useState<Flash[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setFlashes(await getFlashes());
+    };
+    fetchData();
+  }, []);
 
   const handleMainImageChange = (images: File[] | null) => {
     setMainImages(images || []);
@@ -193,7 +202,7 @@ export default function AdminFlashPage() {
             </form>
           </div>
         </div>
-        <FlashGallery designs={flashDesigns} />
+        <FlashGallery designs={flashes} />
       </div>
     </div>
   );
