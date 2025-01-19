@@ -20,7 +20,7 @@ const FlashPage = () => {
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
       })}
-      columnsDefault={4}
+      columnsDefault={6}
       columnsMobile={2}
     >
       <h1>Available Flash</h1>
