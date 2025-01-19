@@ -44,6 +44,7 @@ const Gallery = () => {
       <div className="w-full flex flex-row justify-start">
         <div className="flex flex-row gap-2">
           <span
+            onClick={() => setShowDefaultView(true)}
             className={`${
               showDefaultView
                 ? "text-gray-600"
@@ -53,55 +54,65 @@ const Gallery = () => {
             [Default]
           </span>
           <span
-            className={`text-gray-800/50 hover:text-gray-800 cursor-pointer`}
+            onClick={() => {
+              setShowDefaultView(false);
+            }}
+            className={`${
+              showDefaultView
+                ? "text-gray-800/50 hover:text-gray-800"
+                : "text-gray-600"
+            } cursor-pointer`}
           >
             [Grid]
           </span>
         </div>
       </div>
       <div>
-        {rows?.map((row, i) => (
-          <div
-            key={i}
-            className="grid grid-cols-12 gap-4"
-            style={{ transform: `translateY(-${i * 20}%)` }}
-          >
-            {row.map((image, index) => {
-              // Randomly assign the image to one of the 6 columns
-              const randomColumn = Math.floor(Math.random() * 6) * 2; // Randomly select 0, 2, 4, 6, 8, 10
-              return (
-                <div
-                  key={index}
-                  className="col-span-2 column min-w-44"
-                  style={{ gridColumnStart: `${randomColumn + 1}` }}
-                >
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-              );
-            })}
-          </div>
-        ))}
-        <div className="flex flex-col gap-2 items-end pl-10 md:pl-0 md:grid md:grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] md:gap-4 md:max-w-[1040px] md:mx-auto">
-          {workImages?.map((img, i) => (
+        {showDefaultView ? (
+          rows?.map((row, i) => (
             <div
-              className="md:bg-[#c9c9c9] md:w-full md:object-cover md:overflow-hidden md:aspect-[3/4] md:flex md:items-center md:justify-center"
               key={i}
+              className="grid grid-cols-12 gap-4"
+              style={{ transform: `translateY(-${i * 20}%)` }}
             >
-              <img
-                className="w-full h-full object-cover"
-                width="400"
-                height="400"
-                alt={img.alt}
-                src={img.src}
-                loading={i > 3 ? "lazy" : "eager"}
-              />
+              {row.map((image, index) => {
+                // Randomly assign the image to one of the 6 columns
+                const randomColumn = Math.floor(Math.random() * 6) * 2; // Randomly select 0, 2, 4, 6, 8, 10
+                return (
+                  <div
+                    key={index}
+                    className="col-span-2 column min-w-44"
+                    style={{ gridColumnStart: `${randomColumn + 1}` }}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                );
+              })}
             </div>
-          ))}
-        </div>
+          ))
+        ) : (
+          <div className="flex flex-col gap-2 items-end pl-10 md:pl-0 md:grid md:grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] md:gap-4 md:max-w-[1040px] md:mx-auto">
+            {workImages?.map((img, i) => (
+              <div
+                className="md:bg-[#c9c9c9] md:w-full md:object-cover md:overflow-hidden md:aspect-[3/4] md:flex md:items-center md:justify-center"
+                key={i}
+              >
+                <img
+                  className="w-full h-full object-cover"
+                  width="400"
+                  height="400"
+                  alt={img.alt}
+                  src={img.src}
+                  loading={i > 3 ? "lazy" : "eager"}
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
