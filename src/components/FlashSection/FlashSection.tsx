@@ -10,8 +10,8 @@ function FlashSection() {
           <div className="page" id="page2"></div>
           <div className="page" id="page3"></div>
         </div>
-        <NavLink to="/flash" className="flash-link">
-          view flash
+        <NavLink to="/flash" className="hover:text-lime-400 flash-link">
+          [view flash]
         </NavLink>
       </section>
     </>
