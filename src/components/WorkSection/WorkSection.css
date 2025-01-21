@@ -17,19 +17,14 @@
   /* text-align: center; */
 }
 
+.story-text {
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+}
+
 .mission-statement {
-  margin-inline: auto;
-  max-width: 600px;
-  min-height: 300px;
   letter-spacing: -1px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   color: #73cf2cb2;
-  padding: 40px;
-  /* margin-bottom: 50px; */
-  background-color: #ffffff;
 }
 
 .instagram-link {

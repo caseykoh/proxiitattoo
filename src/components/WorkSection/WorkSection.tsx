@@ -6,13 +6,6 @@ export const WorkSection = () => {
     <>
       <section id="work-section" className="work-gallery">
         <div className="work-container">
-          <div className="mission-statement">
-            <p>
-              proxii_world is a song of the invisible, a proxii_dream, where the
-              waves of the essence rise to the surface of the body. things only
-              you could hear.
-            </p>
-          </div>
           <div className="work-gallery-grid">
             <img
               width="400"

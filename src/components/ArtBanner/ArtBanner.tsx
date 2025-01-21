@@ -1,16 +1,17 @@
+import { StoryStripe } from "../StoryStripe";
 import "./ArtBanner.css";
 
 function ArtBanner() {
   return (
     <>
-      <main className="art-banner-container pt-20 mx-4">
+      <main className="h-screen pt-20 mx-4">
         <img
-          className="duration-500 animate-fadein opacity-0"
+          className="w-100 duration-500 animate-fadein opacity-0"
           src="/assets/proxii_butterfly.jpg"
           alt=""
         />
-        <div className="my-2 tracking-tight leading-5">
-          <p>proxii_dream</p>
+        <div className="my-2 tracking-tight leading-5 text-end">
+          <p>proxiiworld</p>
 
           <p>235 MB</p>
           <a
@@ -18,10 +19,11 @@ function ArtBanner() {
             href="https://www.instagram.com/proxii_dream/"
             target="_blank"
           >
-            [instagram]
+            [ig: proxii_dream]
           </a>
         </div>
       </main>
+      <StoryStripe />
     </>
   );
 }
