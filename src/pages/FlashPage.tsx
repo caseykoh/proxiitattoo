@@ -23,7 +23,9 @@ const FlashPage = () => {
       columnsDefault={6}
       columnsMobile={2}
     >
-      <h1>Available Flash</h1>
+      <div className="w-full flex flex-row justify-end px-4">
+        <h1 className="font-normal text-gray-500 text-end">available flash</h1>
+      </div>
     </MasonryBase>
   );
 };
