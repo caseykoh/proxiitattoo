@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { StoryStripe } from "../StoryStripe";
 import "./ArtBanner.css";
 
@@ -19,7 +19,7 @@ function ArtBanner() {
             className="hover:text-lime-400 contents text-lg"
             // style={{ display: "inline-block" }}
           >
-            <button className=" w-32 p-1 font-bold border-2 border-black">
+            <button className="w-32 p-1 font-bold border-2 border-black">
               [ book now ]
             </button>
           </Link>
