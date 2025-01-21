@@ -4,9 +4,14 @@ import { Flash } from "../types/types";
 interface MasonryGridProps {
   images: Flash[];
   columns: number;
+  onImageClick: (flash: Flash) => void;
 }
 
-const MasonryGrid: React.FC<MasonryGridProps> = ({ images, columns }) => {
+const MasonryGrid: React.FC<MasonryGridProps> = ({
+  images,
+  columns,
+  onImageClick,
+}) => {
   const [posts, setPosts] = useState<Flash[]>([]);
 
   // Initialize posts when the component mounts (or whenever images changes.)
@@ -34,7 +39,7 @@ const MasonryGrid: React.FC<MasonryGridProps> = ({ images, columns }) => {
   return (
     <div className="masonry-container">
       {generateMasonryGrid.map((columnPosts, index) => (
-        <Column key={index} posts={columnPosts} />
+        <Column key={index} posts={columnPosts} onImageClick={onImageClick} />
       ))}
     </div>
   );
@@ -42,13 +47,14 @@ const MasonryGrid: React.FC<MasonryGridProps> = ({ images, columns }) => {
 
 interface ColumnProps {
   posts: Flash[];
+  onImageClick: (flash: Flash) => void;
 }
 
-const Column: React.FC<ColumnProps> = ({ posts }) => {
+const Column: React.FC<ColumnProps> = ({ posts, onImageClick }) => {
   return (
     <div className="column">
       {posts.map((post) => (
-        <Post key={post.id} post={post} />
+        <Post key={post.id} post={post} onImageClick={onImageClick} />
       ))}
     </div>
   );
@@ -56,11 +62,12 @@ const Column: React.FC<ColumnProps> = ({ posts }) => {
 
 interface PostProps {
   post: Flash;
+  onImageClick: (flash: Flash) => void;
 }
 
-const Post: React.FC<PostProps> = ({ post }) => {
+const Post: React.FC<PostProps> = ({ post, onImageClick }) => {
   return (
-    <div className="post">
+    <div className="post cursor-pointer" onClick={() => onImageClick(post)}>
       <img src={post.mainImageUrl} />
       {/* <div className="overlay">
         <h3>{post.title}</h3>
