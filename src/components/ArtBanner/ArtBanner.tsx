@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { StoryStripe } from "../StoryStripe";
 import "./ArtBanner.css";
 
@@ -11,12 +11,16 @@ function ArtBanner() {
           src="/assets/proxii_butterfly.jpg"
           alt=""
         />
-        <div className="my-2 tracking-tight flex flex-col leading-5 text-end">
+        <div className="my-2 tracking-tight flex flex-col leading-5 text-center">
           {/* <p>proxii_dream</p> */}
 
-          <NavLink to="/booking" className="hover:text-lime-400">
+          <Link
+            to="/booking"
+            className="hover:text-lime-400 contents text-lg"
+            // style={{ display: "inline-block" }}
+          >
             [book now]
-          </NavLink>
+          </Link>
           {/* <a
             className="text-gray-400 hover:text-lime-400"
             href="https://www.instagram.com/proxii_dream/"
