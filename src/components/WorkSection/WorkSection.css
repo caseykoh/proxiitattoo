@@ -7,7 +7,7 @@
   animation: fade-in linear both;
   animation-timeline: view();
   animation-range: entry 5% cover 30%;
-  padding: 20px;
+  /* padding: 20px; */
   /* border-top: 1px black solid; */
 }
 
@@ -17,19 +17,14 @@
   /* text-align: center; */
 }
 
+.story-text {
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+}
+
 .mission-statement {
-  margin-inline: auto;
-  max-width: 600px;
-  min-height: 300px;
   letter-spacing: -1px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   color: #73cf2cb2;
-  padding: 40px;
-  /* margin-bottom: 50px; */
-  background-color: #ffffff;
 }
 
 .instagram-link {
@@ -44,27 +39,6 @@
 .general-info-div {
   padding-block: 80px 10px;
   color: black;
-}
-
-.general-info-div p,
-.instagram-link {
-  font-size: 20px;
-  line-height: 22px;
-}
-
-.work-gallery-grid {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  padding-block: 20px;
-}
-
-.gallery-link {
-  font-size: 20px;
-}
-
-.gallery-link:hover {
-  color: var(--accent-color);
 }
 
 @keyframes fade-in {
@@ -88,10 +62,4 @@
   width: 100%;
   height: auto;
   object-fit: cover;
-}
-
-@media (max-width: 700px) {
-  .work-gallery-grid img:nth-child(n + 3) {
-    display: none;
-  }
 }

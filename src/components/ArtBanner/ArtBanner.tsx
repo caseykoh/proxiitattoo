@@ -1,38 +1,29 @@
+import { StoryStripe } from "../StoryStripe";
 import "./ArtBanner.css";
 
 function ArtBanner() {
   return (
     <>
-      <main className="art-banner-container">
-        <div className="main-title">
-          <div className="first-header">
-            <img
-              width="250"
-              height="250"
-              alt="proxii"
-              src="/assets/proxii_header.png"
-            />
-          </div>
-          <div className="second-header">
-            <img
-              width="250"
-              height="250"
-              alt="world"
-              src="/assets/world_header.png"
-            />
-          </div>
-        </div>
-        <div className="banner-description">
-          <p>
-            <b>proxii_dream</b>
-          </p>
-          <p>
-            <em>Proxii World</em>, 2024
-          </p>
-          <p>Code</p>
+      <main className="h-screen pt-20 mx-4">
+        <img
+          className="w-100 duration-500 animate-fadein opacity-0"
+          src="/assets/proxii_butterfly.jpg"
+          alt=""
+        />
+        <div className="my-2 tracking-tight leading-5 text-end">
+          <p>proxiiworld</p>
+
           <p>235 MB</p>
+          <a
+            className="text-gray-400 hover:text-lime-400"
+            href="https://www.instagram.com/proxii_dream/"
+            target="_blank"
+          >
+            [ig: proxii_dream]
+          </a>
         </div>
       </main>
+      <StoryStripe />
     </>
   );
 }

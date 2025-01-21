@@ -2,6 +2,7 @@ import "./Gallery.css";
 import workImages from "../components/SelectWorkImages.tsx";
 import { useEffect, useState } from "react";
 import goToTop from "../GoToTop.tsx";
+import { StoryStripe } from "../components/StoryStripe.tsx";
 
 type Image = {
   src: string;
@@ -57,6 +58,7 @@ const Gallery = () => {
 
   return (
     <section className="gallery-container">
+      <StoryStripe />
       <div className="w-full flex flex-row justify-end md:justify-between px-4">
         {isMobile ? (
           <></>
