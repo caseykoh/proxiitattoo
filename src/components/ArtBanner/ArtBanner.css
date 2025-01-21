@@ -2,15 +2,14 @@
   display: block;
   position: relative;
   height: 100vh;
-  animation: fade-up 0.8s 1.5s backwards;
+  /* animation: fade-up 0.8s 1.5s backwards; */
   background-color: #ffffff;
-  background-image: url("/assets/proxii_butterfly.jpg");
+  /* background-image: url("/assets/proxii_butterfly.jpg"); */
   /* background-size: cover; */
   background-repeat: no-repeat;
   background-position: center;
   background-size: auto 100%;
   /* padding-block: 100px; */
-  padding: 20px;
 }
 
 /* Keyframes */

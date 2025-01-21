@@ -13,16 +13,6 @@ export const WorkSection = () => {
               you could hear.
             </p>
           </div>
-          <div className="general-info-div">
-            <a
-              className="instagram-link"
-              href="https://www.instagram.com/proxii_dream/"
-              target="_blank"
-            >
-              @proxii_dream
-            </a>
-            <p>toronto,on</p>
-          </div>
           <div className="work-gallery-grid">
             <img
               width="400"

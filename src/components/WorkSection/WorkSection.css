@@ -7,7 +7,7 @@
   animation: fade-in linear both;
   animation-timeline: view();
   animation-range: entry 5% cover 30%;
-  padding: 20px;
+  /* padding: 20px; */
   /* border-top: 1px black solid; */
 }
 
@@ -54,7 +54,7 @@
 
 .work-gallery-grid {
   display: grid;
-  gap: 20px;
+  gap: 1px;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   padding-block: 20px;
 }
