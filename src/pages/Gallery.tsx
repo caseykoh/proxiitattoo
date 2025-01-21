@@ -57,6 +57,9 @@ const Gallery = () => {
 
   return (
     <section className="gallery-container">
+      <h1 className="font-normal mr-4 text-gray-500 text-end">
+        select work: 2023-2025
+      </h1>
       {isMobile ? (
         <></>
       ) : (
@@ -116,7 +119,7 @@ const Gallery = () => {
             </div>
           ))
         ) : (
-          <div className="flex flex-col gap-2 items-end md:pl-0 md:grid md:grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] md:gap-4 md:max-w-[1040px] md:mx-auto">
+          <div className="flex flex-col gap-[1px] items-end md:pl-0 md:grid md:grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] md:gap-4 md:max-w-[1040px] md:mx-auto">
             {workImages?.map((img, i) => (
               <div
                 className="md:bg-[#c9c9c9] md:w-full md:object-cover md:overflow-hidden md:aspect-[3/4] md:flex md:items-center md:justify-center"

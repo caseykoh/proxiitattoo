@@ -1,6 +1,6 @@
 .gallery-container {
   /* padding: 30px; */
-  margin-top: 100px;
+  margin-top: 160px;
   /* padding: 60px 2vw; */
 }
 
@@ -9,8 +9,8 @@
 }
 
 .gallery-container h1 {
-  font-size: 2rem;
-  font-weight: 600;
+  /* font-size: 2rem; */
+  /* font-weight: 600; */
   margin-bottom: 20px;
 }
 
