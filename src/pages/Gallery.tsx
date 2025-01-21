@@ -30,6 +30,7 @@ function organizeImagesIntoRows(images: Image[]): Image[][] {
 
 const Gallery = () => {
   const [rows, setRows] = useState<Image[][]>([]);
+  const [isMobile, setIsMobile] = useState(true);
   const [showDefaultView, setShowDefaultView] = useState(true);
 
   useEffect(() => {
@@ -37,38 +38,58 @@ const Gallery = () => {
     const rows = organizeImagesIntoRows(workImages);
     setRows(rows);
     console.log(rows);
+    const checkIsMobile = () => {
+      setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+      console.log(isMobile);
+      console.log(showDefaultView);
+    };
+
+    // Check on initial render
+    checkIsMobile();
+
+    // Listen for window resize events
+    window.addEventListener("resize", checkIsMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkIsMobile);
+    };
   }, []);
 
   return (
     <section className="gallery-container">
-      <div className="w-full flex flex-row justify-start">
-        <div className="flex flex-row gap-2">
-          <span
-            onClick={() => setShowDefaultView(true)}
-            className={`${
-              showDefaultView
-                ? "text-gray-600"
-                : "text-gray-800/50 hover:text-gray-800"
-            } cursor-pointer`}
-          >
-            [Default]
-          </span>
-          <span
-            onClick={() => {
-              setShowDefaultView(false);
-            }}
-            className={`${
-              showDefaultView
-                ? "text-gray-800/50 hover:text-gray-800"
-                : "text-gray-600"
-            } cursor-pointer`}
-          >
-            [Grid]
-          </span>
+      {isMobile ? (
+        <></>
+      ) : (
+        <div className="w-full flex flex-row justify-start">
+          <div className="flex flex-row gap-2">
+            <span
+              onClick={() => setShowDefaultView(true)}
+              className={`${
+                showDefaultView
+                  ? "text-gray-600"
+                  : "text-gray-800/50 hover:text-gray-800"
+              } cursor-pointer`}
+            >
+              [Scattered]
+            </span>
+            <span
+              onClick={() => {
+                setShowDefaultView(false);
+              }}
+              className={`${
+                showDefaultView
+                  ? "text-gray-800/50 hover:text-gray-800"
+                  : "text-gray-600"
+              } cursor-pointer`}
+            >
+              [Grid]
+            </span>
+          </div>
         </div>
-      </div>
+      )}
+
       <div>
-        {showDefaultView ? (
+        {showDefaultView && !isMobile ? (
           rows?.map((row, i) => (
             <div
               key={i}
@@ -95,7 +116,7 @@ const Gallery = () => {
             </div>
           ))
         ) : (
-          <div className="flex flex-col gap-2 items-end pl-10 md:pl-0 md:grid md:grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] md:gap-4 md:max-w-[1040px] md:mx-auto">
+          <div className="flex flex-col gap-2 items-end md:pl-0 md:grid md:grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] md:gap-4 md:max-w-[1040px] md:mx-auto">
             {workImages?.map((img, i) => (
               <div
                 className="md:bg-[#c9c9c9] md:w-full md:object-cover md:overflow-hidden md:aspect-[3/4] md:flex md:items-center md:justify-center"
