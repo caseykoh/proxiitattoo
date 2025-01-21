@@ -38,6 +38,7 @@ function TourSection() {
                     <a
                       href="https://www.instagram.com/000000000000_studio/"
                       target="_blank"
+                      className="underline"
                     >
                       @0Studio
                     </a>
@@ -45,21 +46,9 @@ function TourSection() {
                   <td>2023-Now</td>
                 </tr>
                 <tr>
-                  <td>Vancouver</td>
-                  <td>
-                    <a
-                      href="https://www.instagram.com/subdidink"
-                      target="_blank"
-                    >
-                      @subdidink studio
-                    </a>
-                  </td>
-                  <td>05/18-19/2024</td>
-                </tr>
-                <tr>
                   <td>Montreal</td>
                   <td>TBD</td>
-                  <td>TBD</td>
+                  <td>Soon</td>
                 </tr>
               </tbody>
             </table>

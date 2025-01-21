@@ -15,7 +15,7 @@ function ArtBanner() {
 
           <p>235 MB</p>
           <a
-            className="text-lime-400 hover:text-lime-500"
+            className="text-gray-400 hover:text-lime-400"
             href="https://www.instagram.com/proxii_dream/"
             target="_blank"
           >
