@@ -11,7 +11,7 @@ function ArtBanner() {
           src="/assets/proxii_butterfly.jpg"
           alt=""
         />
-        <div className="my-2 tracking-tight flex flex-col leading-5 text-center">
+        <div className="my-2 tracking-tight flex flex-col leading-5 text-center items-center">
           {/* <p>proxii_dream</p> */}
 
           <Link
@@ -19,7 +19,9 @@ function ArtBanner() {
             className="hover:text-lime-400 contents text-lg"
             // style={{ display: "inline-block" }}
           >
-            [book now]
+            <button className=" w-32 p-1 font-bold border-2 border-black">
+              [ book now ]
+            </button>
           </Link>
           {/* <a
             className="text-gray-400 hover:text-lime-400"
