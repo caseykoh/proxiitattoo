@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 
 interface LightboxProps {
   imageSrc: string; // URL of the image to display in the lightbox
