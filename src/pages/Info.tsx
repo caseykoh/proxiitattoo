@@ -60,7 +60,7 @@ const Info = () => {
   return (
     <>
       <main className="info-page w-full md:w-[40vw] pt-32 px-4">
-        <section className="grid md:grid-cols-2">
+        <section className="">
           <div>⋆｡𖦹°⭒˚｡⋆</div>
           <div className="text-black/40 flex flex-col gap-3">
             <span>
