@@ -73,10 +73,6 @@
   right: 1.5rem;
 }
 
-.home-link {
-  display: none;
-}
-
 @media screen and (max-width: 1150px) {
   .nav-menu {
     position: fixed;
@@ -116,15 +112,5 @@
   .nav-list {
     flex-direction: row;
     column-gap: 2.5rem;
-  }
-}
-
-@media (width < 700px) {
-  .nav-logo {
-    display: none;
-  }
-
-  .home-link {
-    display: block;
   }
 }

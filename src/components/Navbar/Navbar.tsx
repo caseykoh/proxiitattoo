@@ -28,7 +28,7 @@ const Navbar = () => {
           id="nav-menu"
         >
           <ul className="nav-list">
-            <li className="nav-item">
+            <li className="nav-item md:hidden">
               <NavLink
                 to="/"
                 className="nav-link home-link"
