@@ -41,27 +41,6 @@
   color: black;
 }
 
-.general-info-div p,
-.instagram-link {
-  font-size: 20px;
-  line-height: 22px;
-}
-
-.work-gallery-grid {
-  display: grid;
-  gap: 1px;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  padding-block: 20px;
-}
-
-.gallery-link {
-  font-size: 20px;
-}
-
-.gallery-link:hover {
-  color: var(--accent-color);
-}
-
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -83,10 +62,4 @@
   width: 100%;
   height: auto;
   object-fit: cover;
-}
-
-@media (max-width: 700px) {
-  .work-gallery-grid img:nth-child(n + 3) {
-    display: none;
-  }
 }
