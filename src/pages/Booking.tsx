@@ -211,7 +211,7 @@ const Booking = () => {
                         id={`${designType}-select`}
                       />
                       <div
-                        className={`cursor-pointer  border-slate-950 hover:bg-slate-200 peer-checked:bg-slate-950 peer-checked:text-white peer-checked:border-slate-950 border-solid p-2 rounded-xl border-2  ${
+                        className={`cursor-pointer shadow-md border border-gray-400 hover:bg-slate-200 peer-checked:bg-gray-800 peer-checked:text-white peer-checked:border-gray-800 border-solid p-2 rounded-lg  ${
                           errors.designType ? "card-error" : ""
                         }`}
                       >
@@ -349,7 +349,7 @@ const Booking = () => {
             disabled={isSubmitting}
             type="submit"
             className={
-              "submit-button " +
+              "submit-button shadow-md border border-gray-400" +
               (isSubmitting ? "cursor-default opacity-50 " : "")
             }
           >
@@ -358,7 +358,7 @@ const Booking = () => {
                 "submit-text " + (isSubmitting ? "hidden " : "visible")
               }
             >
-              Submit
+              Submit Inquiry
             </span>
             <span
               aria-label="Submitting inquiry "

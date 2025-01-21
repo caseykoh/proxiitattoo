@@ -79,7 +79,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="nav-toggle" id="nav-toggle" onClick={toggleMenu}>
-          <p>menu</p>
+          <p>[menu]</p>
         </div>
       </nav>
     </header>

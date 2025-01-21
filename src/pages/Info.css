@@ -1,9 +1,7 @@
 .info-page {
-  width: 100%;
   min-height: 100vh;
-  padding: 30px;
   /* color: white; */
-  background-image: linear-gradient(to bottom right, #ffffff, #e9e9e9);
+  /* background-image: linear-gradient(to bottom right, #ffffff, #e9e9e9); */
 }
 
 .info-text {
@@ -15,26 +13,18 @@
 
 .info-section {
   margin-top: 200px;
-  padding: 10px;
-  width: 60vw;
-}
-
-.tattoo-faq {
-  font-size: 20px;
 }
 
 details {
-  padding-inline: 20px;
-  padding-block: 45px;
-  border-block: 1px solid #000;
+  padding-block: 20px;
+  border-block: 1px solid #00000026;
   overflow: hidden;
 }
 
 summary {
   list-style-type: none; /* Firefox */
-  transition: all 0.3s;
+  transition: all ease-in-out 0.2s;
   cursor: pointer;
-  font-weight: 600;
 }
 
 summary::-webkit-details-marker {
@@ -42,7 +32,7 @@ summary::-webkit-details-marker {
 }
 
 details p {
-  line-height: 26px;
+  line-height: 20px;
 }
 
 details[open] {

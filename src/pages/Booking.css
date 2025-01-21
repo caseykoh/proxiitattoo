@@ -95,12 +95,8 @@ input[type="file"] {
   font: inherit;
   cursor: pointer;
   outline: inherit;
-  background-color: var(--accent-color);
-  color: var(--accent-color-dark);
   font-size: 20px;
-  font-weight: 600;
   padding: 12px;
-  border: none;
   border-radius: 8px;
 }
 

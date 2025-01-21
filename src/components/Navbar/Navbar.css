@@ -34,7 +34,7 @@
   cursor: pointer;
   background-color: rgb(255, 255, 255);
   padding-inline: 2px;
-  border: 1px black solid;
+  /* border: 1px black solid; */
   text-align: center;
 }
 
