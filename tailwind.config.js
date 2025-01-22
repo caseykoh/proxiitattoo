@@ -14,7 +14,7 @@ export default {
         },
       },
       animation: {
-        fadein: "fade-in 1s ease-in-out 0.25s 1 forwards",
+        fadein: "fade-in 0.5s ease-in-out 0.25s 1 forwards",
       },
     },
   },
