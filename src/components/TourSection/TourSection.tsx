@@ -46,9 +46,19 @@ function TourSection() {
                   <td>2023-Now</td>
                 </tr>
                 <tr>
+                  <td>Calgary</td>
+                  <td>TBD</td>
+                  <td>March 5-7</td>
+                </tr>
+                <tr>
+                  <td>Vancouver</td>
+                  <td>TBD</td>
+                  <td>March 9-12</td>
+                </tr>
+                <tr>
                   <td>Montreal</td>
                   <td>TBD</td>
-                  <td>Soon</td>
+                  <td>Late March..?</td>
                 </tr>
               </tbody>
             </table>
