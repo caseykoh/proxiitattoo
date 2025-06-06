@@ -59,7 +59,7 @@ const Info = () => {
   }, []);
   return (
     <>
-      <main className="info-page w-full md:w-[40vw] pt-32 px-4">
+      <main className="info-page w-full md:w-[40vw] pt-32 px-6 md:px-8">
         <section className="">
           <div>⋆｡𖦹°⭒˚｡⋆</div>
           <div className="text-black/40 flex flex-col gap-3">

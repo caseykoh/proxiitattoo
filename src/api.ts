@@ -1,6 +1,7 @@
 import axios from "axios";
 const imageReferencesAccessBase = import.meta.env.VITE_AWS_IMAGE_REFERENCES_URL;
 const presignedApiUrl = import.meta.env.VITE_AWS_PRESIGNED_URLS;
+const apiUrl = import.meta.env.VITE_APP_API_ENDPOINT;
 
 export async function uploadFileToS3(imageLink: File, url: string) {
   //PUT request with the body as the file.
@@ -14,10 +15,9 @@ export async function uploadFileToS3(imageLink: File, url: string) {
 
 export async function getFlashes() {
   try {
-    const response = await axios.get(
-      import.meta.env.VITE_APP_API_ENDPOINT + "/flash"
-    );
-    return response.data.flash;
+    const response = await fetch(`${apiUrl}/api/flashes`);
+    const data = await response.json();
+    return data.docs;
   } catch (error) {
     console.log(error);
   }

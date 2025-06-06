@@ -11,10 +11,13 @@ export interface Booking {
 export interface Flash {
   id: string;
   price: string;
-  dimensions: string;
-  isActive: boolean;
-  mainImageUrl: string;
-  extraImageUrls: string[];
+  size: string;
+  image: FlashImage;
   title: string;
   createdAt: string;
+}
+
+export interface FlashImage {
+  alt: string;
+  url: string;
 }

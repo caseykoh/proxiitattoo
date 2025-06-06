@@ -1,11 +1,13 @@
 import { FC } from "react";
+import { FlashImage } from "../types/types";
+const apiUrl = import.meta.env.VITE_APP_API_ENDPOINT;
 
 interface LightboxProps {
-  imageSrc: string; // URL of the image to display in the lightbox
+  image: FlashImage; // URL of the image to display in the lightbox
   onClose: () => void; // Function to close the lightbox
 }
 
-const Lightbox: FC<LightboxProps> = ({ imageSrc, onClose }) => {
+const Lightbox: FC<LightboxProps> = ({ image: image, onClose }) => {
   return (
     <div
       className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black bg-opacity-75"
@@ -23,8 +25,8 @@ const Lightbox: FC<LightboxProps> = ({ imageSrc, onClose }) => {
         onClick={(e) => e.stopPropagation()} // Prevent click event propagation to the overlay
       >
         <img
-          src={imageSrc}
-          alt="Lightbox"
+          src={`${apiUrl}${image.url}`}
+          alt={image.alt || "Lightbox"}
           className="max-w-full max-h-[90vh]"
         />
       </div>

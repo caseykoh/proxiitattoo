@@ -21,6 +21,7 @@ const FlashPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      // console.log(await getFlashes());
       setFlashes(await getFlashes());
     };
     fetchData();
@@ -33,7 +34,7 @@ const FlashPage = () => {
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
           );
         })}
-        columnsDefault={6}
+        columnsDefault={4}
         columnsMobile={2}
         onImageClick={handleImageClick}
       >
@@ -43,9 +44,9 @@ const FlashPage = () => {
           </h1>
         </div>
       </MasonryBase>
-      {showLightbox && (
+      {selectedFlash && showLightbox && (
         <Lightbox
-          imageSrc={selectedFlash?.mainImageUrl || ""}
+          image={selectedFlash.image}
           onClose={onLightboxClose}
         ></Lightbox>
       )}

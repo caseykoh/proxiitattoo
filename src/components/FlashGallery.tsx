@@ -16,7 +16,7 @@ export function FlashGallery({ designs }: FlashGalleryProps) {
             <div className="p-0">
               <div className="relative aspect-square">
                 <img
-                  src={design.mainImageUrl}
+                  src={design.image.url}
                   alt={design.title}
                   className="object-cover"
                 />
