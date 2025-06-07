@@ -70,7 +70,7 @@ const Post: React.FC<PostProps> = ({ post, onImageClick }) => {
   return (
     <div className="post cursor-pointer" onClick={() => onImageClick(post)}>
       <img
-        src={`${apiUrl}${post.image.url}`} // or your production domain
+        src={`${post.image.url}`} // or your production domain
         alt={post.image.alt || "Flash image"}
       />
       {/* <div className="overlay">
