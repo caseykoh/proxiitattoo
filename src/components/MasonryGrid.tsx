@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { Flash } from "../types/types";
-// const apiUrl = import.meta.env.VITE_APP_API_ENDPOINT;
 
 interface MasonryGridProps {
   images: Flash[];

@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { FlashImage } from "../types/types";
-const apiUrl = import.meta.env.VITE_APP_API_ENDPOINT;
 
 interface LightboxProps {
   image: FlashImage; // URL of the image to display in the lightbox
@@ -25,7 +24,7 @@ const Lightbox: FC<LightboxProps> = ({ image: image, onClose }) => {
         onClick={(e) => e.stopPropagation()} // Prevent click event propagation to the overlay
       >
         <img
-          src={`${apiUrl}${image.url}`}
+          src={`${image.url}`}
           alt={image.alt || "Lightbox"}
           className="max-w-full max-h-[90vh]"
         />
