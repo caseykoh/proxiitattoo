@@ -43,17 +43,25 @@ function TourSection() {
                       @0Studio
                     </a>
                   </td>
-                  <td>Apr-May 2025</td>
+                  <td>July-Aug 2025</td>
+                </tr>
+                <tr>
+                  <td>Ottawa 🇨🇦</td>
+                  <td>
+                    <a
+                      href="https://www.instagram.com/ink_terminal/"
+                      target="_blank"
+                      className="underline"
+                    >
+                      @ink_terminal
+                    </a>
+                  </td>
+                  <td>July 12-13, 2025</td>
                 </tr>
                 <tr>
                   <td>Vancouver 🇨🇦</td>
                   <td>_</td>
                   <td>Summer 2025</td>
-                </tr>
-                <tr>
-                  <td>Tokyo 🇯🇵</td>
-                  <td>_</td>
-                  <td>Sept 2025</td>
                 </tr>
                 <tr>
                   <td>Seoul 🇰🇷</td>
